@@ -1,23 +1,3 @@
-/*
- * Copyright 2021 The CFU-Playground Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-#ifndef BENCHMARKS_H
-#define BENCHMARKS_H
-
-// micro-benchmark menu
-void do_benchmarks_menu();
-
-#endif  // !BENCHMARKS_H
+version https://git-lfs.github.com/spec/v1
+oid sha256:c7a09fb28e8ba8c462c9b80f8b2e6c55e85ff67756919408cebdb147c7b4d04a
+size 732

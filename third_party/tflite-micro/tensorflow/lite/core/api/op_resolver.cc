@@ -19,6 +19,7 @@ limitations under the License.
 #include "tensorflow/lite/core/api/error_reporter.h"
 #include "tensorflow/lite/core/c/common.h"
 #include "tensorflow/lite/schema/schema_utils.h"
+#include "tensorflow/lite/micro/micro_log.h" //
 
 namespace tflite {
 
@@ -60,6 +61,7 @@ TfLiteStatus GetRegistrationFromOpCode(
       // Do not report error for unresolved custom op, we do the final check
       // while preparing ops.
       status = kTfLiteError;
+      MicroPrintf("builtin_code: %s, name: %s, version: %d",EnumNameBuiltinOperator(builtin_code), name, version);
     }
   }
   return status;

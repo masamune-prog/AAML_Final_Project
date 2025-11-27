@@ -100,7 +100,7 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
       const auto* op = subgraph->operators()->Get(i);
       const size_t index = op->opcode_index();
       if (index >= opcodes->size()) {
-        MicroPrintf("Missing registration for opcode_index %d\n", index);
+        printf("Missing registration for opcode_index %d\n", index);
         return kTfLiteError;
       }
       const auto* opcode = opcodes->Get(index);
@@ -110,7 +110,7 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
                                           .node_and_registrations[i]
                                           .registration));
       if (status != kTfLiteOk) {
-        MicroPrintf("Failed to get registration from op code %s\n ",
+        printf("Failed to get registration from op code %s\n ",
                     EnumNameBuiltinOperator(GetBuiltinCode(opcode)));
         return status;
       }
@@ -118,7 +118,7 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
                                      .node_and_registrations[i]
                                      .registration;
       if (registration == nullptr) {
-        MicroPrintf("Skipping op for opcode_index %d\n", index);
+        printf("Skipping op for opcode_index %d\n", index);
         return kTfLiteError;
       }
       BuiltinOperator op_type =
@@ -137,7 +137,7 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
         }
       } else {
         if (op->custom_options() != nullptr) {
-          MicroPrintf(
+          printf(
               "Unsupported behavior: found builtin operator %s with custom "
               "options.\n",
               EnumNameBuiltinOperator(op_type));
@@ -147,7 +147,7 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
         TfLiteBridgeBuiltinParseFunction parser =
             op_resolver_.GetOpDataParser(op_type);
         if (parser == nullptr) {
-          MicroPrintf("Did not find a parser for %s",
+          printf("Did not find a parser for %s",
                       EnumNameBuiltinOperator(op_type));
 
           return kTfLiteError;
@@ -181,9 +181,8 @@ TfLiteStatus MicroInterpreter::PrepareNodeAndRegistrationDataFromFlatbuffer() {
 
 TfLiteStatus MicroInterpreter::AllocateTensors() {
   SubgraphAllocations* allocations = allocator_.StartModelAllocation(model_);
-
   if (allocations == nullptr) {
-    MicroPrintf("Failed starting model allocation.\n");
+    printf("Failed starting model allocation.\n");
     initialization_status_ = kTfLiteError;
     return kTfLiteError;
   }
@@ -214,9 +213,15 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
   context_.RequestScratchBufferInArena = nullptr;
   context_.GetScratchBuffer = MicroContextGetScratchBuffer;
 
+  TfLiteStatus ts = allocator_.FinishModelAllocation(
+                                   model_, graph_.GetAllocations(),
+                                   &scratch_buffer_handles_);
+  TF_LITE_ENSURE_OK(&context, ts);
+#if 0
   TF_LITE_ENSURE_OK(&context_, allocator_.FinishModelAllocation(
                                    model_, graph_.GetAllocations(),
                                    &scratch_buffer_handles_));
+#endif
 
   micro_context_.SetScratchBufferHandles(scratch_buffer_handles_);
 
@@ -226,7 +231,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
       reinterpret_cast<TfLiteTensor**>(allocator_.AllocatePersistentBuffer(
           sizeof(TfLiteTensor*) * inputs_size()));
   if (input_tensors_ == nullptr) {
-    MicroPrintf(
+    printf(
         "Failed to allocate memory for context->input_tensors_, "
         "%d bytes required",
         sizeof(TfLiteTensor*) * inputs_size());
@@ -237,7 +242,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
     input_tensors_[i] = allocator_.AllocatePersistentTfLiteTensor(
         model_, graph_.GetAllocations(), inputs().Get(i), 0);
     if (input_tensors_[i] == nullptr) {
-      MicroPrintf("Failed to initialize input tensor %d", i);
+      printf("Failed to initialize input tensor %d", i);
       return kTfLiteError;
     }
   }
@@ -248,7 +253,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
       reinterpret_cast<TfLiteTensor**>(allocator_.AllocatePersistentBuffer(
           sizeof(TfLiteTensor*) * outputs_size()));
   if (output_tensors_ == nullptr) {
-    MicroPrintf(
+    printf(
         "Failed to allocate memory for context->output_tensors_, "
         "%d bytes required",
         sizeof(TfLiteTensor*) * outputs_size());
@@ -259,7 +264,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
     output_tensors_[i] = allocator_.AllocatePersistentTfLiteTensor(
         model_, graph_.GetAllocations(), outputs().Get(i), 0);
     if (output_tensors_[i] == nullptr) {
-      MicroPrintf("Failed to initialize output tensor %d", i);
+      printf("Failed to initialize output tensor %d", i);
       return kTfLiteError;
     }
   }
@@ -272,7 +277,7 @@ TfLiteStatus MicroInterpreter::AllocateTensors() {
 
 TfLiteStatus MicroInterpreter::Invoke() {
   if (initialization_status_ != kTfLiteOk) {
-    MicroPrintf("Invoke() called after initialization failed\n");
+    printf("Invoke() called after initialization failed\n");
     return kTfLiteError;
   }
 
@@ -287,7 +292,7 @@ TfLiteStatus MicroInterpreter::Invoke() {
 TfLiteTensor* MicroInterpreter::input(size_t index) {
   const size_t length = inputs_size();
   if (index >= length) {
-    MicroPrintf("Input index %d out of range (length is %d)", index, length);
+    printf("Input index %d out of range (length is %d)", index, length);
     return nullptr;
   }
   return input_tensors_[index];
@@ -296,7 +301,7 @@ TfLiteTensor* MicroInterpreter::input(size_t index) {
 TfLiteTensor* MicroInterpreter::output(size_t index) {
   const size_t length = outputs_size();
   if (index >= length) {
-    MicroPrintf("Output index %d out of range (length is %d)", index, length);
+    printf("Output index %d out of range (length is %d)", index, length);
     return nullptr;
   }
   return output_tensors_[index];

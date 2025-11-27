@@ -55,7 +55,7 @@ endif
 export PROJ       := $(lastword $(subst /, ,${CURDIR}))
 export CFU_ROOT   := $(realpath $(CURDIR)/../..)
 export PLATFORM   ?= common_soc
-export TARGET     ?= digilent_arty
+export TARGET     ?= digilent_nexys4ddr
 export TTY        ?= $(or $(wildcard /dev/ttyUSB?), $(wildcard /dev/ttyACM?))
 
 RUN_MENU_ITEMS    ?=1 1 1
@@ -284,6 +284,10 @@ ifndef SKIP_TFLM
 	$(COPY) $(TFLM_TP_DIR)/flatbuffers/include/* $(BUILD_DIR)/src/third_party/flatbuffers/include
 	mkdir -p $(BUILD_DIR)/src/third_party/ruy/ruy/profiler
 	$(COPY) $(TFLM_TP_DIR)/ruy/ruy/profiler/instrumentation.h $(BUILD_DIR)/src/third_party/ruy/ruy/profiler
+	mkdir -p $(BUILD_DIR)/src/third_party/fft2d
+	$(COPY) $(TFLM_TP_DIR)/fft2d/fft.h $(BUILD_DIR)/src/third_party/fft2d
+	$(COPY) $(TFLM_TP_DIR)/fft2d/fft2d.h $(BUILD_DIR)/src/third_party/fft2d
+	$(COPY) $(TFLM_TP_DIR)/fft2d/fft4g.c $(BUILD_DIR)/src/third_party/fft2d
 endif
 
 

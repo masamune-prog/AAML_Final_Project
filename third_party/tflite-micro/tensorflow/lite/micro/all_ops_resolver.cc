@@ -1,3 +1,4 @@
+
 /* Copyright 2022 The TensorFlow Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,6 +28,8 @@ AllOpsResolver::AllOpsResolver() {
   AddArgMax();
   AddArgMin();
   AddAssignVariable();
+  // add new
+  AddAudio_Spectrogram();
   AddAveragePool2D();
   AddBatchToSpaceNd();
   AddBroadcastArgs();
@@ -74,6 +77,8 @@ AllOpsResolver::AllOpsResolver() {
   AddMaxPool2D();
   AddMaximum();
   AddMean();
+  // add new
+  AddMFCC();
   AddMinimum();
   AddMirrorPad();
   AddMul();

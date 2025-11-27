@@ -101,3 +101,17 @@ third_party/yosys
 
 # Environment
 env
+
+proj/lab2_copy
+proj/lab4_test
+proj/lab2
+proj/lab4_template
+proj/lab5_proj
+proj/lab4_template.zip
+
+# Ignore build artifacts
+proj/AAML-2025-Project/build/
+
+# proj/AAML-2025-Project/*.tflite
+
+# proj/AAML-2025-Project/src/wav2letter/model/wav2letter_pruned_int8.h

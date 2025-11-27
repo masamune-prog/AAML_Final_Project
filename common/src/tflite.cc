@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef  SKIP_TFLM
+#ifndef SKIP_TFLM
 
 #include "tflite.h"
 
@@ -21,14 +21,13 @@
 #include "perf.h"
 #include "playground_util/random.h"
 #include "proj_tflite.h"
+#include "tensorflow/lite/core/api/error_reporter_macro.h"
 #include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_error_reporter.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/micro/micro_profiler.h"
 #include "tensorflow/lite/schema/schema_generated.h"
-#include "tensorflow/lite/core/api/error_reporter_macro.h"
-
 #include "tflite_unit_tests.h"
 
 #ifdef TF_LITE_SHOW_MEMORY_USE
@@ -107,17 +106,24 @@ constexpr int kTensorArenaSize = const_max<int>(
 #ifdef INCLUDE_MODEL_MLCOMMONS_TINY_V01_VWW
     99 * 1024,
 #endif
+#ifdef INCLUDE_MODEL_DS_CNN_STREAM_FE
+    3000 * 1024,
+#endif
+#ifdef INCLUDE_MODEL_MOBILE_VIT_XXS
+    16384 * 1024,
+#endif
     0 /* When no models defined, we don't need a tensor arena. */
 );
 
 #ifdef CONFIG_SOC_SEPARATE_ARENA
-static uint8_t tensor_arena[kTensorArenaSize] __attribute__((section(".arena")));
+static uint8_t tensor_arena[kTensorArenaSize]
+    __attribute__((section(".arena")));
 #else
 static uint8_t tensor_arena[kTensorArenaSize];
 #endif
 }  // anonymous namespace
 
-uint8_t *tflite_tensor_arena = tensor_arena;
+uint8_t* tflite_tensor_arena = tensor_arena;
 
 static void tflite_init() {
   static bool initialized = false;
@@ -162,9 +168,8 @@ void tflite_load_model(const unsigned char* model_data,
   // NOLINTNEXTLINE(runtime-global-variables)
   alignas(tflite::INTERPRETER_TYPE) static unsigned char
       buf[sizeof(tflite::INTERPRETER_TYPE)];
-  interpreter = new (buf)
-      tflite::INTERPRETER_TYPE(model, *op_resolver, tensor_arena,
-                               kTensorArenaSize, nullptr, profiler);
+  interpreter = new (buf) tflite::INTERPRETER_TYPE(
+      model, *op_resolver, tensor_arena, kTensorArenaSize, nullptr, profiler);
 
   // Allocate memory from the tensor_arena for the model's tensors.
   TfLiteStatus allocate_status = interpreter->AllocateTensors();
@@ -185,7 +190,7 @@ void tflite_load_model(const unsigned char* model_data,
     printf(" %d", dims->data[ii]);
   }
   puts("\n");
-
+  printf("DRAM: %d bytes\n", interpreter->arena_used_bytes());
   tflite_postload();
 }
 
@@ -269,4 +274,4 @@ void tflite_classify() {
 
 int8_t* get_input() { return interpreter->input(0)->data.int8; }
 
-#endif // SKIP_TFLM
+#endif  // SKIP_TFLM

@@ -72,7 +72,7 @@ TfLiteStatus NonPersistentArenaBufferAllocator::ResetTempAllocations() {
   if (!IsAllTempDeallocated()) {
     MicroPrintf(
         "All temp buffers must be freed before calling ResetTempAllocations()");
-    return kTfLiteError;
+    //return kTfLiteError;
   }
   next_temp_ = head_temp_;
   return kTfLiteOk;

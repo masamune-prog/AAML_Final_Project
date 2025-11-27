@@ -19,6 +19,7 @@
 #include <stdio.h>
 
 #include "menu.h"
+#include "models/ds_cnn_stream_fe/ds_cnn.h"
 #include "models/hps_model/hps_model.h"
 #include "models/magic_wand/magic_wand.h"
 #include "models/micro_speech/micro_speech.h"
@@ -27,8 +28,8 @@
 #include "models/mlcommons_tiny_v01/kws/kws.h"
 #include "models/mlcommons_tiny_v01/vww/vww.h"
 #include "models/mnv2/mnv2.h"
+#include "models/mobileViT_xxs/mobileViT.h"
 #include "models/pdti8/pdti8.h"
-
 inline void no_menu() {}
 
 // Automatically incrementing compile time constant character.
@@ -40,6 +41,12 @@ static struct Menu MENU = {
     "TfLM Models",
     "models",
     {
+#if defined(INCLUDE_MODEL_MOBILE_VIT_XXS)
+        MENU_ITEM(AUTO_INC_CHAR, "MobileViT xxs", mobileViT_xxs_menu),
+#endif
+#if defined(INCLUDE_MODEL_DS_CNN_STREAM_FE)
+        MENU_ITEM(AUTO_INC_CHAR, "Ds cnn stream fe", ds_cnn_stream_fe_menu),
+#endif
 #if defined(INCLUDE_MODEL_PDTI8) || defined(INCLUDE_ALL_TFLM_EXAMPLES)
         MENU_ITEM(AUTO_INC_CHAR, "Person Detection int8 model", pdti8_menu),
 #endif

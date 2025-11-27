@@ -64,9 +64,21 @@ TfLiteRegistration Register_MEAN() {
 TfLiteRegistration Register_REDUCE_MAX() {
   return tflite::micro::RegisterOp(InitReduce, PrepareMax, EvalMax);
 }
-
+/*
 TfLiteRegistration Register_SUM() {
   return tflite::micro::RegisterOp(InitReduce, PrepareMeanOrSum, EvalSum);
 }
+*/
+TfLiteRegistration Register_SUM() {
+  return {/*init=*/InitReduce,
+          /*free=*/nullptr,
+          /*prepare=*/PrepareMeanOrSum,
+          /*invoke=*/EvalSum,
+          /*profiling_string=*/nullptr,
+          /*builtin_code=*/0,
+          /*custom_name=*/nullptr,
+          /*version=*/0};
+}
+
 
 }  // namespace tflite
