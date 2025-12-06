@@ -115,3 +115,5 @@ proj/AAML-2025-Project/build/
 # proj/AAML-2025-Project/*.tflite
 
 # proj/AAML-2025-Project/src/wav2letter/model/wav2letter_pruned_int8.h
+
+proj/AAML-2025-Project/src/wav2letter/model/model_fusion

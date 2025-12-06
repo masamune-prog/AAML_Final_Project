@@ -133,7 +133,9 @@ if __name__ == '__main__':
         read_and_print(com, READY_MSG)
 
         # --- Start the loop ---
-        for testcase in tqdm(testcases, desc="Running Evaluation"):
+        #edit loop to only run first test case for faster testing
+        #REMEMBER TO CHANGE BACK
+        for testcase in tqdm([testcases[0]], desc="Running Evaluation"):
             
             # 1. Load test data from file
             if not os.path.exists(testcase.filename):

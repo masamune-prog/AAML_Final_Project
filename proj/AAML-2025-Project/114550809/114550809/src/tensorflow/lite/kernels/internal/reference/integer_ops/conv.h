@@ -1,3 +1,4 @@
+
 /* Copyright 2019 The TensorFlow Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +16,11 @@ limitations under the License.
 #ifndef TENSORFLOW_LITE_KERNELS_INTERNAL_REFERENCE_INTEGER_OPS_CONV_H_
 #define TENSORFLOW_LITE_KERNELS_INTERNAL_REFERENCE_INTEGER_OPS_CONV_H_
 
-#include <cfu.h>
-#include <perf.h>
-
 #include <algorithm>
-#include <cstring>
-
+#include "cfu.h"
 #include "tensorflow/lite/kernels/internal/common.h"
 #include "tensorflow/lite/kernels/internal/portable_tensor_utils.h"
+
 
 namespace tflite {
 namespace reference_integer_ops {
@@ -35,7 +33,6 @@ inline void ConvPerChannel(
     const int8_t* filter_data, const RuntimeShape& bias_shape,
     const int32_t* bias_data, const RuntimeShape& output_shape,
     int8_t* output_data) {
-  perf_enable_counter(6);
   // Get parameters.
   const int32_t input_offset = params.input_offset;  // r = s(q - Z)
   const int stride_width = params.stride_width;
@@ -80,8 +77,11 @@ inline void ConvPerChannel(
         const int in_x_origin = (out_x * stride_width) - pad_width;
         for (int out_channel = 0; out_channel < output_depth; ++out_channel) {
           auto group = out_channel / filters_per_group;
-          // Configure CFU with input_offset and reset accumulator
+          //avoid compiler warning
+          (void)group;
+          // Config input_offset and reset CFU accumulator
           cfu_op0(1, input_offset, 0);
+          // Reset Software accumulator
           int32_t acc_cfu = 0;
           int32_t acc = 0;
           for (int filter_y = 0; filter_y < filter_height; ++filter_y) {
@@ -97,42 +97,45 @@ inline void ConvPerChannel(
               if (!is_point_inside_image) {
                 continue;
               }
-
               int in_channel;
-              // Unroll by 4 for CFU fast path; handle leftovers separately
-              for (in_channel = 0; in_channel + 4 < filter_input_depth;
-                   in_channel += 4) {
-                const int base_in_ch = in_channel + group * filter_input_depth;
+              // unrolling factor: 4
+              //we stop at before 4 to avoid buffer overflow
+              // and handle the remaining elements in the next loop
+              for (in_channel = 0; in_channel+4 < input_depth; in_channel += 4) {
+                uint32_t input_val = *((uint32_t *)(input_data + Offset(
+                    input_shape, batch, in_y, in_x, in_channel)));
 
-                const int8_t* in_ptr = &input_data[Offset(
-                    input_shape, batch, in_y, in_x, base_in_ch)];
-                const int8_t* f_ptr = &filter_data[Offset(
-                    filter_shape, out_channel, filter_y, filter_x, in_channel)];
-
-                uint32_t input_val = static_cast<uint8_t>(in_ptr[0]) |
-                                     (static_cast<uint8_t>(in_ptr[1]) << 8) |
-                                     (static_cast<uint8_t>(in_ptr[2]) << 16) |
-                                     (static_cast<uint8_t>(in_ptr[3]) << 24);
-
-                uint32_t filter_val = static_cast<uint8_t>(f_ptr[0]) |
-                                      (static_cast<uint8_t>(f_ptr[1]) << 8) |
-                                      (static_cast<uint8_t>(f_ptr[2]) << 16) |
-                                      (static_cast<uint8_t>(f_ptr[3]) << 24);
-
+                uint32_t filter_val = *((uint32_t *)(filter_data + Offset(
+                    filter_shape, out_channel, filter_y, filter_x, in_channel)));
                 acc_cfu = cfu_op0(0, input_val, filter_val);
               }
-              // Leftovers (non-multiple-of-4 channels)
-              for (; in_channel < filter_input_depth; ++in_channel) {
-                int32_t input_val =
-                    input_data[Offset(input_shape, batch, in_y, in_x,
-                                      in_channel + group * filter_input_depth)];
-                int32_t filter_val = filter_data[Offset(
-                    filter_shape, out_channel, filter_y, filter_x, in_channel)];
+              // left-over
+              for (; in_channel < input_depth; in_channel++) {
+                int8_t input_val = *((int8_t *)(input_data + Offset(
+                    input_shape, batch, in_y, in_x, in_channel)));
+
+                int8_t filter_val = *((int8_t *)(filter_data + Offset(
+                    filter_shape, out_channel, filter_y, filter_x, in_channel)));
+                // Accumulate with 32 bits accumulator.
+                // In the nudging process during model quantization, we force
+                // real value of 0.0 be represented by a quantized value. This
+                // guarantees that the input_offset is a int8_t, even though
+                // it is represented using int32_t. int32_t += int8_t *
+                // (int8_t - int8_t) so the highest value we can get from each
+                // accumulation is [-127, 127] * ([-128, 127] -
+                // [-128, 127]), which is [-32512, 32512]. log2(32512)
+                // = 14.98, which means we can accumulate at least 2^16
+                // multiplications without overflow. The accumulator is
+                // applied to a filter so the accumulation logic will hold as
+                // long as the filter size (filter_y * filter_x * in_channel)
+                // does not exceed 2^16, which is the case in all the models
+                // we have seen so far.
+                // TODO(b/174275578): Add a check to make sure the
+                // accumulator depth is smaller than 2^16.
                 acc += filter_val * (input_val + input_offset);
               }
             }
           }
-          // Add CFU-accumulated contribution
           acc += acc_cfu;
           if (bias_data) {
             acc += bias_data[out_channel];
@@ -148,7 +151,6 @@ inline void ConvPerChannel(
       }
     }
   }
-  perf_disable_counter(6);
 }
 
 inline void ConvPerChannelWithPackedInt4Weights(
