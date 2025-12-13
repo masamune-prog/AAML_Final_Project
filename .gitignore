@@ -72,7 +72,7 @@ soc/prog
 proj/my_first_cfu
 
 # cfu.v, if present, must be added explicitly
-proj/*/cfu.v
+#proj/*/cfu.v
 
 build
 csr.csv
