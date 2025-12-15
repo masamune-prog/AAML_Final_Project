@@ -50,3 +50,15 @@ cd proj/AAML-2025-Project
 make prog EXTRA_LITEX_ARGS="--cpu-variant=perf+cfu"&& make load
 
 ```
+
+5. To evaluate on 1 label
+
+```bash
+python eval.py --port /dev/ttyUSB1
+```
+
+To evaluate on all labels
+
+```bash
+python eval.py --port /dev/ttyUSB1 --csv y_labels_copy.csv
+```
