@@ -23,7 +23,8 @@ limitations under the License.
 #include "playground_util/print_params.h"
 #include "tensorflow/lite/kernels/internal/common.h"
 #include "tensorflow/lite/kernels/internal/portable_tensor_utils.h"
-#pragma GCC optimize("Ofast,inline")
+// #pragma GCC optimize("Ofast,inline")
+// the compiler flag is slower?
 static uint32_t im2col_packed[512][8192];
 static uint32_t fr2row_packed[8192][512];
 
@@ -181,15 +182,19 @@ inline void ConvPerChannel(
         // SUPER FAST LOADING LOOP
         // -------------------------------------------------------------
         // No shifting, no masking, just raw moves.
-
+        cfu_op0(20, 0, 0);
         for (int k = 0; k < k_chunk_size; ++k) {
           int real_k = k_start + k;
 
-          // Load Weights: 1 Read, 1 Write
-          cfu_op0(10, k, fr2row_packed[real_k][weight_col_idx]);
+          // // Load Weights: 1 Read, 1 Write
+          // cfu_op0(10, k, fr2row_packed[real_k][weight_col_idx]);
 
-          // Load Inputs: 1 Read, 1 Write
-          cfu_op0(8, k, im2col_packed[input_row_idx][real_k]);
+          // // Load Inputs: 1 Read, 1 Write
+          // cfu_op0(8, k, im2col_packed[input_row_idx][real_k]);
+          cfu_op0(19,
+                  im2col_packed[input_row_idx][real_k],  // Goes to Buffer A
+                  fr2row_packed[real_k][weight_col_idx]  // Goes to Buffer B
+          );
         }
 
         // Compute

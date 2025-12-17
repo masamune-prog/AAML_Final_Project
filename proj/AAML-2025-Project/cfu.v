@@ -23,7 +23,7 @@ module Cfu
   reg         rst_n;
   reg         in_valid;
   reg [31:0]  K, M, N;
-
+  reg [ADDR_BITS-1:0] init_k_counter;
   wire [6:0]  op = cmd_payload_function_id[9:3];
   reg  [31:0] input_offset;
   // TPU interface
@@ -207,7 +207,20 @@ module Cfu
             7'd18: begin // Pass Offset
             input_offset <= cmd_payload_inputs_0;
           end
-            default: ;
+          //combine 10 and 8
+          7'd19: begin
+            A_index_init   <= init_k_counter;
+            A_data_in_init <= cmd_payload_inputs_0;
+            A_wr_en_init   <= 1'b1;
+            B_index_init   <= init_k_counter;
+            B_data_in_init <= cmd_payload_inputs_1;
+            B_wr_en_init   <= 1'b1;
+            init_k_counter <= init_k_counter + 1;
+          end
+          7'd20: begin
+            init_k_counter <= 0;
+          end
+            default;
           endcase
         end
 
