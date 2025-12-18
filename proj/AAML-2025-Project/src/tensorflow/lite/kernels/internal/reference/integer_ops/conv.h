@@ -156,7 +156,7 @@ inline void ConvPerChannel(
   const int K = filter_height * filter_width * input_depth;
 
   // MATCHING YOUR HARDWARE: 12-bit address = 4096 entries
-  const int MAX_CFU_SIZE = 4096;
+  const int MAX_CFU_SIZE = 8192;
 
   cfu_op0(4, 4, 0);  // M=4
   cfu_op0(6, 4, 0);  // N=4
@@ -174,7 +174,9 @@ inline void ConvPerChannel(
       // --- TILE LOOP ---
       for (int k_start = 0; k_start < K; k_start += MAX_CFU_SIZE) {
         int k_chunk_size = std::min(MAX_CFU_SIZE, K - k_start);
-
+        // printf("OC=%d, SLIDE=%d, K_START=%d, K_SIZE=%d\n", out_channel,
+        // slide,
+        //        k_start, k_chunk_size);
         // Only verify size if needed (some CFUs auto-reset index)
         cfu_op0(2, k_chunk_size, 0);
 

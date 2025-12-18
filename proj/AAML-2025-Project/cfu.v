@@ -3,7 +3,7 @@
 
 module Cfu
 #(
-  parameter ADDR_BITS = 12,
+  parameter ADDR_BITS = 13,
   parameter DATA_BITS = 32,
   parameter C_BITS    = 128
 )(

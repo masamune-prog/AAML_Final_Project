@@ -3,7 +3,7 @@
 `include "RTL/controller.v"
 module TPU
 #(
-    parameter ADDR_BITS=12
+    parameter ADDR_BITS=13
 )(
     clk,
     rst_n,
