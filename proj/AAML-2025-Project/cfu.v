@@ -3,7 +3,7 @@
 
 module Cfu
 #(
-  parameter ADDR_BITS = 13,
+  parameter ADDR_BITS = 15,
   parameter DATA_BITS = 32,
   parameter C_BITS    = 128
 )(
@@ -66,7 +66,9 @@ module Cfu
     .wr_en(B_wr_en_mux), .index(B_index_mux),
     .data_in(B_data_in_mux), .data_out(B_data_out)
   );
-  global_buffer_bram #(.ADDR_BITS(ADDR_BITS), .DATA_BITS(C_BITS)) gbuff_C (
+  // @ ======== test C address bit sub, and A B addr bits increase ======//
+  // @ ======== currently it's 6 bits
+  global_buffer_bram #(.ADDR_BITS(8), .DATA_BITS(C_BITS)) gbuff_C (
     .clk(clk), .rst_n(1'b1), .ram_en(1'b1),
     .wr_en(C_wr_en_mux), .index(C_index_mux),
     .data_in(C_data_in_mux), .data_out(C_data_out)

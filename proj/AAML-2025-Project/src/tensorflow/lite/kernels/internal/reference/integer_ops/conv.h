@@ -25,8 +25,8 @@ limitations under the License.
 #include "tensorflow/lite/kernels/internal/portable_tensor_utils.h"
 // #pragma GCC optimize("Ofast,inline")
 // the compiler flag is slower?
-static uint32_t im2col_packed[512][8192];
-static uint32_t fr2row_packed[8192][512];
+// static uint32_t im2col_packed[512][8192];
+// static uint32_t fr2row_packed[8192][512];
 
 namespace tflite {
 namespace reference_integer_ops {
@@ -65,6 +65,12 @@ inline void ConvPerChannel(
   // ===============================================================
   // STEP 1: FILL & PACK IM2COL (INPUTS)
   // ===============================================================
+
+  // @ Test if this enhances the stability
+  // memset(im2col_packed, 0, sizeof(im2col_packed));
+  // memset(fr2row_packed, 0, sizeof(fr2row_packed));
+  uint32_t im2col_packed[512][8192];
+  uint32_t fr2row_packed[8192][512];
 
   int row_idx = 0;
   int col_idx = 0;
@@ -146,94 +152,145 @@ inline void ConvPerChannel(
     }
   }
 
-  // ===============================================================
-  // STEP 3: HIGH-SPEED TILED EXECUTION
-  // ===============================================================
+  // ==============================================================
+  // STEP 3: HIGH-SPEED TILED EXECUTION (Safe 16x16)
+  // ==============================================================
 
   cfu_op0(1, 0, 0);              // Reset
   cfu_op0(18, input_offset, 0);  // Input Offset
 
   const int K = filter_height * filter_width * input_depth;
+  
+  // 1. SAFETY CHECK: CALCULATE MAX TILE SIZE
+  // Hardware buffer depth (entries per buffer A/B)
+  const int BUFFER_DEPTH = 4096; 
+  
+  // How many "strips" (groups of 4) can we fit?
+  // 1 strip = 1*K entries. 
+  int max_strips = BUFFER_DEPTH / K;
+  
+  // Clamp strips to valid tile configs: 4 (16x16), 2 (8x8), or 1 (4x4)
+  if (max_strips >= 4) max_strips = 4;
+  else if (max_strips >= 2) max_strips = 2;
+  else max_strips = 1;
 
-  // MATCHING YOUR HARDWARE: 12-bit address = 4096 entries
-  const int MAX_CFU_SIZE = 8192;
+  // Set the Tile Size based on safety calc
+  // strips=4 -> Size 16. strips=2 -> Size 8. strips=1 -> Size 4.
+  const int TILE_SIZE = max_strips * 4;
 
-  cfu_op0(4, 4, 0);  // M=4
-  cfu_op0(6, 4, 0);  // N=4
+  cfu_op0(4, TILE_SIZE, 0); // Set M
+  cfu_op0(6, TILE_SIZE, 0); // Set N
 
-  for (int out_channel = 0; out_channel < output_depth; out_channel += 4) {
-    // Optimization: Pre-calculate column index for weights
-    int weight_col_idx = out_channel >> 2;
+  for (int out_channel = 0; out_channel < output_depth; out_channel += TILE_SIZE) {
+    
+    int current_N = std::min(TILE_SIZE, output_depth - out_channel);
+    cfu_op0(6, current_N, 0); 
 
-    for (int slide = 0; slide < output_height * output_width; slide += 4) {
-      // Optimization: Pre-calculate row index for inputs
-      int input_row_idx = slide >> 2;
+    int weight_col_base = out_channel >> 2; 
 
-      int32_t acc[4][4] = {{0}};
+    for (int slide = 0; slide < output_height * output_width; slide += TILE_SIZE) {
+      
+      int current_M = std::min(TILE_SIZE, (output_height * output_width) - slide);
+      cfu_op0(4, current_M, 0); 
 
-      // --- TILE LOOP ---
-      for (int k_start = 0; k_start < K; k_start += MAX_CFU_SIZE) {
-        int k_chunk_size = std::min(MAX_CFU_SIZE, K - k_start);
-        // printf("OC=%d, SLIDE=%d, K_START=%d, K_SIZE=%d\n", out_channel,
-        // slide,
-        //        k_start, k_chunk_size);
-        // Only verify size if needed (some CFUs auto-reset index)
-        cfu_op0(2, k_chunk_size, 0);
+      int input_row_base = slide >> 2;
 
-        // -------------------------------------------------------------
-        // SUPER FAST LOADING LOOP
-        // -------------------------------------------------------------
-        // No shifting, no masking, just raw moves.
-        cfu_op0(20, 0, 0);
-        for (int k = 0; k < k_chunk_size; ++k) {
-          int real_k = k_start + k;
+      // -------------------------------------------------------------
+      // LOAD BUFFERS (Using op 19 with Safe Strip Count)
+      // -------------------------------------------------------------
+      cfu_op0(2, K, 0);  
+      cfu_op0(20, 0, 0); // Reset K counter
 
-          // // Load Weights: 1 Read, 1 Write
-          // cfu_op0(10, k, fr2row_packed[real_k][weight_col_idx]);
+      // We load 'max_strips' to ensure we never overflow the buffer.
+      // Even if TILE_SIZE=16, if K is huge, max_strips might be 1 (Tile=4).
+      for (int strip = 0; strip < max_strips; ++strip) {
+        
+        int packed_row = input_row_base + strip;
+        int packed_col = weight_col_base + strip;
 
-          // // Load Inputs: 1 Read, 1 Write
-          // cfu_op0(8, k, im2col_packed[input_row_idx][real_k]);
-          cfu_op0(19,
-                  im2col_packed[input_row_idx][real_k],  // Goes to Buffer A
-                  fr2row_packed[real_k][weight_col_idx]  // Goes to Buffer B
-          );
-        }
-
-        // Compute
-        cfu_op0(12, 0, 0);  // Start
-        while (cfu_op0(13, 0, 0) != 0) {
-        }  // Wait
-
-        // Accumulate
-        for (int s = 0; s < 4; ++s) {
-          acc[s][0] += cfu_op0(17, s, 0);
-          acc[s][1] += cfu_op0(16, s, 0);
-          acc[s][2] += cfu_op0(15, s, 0);
-          acc[s][3] += cfu_op0(14, s, 0);
+        // Check if we are at edge of image/channel limits
+        // (Use (current_X + 3)/4 to get the number of needed strips)
+        bool valid_row = (strip < (current_M + 3) / 4);
+        bool valid_col = (strip < (current_N + 3) / 4);
+        
+        if (valid_row && valid_col) {
+            for (int k = 0; k < K; ++k) {
+                cfu_op0(19, 
+                    im2col_packed[packed_row][k], 
+                    fr2row_packed[k][packed_col]
+                );
+            }
+        } else {
+            // Padding: Write 0s if we are past the edge of the image
+            for (int k = 0; k < K; ++k) {
+                uint32_t val_A = valid_row ? im2col_packed[packed_row][k] : 0;
+                uint32_t val_B = valid_col ? fr2row_packed[k][packed_col] : 0;
+                cfu_op0(19, val_A, val_B);
+            }
         }
       }
 
-      // --- Post Processing ---
-      for (int s = 0; s < 4; ++s) {
+      // -------------------------------------------------------------
+      // COMPUTE
+      // -------------------------------------------------------------
+      cfu_op0(12, 0, 0); 
+      while (cfu_op0(13, 0, 0) != 0) { } 
+
+      // -------------------------------------------------------------
+      // READ BACK (Flexible for 4, 8, or 16)
+      // -------------------------------------------------------------
+      int32_t acc[16][16]; // Max size buffer
+      int c_sram_addr = 0;
+      
+      // Calculate how many blocks the hardware actually processed
+      int strips_M_proc = (current_M + 3) / 4;
+      int strips_N_proc = (current_N + 3) / 4;
+
+      for (int n_block = 0; n_block < strips_N_proc; ++n_block) {
+          for (int m_block = 0; m_block < strips_M_proc; ++m_block) {
+              for (int r = 0; r < 4; ++r) {
+                  int actual_row = (m_block * 4) + r;
+                  int actual_col_base = (n_block * 4);
+                  
+                  // Only read valid rows to avoid buffer overrun
+                  if (actual_row < current_M) {
+                      acc[actual_row][actual_col_base + 0] = cfu_op0(17, c_sram_addr, 0);
+                      acc[actual_row][actual_col_base + 1] = cfu_op0(16, c_sram_addr, 0);
+                      acc[actual_row][actual_col_base + 2] = cfu_op0(15, c_sram_addr, 0);
+                      acc[actual_row][actual_col_base + 3] = cfu_op0(14, c_sram_addr, 0);
+                  }
+                  c_sram_addr++;
+              }
+          }
+      }
+
+      // -------------------------------------------------------------
+      // POST PROCESSING
+      // -------------------------------------------------------------
+      for (int s = 0; s < current_M; ++s) {
         int current_slide = slide + s;
         if (current_slide >= output_height * output_width) continue;
 
-        for (int c = 0; c < 4; ++c) {
-          if (out_channel + c >= output_depth) continue;
+        for (int c = 0; c < current_N; ++c) {
+          int final_channel = out_channel + c;
+          if (final_channel >= output_depth) continue;
 
           int32_t final_val = acc[s][c];
-          if (bias_data) final_val += bias_data[out_channel + c];
+          
+          if (bias_data) final_val += bias_data[final_channel];
 
           final_val = MultiplyByQuantizedMultiplier(
-              final_val, output_multiplier[out_channel + c],
-              output_shift[out_channel + c]);
+              final_val, output_multiplier[final_channel],
+              output_shift[final_channel]);
+          
           final_val += output_offset;
           final_val = std::max(final_val, output_activation_min);
           final_val = std::min(final_val, output_activation_max);
 
           int out_y = current_slide / output_width;
           int out_x = current_slide % output_width;
-          output_data[Offset(output_shape, 0, out_y, out_x, out_channel + c)] =
+          
+          output_data[Offset(output_shape, 0, out_y, out_x, final_channel)] =
               static_cast<int8_t>(final_val);
         }
       }
@@ -354,6 +411,11 @@ inline void ConvPerChannel(
       }
     }
   }
+
+  // ==============================================================
+  // FINISHED
+  // ==============================================================
+
 }
 
 }  // namespace reference_integer_ops
