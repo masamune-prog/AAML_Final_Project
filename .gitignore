@@ -36,7 +36,11 @@
 *.x86_64
 *.hex
 *.bin
-
+!1320-122612-0011_input.bin  
+!61-70968-0033_input.bin
+!8463-294825-0014_input.bin
+!5142-33396-0061_input.bin
+!672-122797-0046_input.bin
 # Debug files
 *.dSYM/
 *.su
