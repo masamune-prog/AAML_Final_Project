@@ -77,6 +77,17 @@ module Cfu (
   wire [2:0] cur_state_fromTPU; // for testing tpu state
   reg [1:0] readC_counter;
 
+  reg signed [31:0] relu_input_offset;
+  reg signed [31:0] relu_output_offset;
+  reg signed [31:0] relu_multiplier_id;
+  reg signed [31:0] relu_multiplier_alpla;
+  reg signed [31:0] relu_shift_id;
+  reg signed [31:0] relu_shift_alpla;
+  reg signed [31:0] relu_input;
+  reg signed [31:0] relu_min;
+  reg signed [31:0] relu_max;
+  wire signed [31:0] relu_clamped_output;
+
   localparam READ_CFU = 2'd0;
   localparam WAIT_RSP = 2'd1;
   reg [1:0] cfu_state;
@@ -162,27 +173,22 @@ module Cfu (
     .C_index        (C_index_forWrite),      // out   
     .C_data_in      (C_data_in),    // out     
     .C_data_out     (C_data_out),
-    .offset         (offset),
-    .cur_state      (cur_state_fromTPU),     // set to out for cfu
-    // .K_num          (K_num),
-    // .M_num          (M_num),
-    // .N_num          (N_num),
-    // .MdivFour       (MdivFour),
-    // .NdivFour       (NdivFour),
-    // .k              (k),
-    // .m              (m),
-    // .n              (n), 
-    .C_write_counter (C_write_counter)
-    // .C_reg_state    (C_reg_state),
-    // .see_sa_out0    (see_sa_out0),
-    // .see_sa_out1    (see_sa_out1), 
-    // .see_sa_out2    (see_sa_out2), 
-    // .see_sa_out3    (see_sa_out3), 
-    // .see_a_out0     (see_a_out0),
-    // .see_a_out1     (see_a_out1),
-    // .see_b_out0    (see_b_out0),
-    // .see_b_out1     (see_b_out1)
+    .offset         (offset)
   );
+
+  leaky_relu My_relu(
+    .input_data (relu_input),
+    .input_offset(relu_input_offset),
+    .output_offset(relu_output_offset),
+    .multiplier_id(relu_multiplier_id),
+    .multiplier_alpla(relu_multiplier_alpla),
+    .shift_id(relu_shift_id),
+    .shift_alpla(relu_shift_alpla),
+    .min(relu_min),
+    .max(relu_max),
+    .clamped_output(relu_clamped_output)
+  );
+
 
   
   always @(posedge clk) begin
@@ -213,51 +219,85 @@ module Cfu (
             cmd_ready <= 1'b0;
             rsp_valid <= 1'b1;
             cfu_state <= WAIT_RSP;
-            if (cmd_payload_function_id[9:3] == 7'd0) begin // reset index
-              A_wr_en_fromCFU <= 1'b0;
-              B_wr_en_fromCFU <= 1'b0;
-              A_index_forWrite <= 12'd0 - 12'd1; // -1
-              B_index_forWrite <= 12'd0 - 12'd1; // -1
-              print = 0;
-            end else if (cmd_payload_function_id[9:3] == 7'd1) begin // put data into gbuff A, B
-              A_wr_en_fromCFU = 1'b1;
-              // B_wr_en_fromCFU = 1'b1;
-              A_index_forWrite <= A_index_forWrite + 1; 
-              // B_index_forWrite <= B_index_forWrite + 1;
-              A_data_in <= cmd_payload_inputs_0[31:0];
-              // B_data_in <= cmd_payload_inputs_1[31:0];
-            end else if (cmd_payload_function_id[9:3] == 7'd2) begin
-              B_wr_en_fromCFU = 1'b1;
-              B_index_forWrite <= B_index_forWrite + 1;
-              B_data_in <= cmd_payload_inputs_1[31:0];
-            end else if (cmd_payload_function_id[9:3] == 7'd3) begin
-              in_valid <= 1'b1;
-              K <= cmd_payload_inputs_0[23:16];
-              M <= cmd_payload_inputs_0[15:8];
-              N <= cmd_payload_inputs_0[7:0];
-            end else if (cmd_payload_function_id[9:3] == 7'd4) begin // pooling to see if cfu is busy or not
-              if (busy) begin
-                rsp_payload_outputs_0 <= 1;
-              end else begin // busy == 0
-                rsp_payload_outputs_0 <= 0;
-                C_index_forRead <= 0;
-                readC_counter <= 2'd0;
+            case(cmd_payload_function_id[9:3])
+              7'd0:begin
+                A_wr_en_fromCFU <= 1'b0;
+                B_wr_en_fromCFU <= 1'b0;
+                A_index_forWrite <= 12'd0 - 12'd1; // -1
+                B_index_forWrite <= 12'd0 - 12'd1; // -1
+                print = 0;
+              end
+              7'd1:begin
+                A_wr_en_fromCFU = 1'b1;
+                // B_wr_en_fromCFU = 1'b1;
+                A_index_forWrite <= A_index_forWrite + 1; 
+                // B_index_forWrite <= B_index_forWrite + 1;
+                A_data_in <= cmd_payload_inputs_0[31:0];
+                // B_data_in <= cmd_payload_inputs_1[31:0];
+              end
+              7'd2:begin
+                B_wr_en_fromCFU = 1'b1;
+                B_index_forWrite <= B_index_forWrite + 1;
+                B_data_in <= cmd_payload_inputs_1[31:0];
+              end
+              7'd3:begin
+                in_valid <= 1'b1;
+                K <= cmd_payload_inputs_0[23:16];
+                M <= cmd_payload_inputs_0[15:8];
+                N <= cmd_payload_inputs_0[7:0];
+              end
+              7'd4:begin
+                if (busy) begin
+                  rsp_payload_outputs_0 <= 1;
+                end else begin // busy == 0
+                  rsp_payload_outputs_0 <= 0;
+                  C_index_forRead <= 0;
+                  readC_counter <= 2'd0;
+                end
+              end
+              7'd5:begin
+                C_wr_en_fromCFU = 1'b0;
+                if (readC_counter == 2'd0) begin
+                  rsp_payload_outputs_0 <= C_data_out[127:96];
+                end else if (readC_counter == 2'd1) begin
+                  rsp_payload_outputs_0 <= C_data_out[95:64];
+                end else if (readC_counter == 2'd2) begin
+                  rsp_payload_outputs_0 <= C_data_out[63:32];
+                end else if (readC_counter == 2'd3) begin
+                  rsp_payload_outputs_0 <= C_data_out[31:0];
+                  C_index_forRead <= C_index_forRead + 1;
+                end
+                readC_counter <= readC_counter + 1;
+              end
+              7'd6:begin
+                offset <= cmd_payload_inputs_0[31:0];
+              end
+              7'd10:begin
+                relu_input_offset <=  cmd_payload_inputs_0[31:0];
+                relu_output_offset <=  cmd_payload_inputs_1[31:0];
+              end
+              7'd11:begin
+                relu_multiplier_id <=  cmd_payload_inputs_0[31:0];
+                relu_multiplier_alpla <=  cmd_payload_inputs_1[31:0];
+              end
+              7'd12:begin
+                relu_shift_id <=  cmd_payload_inputs_0[31:0];
+                relu_shift_alpla <=  cmd_payload_inputs_1[31:0];
+              end
+              7'd13:begin
+                relu_input <=  cmd_payload_inputs_0[31:0];
+              end
+              7'd14:begin
+                rsp_payload_outputs_0 <=  relu_clamped_output;
+              end
+              7'd15:begin
+                relu_min <=  cmd_payload_inputs_0[31:0];
+                relu_max <=  cmd_payload_inputs_1[31:0];
               end
               
-            end else if (cmd_payload_function_id[9:3] == 7'd5) begin
-              C_wr_en_fromCFU = 1'b0;
-              if (readC_counter == 2'd0) begin
-                rsp_payload_outputs_0 <= C_data_out[127:96];
-              end else if (readC_counter == 2'd1) begin
-                rsp_payload_outputs_0 <= C_data_out[95:64];
-              end else if (readC_counter == 2'd2) begin
-                rsp_payload_outputs_0 <= C_data_out[63:32];
-              end else if (readC_counter == 2'd3) begin
-                rsp_payload_outputs_0 <= C_data_out[31:0];
-                C_index_forRead <= C_index_forRead + 1;
-              end
-              readC_counter <= readC_counter + 1;
-            end else if (cmd_payload_function_id[9:3] == 7'd6) begin
+            endcase
+            /*
+            else if (cmd_payload_function_id[9:3] == 7'd6) begin
               offset <= cmd_payload_inputs_0[31:0];
             end else if (cmd_payload_function_id[9:3] == 7'd7) begin 
               rsp_payload_outputs_0 <= {8'b0, K, M, N};
@@ -273,6 +313,16 @@ module Cfu (
             //   // rsp_payload_outputs_0 <= see_sa_out3;
             //   rsp_payload_outputs_0 <= see_b_out1;
             // end
+            else if (cmd_payload_function_id[9:3] == 7'd10) begin
+              case(cmd_payload_inputs_1[1:0])
+                2'b00:rsp_payload_outputs_0 <= {cmd_payload_inputs_0[7:0],24'b0};
+                2'b01:rsp_payload_outputs_0[23:16] <= cmd_payload_inputs_0[7:0];
+                2'b10:rsp_payload_outputs_0[15:8] <= cmd_payload_inputs_0[7:0];
+                2'b11:rsp_payload_outputs_0[7:0] <= cmd_payload_inputs_0[7:0];
+              endcase
+              
+            end 
+            */
           end
         end
 
@@ -290,6 +340,114 @@ module Cfu (
   end
 
 endmodule
+
+module leaky_relu(
+  input_data ,
+  input_offset,
+  output_offset,
+  multiplier_id,
+  multiplier_alpla,
+  shift_id,
+  shift_alpla,
+  min,
+  max,
+  clamped_output
+);
+
+  input signed [31:0] input_data;
+  input signed  [31:0] input_offset;
+  input signed  [31:0] output_offset;
+  input signed  [31:0] multiplier_id;
+  input signed  [31:0] multiplier_alpla;
+  input signed  [31:0] shift_id;
+  input signed  [31:0] shift_alpla;
+  input signed  [31:0] min;
+  input signed  [31:0] max;
+  output reg signed  [31:0] clamped_output;
+
+  wire signed [31:0] val;
+  assign val = input_data - input_offset;
+
+  reg signed [31:0] multiplier;
+  reg signed [ 5:0] shift;
+  
+  always@(*)begin
+    if(val[31])begin
+      multiplier = multiplier_alpla;
+      shift = shift_alpla[5:0];
+    end
+    else begin
+      multiplier = multiplier_id;
+      shift = shift_id[5:0];
+    end
+  end
+    
+  
+  reg signed [31:0] val_shift;
+  reg signed [ 5:0] right_shift;
+
+  always@(*)begin
+    if($signed(shift) > 0)begin
+      val_shift = val <<< shift;
+      right_shift = 0;
+    end
+    else begin
+      val_shift = val;
+      right_shift = -$signed(shift);
+    end
+
+  end
+    
+
+  reg signed [63:0] nudge;
+  reg signed [63:0] product;
+  reg signed [63:0] acc;
+  reg signed [31:0] high_mul_result; 
+    
+
+  always@(*)begin
+    product = val_shift * multiplier;
+    nudge = (product >=0)? (1 << 30) : (1 - (1 << 30));
+    acc = product + nudge;
+    if( val_shift ==  -2147483648 && multiplier ==  -2147483648)begin
+      high_mul_result = 2147483647;
+    end
+    else begin
+      high_mul_result = (acc <0 && acc[30:0] != 0) ? acc[62:31] +1 : acc[62:31];
+    end
+  end
+  
+  reg signed [31:0] final_scaled_val;
+  reg [31:0] mask;
+  reg [31:0] remainder;
+  reg [31:0] threshold;
+
+  always@(*)begin
+    mask = (1 << right_shift) - 1;
+    remainder = high_mul_result & mask;
+    threshold = (mask >> 1) + (high_mul_result < 0 ? 1 : 0);
+
+    final_scaled_val = (high_mul_result >>> right_shift) + (remainder > threshold ? 1 : 0);
+  end
+
+  reg signed [31:0] unclamped;
+  
+  always@(*)begin
+    unclamped = output_offset + final_scaled_val;
+
+  end
+
+  always @(*) begin
+      if (unclamped > max) begin
+          clamped_output = max;
+      end else if (unclamped < min) begin
+          clamped_output = min;
+      end else begin
+          clamped_output = unclamped;
+      end
+  end
+endmodule
+
 
 module TPU(
     clk,
@@ -315,26 +473,7 @@ module TPU(
     C_index,
     C_data_in,
     C_data_out,
-    offset,
-    cur_state,
-    // K_num,
-    // M_num,
-    // N_num,
-    // MdivFour,
-    // NdivFour,
-    // k,
-    // m,
-    // n, 
-    C_write_counter 
-    // C_reg_state,
-    // see_sa_out0, 
-    // see_sa_out1, 
-    // see_sa_out2, 
-    // see_sa_out3, 
-    // see_a_out0,
-    // see_a_out1, 
-    // see_b_out0,
-    // see_b_out1
+    offset
 );
 
 
@@ -368,7 +507,7 @@ localparam WORK = 3'd1;
 localparam WRITE = 3'd2;
 localparam DONE = 3'd3;
 localparam ERROR = 3'd4;
-output reg [2:0] cur_state; // set to output for cfu
+reg [2:0] cur_state; // set to output for cfu
 reg pe_rst;
 
 assign A_wr_en = 0;
@@ -430,7 +569,7 @@ reg [7:0] m, k, n;
 // reg [15:0] C_addr_cur;
 // reg [1:0] C_sa_index;
 reg [2:0] wait_cycles;
-output reg [2:0] C_write_counter;
+reg [2:0] C_write_counter;
 reg [8:0] offset_inTPU;
 // reg [127:0] see_sa_out0, see_sa_out1, see_sa_out2, see_sa_out3;
 // reg [31:0] see_a_out0, see_a_out1, see_b_out0, see_b_out1;
