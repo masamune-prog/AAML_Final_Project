@@ -16,21 +16,19 @@ limitations under the License.
 #define TENSORFLOW_LITE_KERNELS_INTERNAL_REFERENCE_INTEGER_OPS_CONV_H_
 
 #include <algorithm>
-#include <cstring>
 
-#include "cfu.h"
-#include "perf.h"
 #include "playground_util/print_params.h"
 #include "tensorflow/lite/kernels/internal/common.h"
 #include "tensorflow/lite/kernels/internal/portable_tensor_utils.h"
-// #pragma GCC optimize("Ofast,inline")
-// the compiler flag is slower?
-static uint32_t im2col_packed[512][8192];
-static uint32_t fr2row_packed[8192][512];
+// #include <stdio.h>
+#include "cfu.h"
+#include "perf.h"
 
 namespace tflite {
+
 namespace reference_integer_ops {
 
+// Fixed-point per-channel-quantization convolution reference kernel.
 inline void ConvPerChannel(
     const ConvParams& params, const int32_t* output_multiplier,
     const int32_t* output_shift, const RuntimeShape& input_shape,
@@ -39,21 +37,27 @@ inline void ConvPerChannel(
     const int32_t* bias_data, const RuntimeShape& output_shape,
     int8_t* output_data) {
   perf_enable_counter(6);
+  const int32_t input_offset = params.input_offset;
 
-  // --- Parameter Setup ---
+  int8_t default_val = static_cast<int8_t>(-input_offset);
+  uint8_t default_u8 = static_cast<uint8_t>(default_val);
+  uint32_t default_packed = (static_cast<uint32_t>(default_u8) << 24) |
+                            (static_cast<uint32_t>(default_u8) << 16) |
+                            (static_cast<uint32_t>(default_u8) << 8) |
+                            static_cast<uint32_t>(default_u8);
+
   const int stride_width = params.stride_width;
   const int stride_height = params.stride_height;
   const int dilation_width_factor = params.dilation_width_factor;
   const int dilation_height_factor = params.dilation_height_factor;
   const int pad_width = params.padding_values.width;
   const int pad_height = params.padding_values.height;
-  const int32_t input_offset = params.input_offset;
   const int32_t output_offset = params.output_offset;
   const int32_t output_activation_min = params.quantized_activation_min;
   const int32_t output_activation_max = params.quantized_activation_max;
 
-  const int input_depth = input_shape.Dims(3);
-  const int output_depth = MatchingDim(filter_shape, 0, output_shape, 3);
+  // const int batches = input_shape.Dims(0);
+  const int output_depth = output_shape.Dims(3);
   const int input_height = input_shape.Dims(1);
   const int input_width = input_shape.Dims(2);
   const int filter_height = filter_shape.Dims(1);
@@ -62,184 +66,358 @@ inline void ConvPerChannel(
   const int output_height = output_shape.Dims(1);
   const int output_width = output_shape.Dims(2);
 
-  // ===============================================================
-  // STEP 1: FILL & PACK IM2COL (INPUTS)
-  // ===============================================================
+  const int filter_H_MUL_filter_W = filter_height * filter_width;
+  const int im2col_h = output_height * output_width;
+  const int im2col_w = filter_H_MUL_filter_W * filter_input_depth;
+  // const int kernel_h = im2col_w;
+  const int kernel_w = output_depth;
 
-  int row_idx = 0;
-  int col_idx = 0;
+  constexpr int MAX_IM2COL_H = 2048;
+  constexpr int MAX_IM2COL_W = 8192;
+  constexpr int MAX_KERNEL_H = 8192;
+  constexpr int MAX_KERNEL_W = 2048;
+  constexpr int MAX_RESULT_H = 2048;
+  constexpr int MAX_RESULT_W = 2048;
 
-  // REMOVED: uint32_t packed_val = 0;
-  // REMOVED: int pack_counter = 0;
+  // printf("im2col_h = %d", im2col_h);
+  // printf("im2col_w = %d", im2col_w);
+  // printf("kernel_w = %d", kernel_w);
+  // printf("filter_H_MUL_filter_W = %d\n", filter_H_MUL_filter_W);
 
+  int8_t im2col[MAX_IM2COL_H * MAX_IM2COL_W];
+  int8_t kernel[MAX_KERNEL_H * MAX_KERNEL_W];
+  int32_t output_buf[MAX_RESULT_H * MAX_RESULT_W];
+
+  constexpr int T = 32;
+  constexpr int SYSTOLIC_SIZE = 4;
+  uint8_t K_in = T, M_in = T, N_in = T;
+  // for (int batch = 0; batch < batches; ++batch) {
+  // build im2col
   for (int out_y = 0; out_y < output_height; ++out_y) {
-    const int top_edge = (out_y * stride_height) - pad_height;
+    const int in_y_origin = out_y * stride_height - pad_height;
+    const int out_y_offset = out_y * output_width;
     for (int out_x = 0; out_x < output_width; ++out_x) {
-      const int left_edge = (out_x * stride_width) - pad_width;
-
-      // Optimization: Calculate row/sub-row once
-      int packed_row = row_idx >> 2;        // row / 4
-      int byte_pos = row_idx & 3;           // row % 4
-      int shift_amt = 24 - (byte_pos * 8);  // 24, 16, 8, 0
+      const int in_x_origin = out_x * stride_width - pad_width;
+      const int im2col_i = out_y_offset + out_x;
+      const int im2col_row_base = im2col_i * im2col_w;
 
       for (int filter_y = 0; filter_y < filter_height; ++filter_y) {
-        const int in_y = top_edge + filter_y * dilation_height_factor;
+        const int in_y = in_y_origin + dilation_height_factor * filter_y;
+        const int filter_y_offset = filter_y * filter_width;
+
         for (int filter_x = 0; filter_x < filter_width; ++filter_x) {
-          const int in_x = left_edge + filter_x * dilation_width_factor;
-          const bool is_point_inside = (in_x >= 0 && in_x < input_width &&
-                                        in_y >= 0 && in_y < input_height);
+          const int in_x = in_x_origin + dilation_width_factor * filter_x;
+          const bool is_point_inside_image =
+              (in_x >= 0) && (in_x < input_width) && (in_y >= 0) &&
+              (in_y < input_height);
 
-          for (int in_c = 0; in_c < filter_input_depth; ++in_c) {
-            col_idx = filter_height * filter_width * in_c +
-                      filter_y * filter_width + filter_x;
+          // Unrolling in_channel by 4
+          for (int in_channel = 0; in_channel < filter_input_depth;
+               in_channel += 4) {
+            int base =
+                in_channel * filter_H_MUL_filter_W + filter_y_offset + filter_x;
 
-            uint8_t val;
-            if (is_point_inside) {
-              val = *((int8_t*)(input_data +
-                                Offset(input_shape, 0, in_y, in_x, in_c)));
-            } else {
-              val = (uint8_t)(-input_offset);
-            }
+            int im2col_j0 = base;
+            int im2col_j1 =
+                base + filter_H_MUL_filter_W;  // 若 filter_H_MUL_filter_W =
+                                               // filter_height*filter_width
+            int im2col_j2 = base + 2 * filter_H_MUL_filter_W;
+            int im2col_j3 = base + 3 * filter_H_MUL_filter_W;
 
-            // Read-Modify-Write to pack bits
-            // Initialize with 0 if this is the first byte (byte_pos == 0)
-            if (byte_pos == 0) {
-              im2col_packed[packed_row][col_idx] = (val << 24);
-            } else {
-              im2col_packed[packed_row][col_idx] |= (val << shift_amt);
-            }
+            im2col[im2col_row_base + im2col_j0] =
+                is_point_inside_image ? input_data[Offset(input_shape, 0, in_y,
+                                                          in_x, in_channel + 0)]
+                                      : static_cast<int8_t>(-input_offset);
+
+            im2col[im2col_row_base + im2col_j1] =
+                is_point_inside_image ? input_data[Offset(input_shape, 0, in_y,
+                                                          in_x, in_channel + 1)]
+                                      : static_cast<int8_t>(-input_offset);
+
+            im2col[im2col_row_base + im2col_j2] =
+                is_point_inside_image ? input_data[Offset(input_shape, 0, in_y,
+                                                          in_x, in_channel + 2)]
+                                      : static_cast<int8_t>(-input_offset);
+
+            im2col[im2col_row_base + im2col_j3] =
+                is_point_inside_image ? input_data[Offset(input_shape, 0, in_y,
+                                                          in_x, in_channel + 3)]
+                                      : static_cast<int8_t>(-input_offset);
           }
         }
       }
-      row_idx++;
     }
   }
 
-  // ===============================================================
-  // STEP 2: FILL & PACK FR2ROW (WEIGHTS)
-  // ===============================================================
-  // We rearrange loops to pack 4 output channels into one uint32.
-  // fr2row_packed[k][out_channel / 4]
+  // build kernel
+  for (int out_channel = 0; out_channel < output_depth; ++out_channel) {
+    for (int filter_y = 0; filter_y < filter_height; ++filter_y) {
+      const int filter_y_offset = filter_y * filter_width;
+      for (int filter_x = 0; filter_x < filter_width; ++filter_x) {
+        const int filter_x_offset = filter_y_offset + filter_x;
+        // Unrolling in_channel by 4
+        for (int in_channel = 0; in_channel < filter_input_depth;
+             in_channel += 4) {
+          int base =
+              filter_x_offset + in_channel * filter_height * filter_width;
 
-  for (int out_c = 0; out_c < output_depth; out_c += 4) {
-    // Handle boundary if depth % 4 != 0 (assuming multiple of 4 for simplicity
-    // based on your code)
+          int kernel_i0 = base;
+          int kernel_i1 = base + filter_height * filter_width;
+          int kernel_i2 = base + 2 * filter_height * filter_width;
+          int kernel_i3 = base + 3 * filter_height * filter_width;
 
-    for (int fy = 0; fy < filter_height; ++fy) {
-      for (int fx = 0; fx < filter_width; ++fx) {
-        for (int ic = 0; ic < filter_input_depth; ++ic) {
-          int k = filter_height * filter_width * ic + fy * filter_width + fx;
+          kernel[kernel_i0 * kernel_w + out_channel] = filter_data[Offset(
+              filter_shape, out_channel, filter_y, filter_x, in_channel + 0)];
 
-          // Pack 4 channels: c, c+1, c+2, c+3
-          uint32_t val32 = 0;
-          for (int sub = 0; sub < 4; ++sub) {
-            if (out_c + sub < output_depth) {
-              uint8_t v =
-                  *((int8_t*)(filter_data +
-                              Offset(filter_shape, out_c + sub, fy, fx, ic)));
-              val32 |= (v << (24 - sub * 8));
-            }
+          kernel[kernel_i1 * kernel_w + out_channel] = filter_data[Offset(
+              filter_shape, out_channel, filter_y, filter_x, in_channel + 1)];
+
+          kernel[kernel_i2 * kernel_w + out_channel] = filter_data[Offset(
+              filter_shape, out_channel, filter_y, filter_x, in_channel + 2)];
+
+          kernel[kernel_i3 * kernel_w + out_channel] = filter_data[Offset(
+              filter_shape, out_channel, filter_y, filter_x, in_channel + 3)];
+        }
+      }
+    }
+  }
+
+  cfu_op0(6, input_offset, 0);  // Set input offset
+
+  // Initialize output_buf (faster than using {0} to ini)
+  for (int i = 0; i < im2col_h; ++i) {
+    int row_base = i * kernel_w;
+    for (int j = 0; j < kernel_w; ++j) {
+      output_buf[row_base + j] = 0;
+    }
+  }
+
+  // Tiled GEMM with CFU
+  for (int m = 0; m < im2col_h; m += T) {
+    int m_tile = std::min(m + T, im2col_h) - m;
+    int m_quotient = m_tile / 4;
+    int m_remainder = m_tile % 4;
+    for (int n = 0; n < kernel_w; n += T) {
+      int n_tile = std::min(n + T, kernel_w) - n;
+      int n_quotient = n_tile / 4;
+      int n_remainder = n_tile % 4;
+
+      for (int k = 0; k < im2col_w; k += T) {
+        int k_tile = std::min(k + T, im2col_w) - k;
+
+        cfu_op0(0, 0, 0);  // Initialize systolic array
+
+        // pre-process im2col data for memory mapping (Type A)
+        // handle % 4 == 0
+        for (int col_block = 0; col_block < m_quotient; ++col_block) {
+          int col_start = col_block * SYSTOLIC_SIZE;
+          for (int i = 0; i < k_tile; ++i) {
+            // unroll 4 times and put im2col data into cfu
+            uint8_t v0 = static_cast<uint8_t>(
+                im2col[(m + col_start) * im2col_w + (k + i)]);
+            uint8_t v1 = static_cast<uint8_t>(
+                im2col[(m + col_start + 1) * im2col_w + (k + i)]);
+            uint8_t v2 = static_cast<uint8_t>(
+                im2col[(m + col_start + 2) * im2col_w + (k + i)]);
+            uint8_t v3 = static_cast<uint8_t>(
+                im2col[(m + col_start + 3) * im2col_w + (k + i)]);
+
+            // packed 4 int8_t to 1 int32_t
+            uint32_t A_packed = ((uint32_t)v0 << 24) | ((uint32_t)v1 << 16) |
+                                ((uint32_t)v2 << 8) | (uint32_t)v3;
+            cfu_op0(1, A_packed, 0);  // send 32 bit data into cfu
           }
-          fr2row_packed[k][out_c >> 2] = val32;
+        }
+
+        // handle %4 != 0
+        if (m_remainder > 0) {
+          int col_start = m_quotient * SYSTOLIC_SIZE;
+          for (int i = 0; i < k_tile; ++i) {
+            uint32_t A_packed =
+                default_packed;  // pre-filled -input_offset for edge cases
+
+            // write value based on m_remainder
+            if (m_remainder > 0) {
+              uint8_t v0 = static_cast<uint8_t>(
+                  im2col[(m + col_start) * im2col_w + (k + i)]);
+              A_packed = (A_packed & 0x00FFFFFFu) | ((uint32_t)v0 << 24);
+            }
+            if (m_remainder > 1) {
+              uint8_t v1 = static_cast<uint8_t>(
+                  im2col[(m + col_start + 1) * im2col_w + (k + i)]);
+              A_packed = (A_packed & 0xFF00FFFFu) | ((uint32_t)v1 << 16);
+            }
+            if (m_remainder > 2) {
+              uint8_t v2 = static_cast<uint8_t>(
+                  im2col[(m + col_start + 2) * im2col_w + (k + i)]);
+              A_packed = (A_packed & 0xFFFF00FFu) | ((uint32_t)v2 << 8);
+            }
+
+            cfu_op0(1, A_packed, 0);
+          }
+        }
+        // preprocess im2col ends here
+
+        // preprocess kernel data (same logic as im2col but mem mapping is type
+        // B)
+        for (int col_block = 0; col_block < n_quotient; ++col_block) {
+          int col_start = col_block * SYSTOLIC_SIZE;
+          for (int i = 0; i < k_tile; ++i) {
+            // unroll 4 times and put kernel data into cfu
+            uint8_t v0 = static_cast<uint8_t>(
+                kernel[(k + i) * kernel_w + (n + col_start)]);
+            uint8_t v1 = static_cast<uint8_t>(
+                kernel[(k + i) * kernel_w + (n + col_start + 1)]);
+            uint8_t v2 = static_cast<uint8_t>(
+                kernel[(k + i) * kernel_w + (n + col_start + 2)]);
+            uint8_t v3 = static_cast<uint8_t>(
+                kernel[(k + i) * kernel_w + (n + col_start + 3)]);
+
+            // packed 4 int8_t to 1 int32_t
+            uint32_t B_packed = ((uint32_t)v0 << 24) | ((uint32_t)v1 << 16) |
+                                ((uint32_t)v2 << 8) | (uint32_t)v3;
+            cfu_op0(2, 0, B_packed);  // send 32 bit data into cfu
+          }
+        }
+
+        if (n_remainder > 0) {
+          int col_start = n_quotient * SYSTOLIC_SIZE;
+          for (int i = 0; i < k_tile; ++i) {
+            uint32_t B_packed = 0;  // pre-filled 0 for edge cases
+
+            if (n_remainder > 0) {
+              uint8_t v0 = static_cast<uint8_t>(
+                  kernel[(k + i) * kernel_w + (n + col_start)]);
+              B_packed = (B_packed & 0x00FFFFFFu) | ((uint32_t)v0 << 24);
+            }
+            if (n_remainder > 1) {
+              uint8_t v1 = static_cast<uint8_t>(
+                  kernel[(k + i) * kernel_w + (n + col_start + 1)]);
+              B_packed = (B_packed & 0xFF00FFFFu) | ((uint32_t)v1 << 16);
+            }
+            if (n_remainder > 2) {
+              uint8_t v2 = static_cast<uint8_t>(
+                  kernel[(k + i) * kernel_w + (n + col_start + 2)]);
+              B_packed = (B_packed & 0xFFFF00FFu) | ((uint32_t)v2 << 8);
+            }
+
+            cfu_op0(2, 0, B_packed);  // send 32 bit data into cfu
+          }
+        }
+        // preprocess kernel ends here
+
+        M_in = m_tile;
+        N_in = n_tile;
+        K_in = k_tile;
+        cfu_op0(3, ((K_in << 16) | (M_in << 8) | N_in), 0);  // Set dimensions
+        while (cfu_op0(4, 0, 0)) {                           /* busy wait */
+        }
+
+        // handle output data from cfu
+        // first handle % 4 == 0
+        for (int current_n = 0; current_n < n_quotient; ++current_n) {
+          int base_col =
+              4 * current_n;  // calc base index to directly put into output_buf
+          for (int i = 0; i < m_tile; ++i) {
+            int out_row_base = (m + i) * kernel_w;
+            // unroll 4 times directly put back to output_buf
+            int32_t val0 = cfu_op0(5, 0, 0);
+            int32_t val1 = cfu_op0(5, 0, 0);
+            int32_t val2 = cfu_op0(5, 0, 0);
+            int32_t val3 = cfu_op0(5, 0, 0);
+
+            output_buf[out_row_base + (n + base_col)] += val0;
+            output_buf[out_row_base + (n + base_col + 1)] += val1;
+            output_buf[out_row_base + (n + base_col + 2)] += val2;
+            output_buf[out_row_base + (n + base_col + 3)] += val3;
+          }
+        }
+
+        // handle % 4 != 0
+        if (n_remainder > 0) {
+          int base_col = 4 * n_quotient;
+          for (int i = 0; i < m_tile; ++i) {
+            int out_row_base = (m + i) * kernel_w;
+
+            int32_t val0 = cfu_op0(5, 0, 0);
+            int32_t val1 = cfu_op0(5, 0, 0);
+            int32_t val2 = cfu_op0(5, 0, 0);
+            int32_t val3 = cfu_op0(5, 0, 0);
+
+            if (n_remainder > 0)
+              output_buf[out_row_base + (n + base_col)] += val0;
+            if (n_remainder > 1)
+              output_buf[out_row_base + (n + base_col + 1)] += val1;
+            if (n_remainder > 2)
+              output_buf[out_row_base + (n + base_col + 2)] += val2;
+            (void)val3;  // let compiler knows val3 has been used
+          }
         }
       }
     }
   }
 
-  // ===============================================================
-  // STEP 3: HIGH-SPEED TILED EXECUTION
-  // ===============================================================
+  for (int out_y = 0; out_y < output_height; ++out_y) {
+    const int base_y = (0 * output_height + out_y) * output_width;
+    for (int out_x = 0; out_x < output_width; ++out_x) {
+      const int base_x = base_y + out_x;  // calc base index for x
+      const int out_row_base = (out_y * output_width + out_x) *
+                               kernel_w;  // calc output row base for output_buf
 
-  cfu_op0(1, 0, 0);              // Reset
-  cfu_op0(18, input_offset, 0);  // Input Offset
+      int output_index_base =
+          base_x * output_depth;  // calc output index base for output data
+      // use ptr to reduce calc for output
+      int32_t* buf_ptr = &output_buf[out_row_base];
+      int8_t* output_ptr = &output_data[output_index_base];
 
-  const int K = filter_height * filter_width * input_depth;
+      for (int out_channel = 0; out_channel < output_depth; out_channel += 4) {
+        int32_t acc0 = buf_ptr[out_channel];
+        int32_t acc1 = buf_ptr[out_channel + 1];
+        int32_t acc2 = buf_ptr[out_channel + 2];
+        int32_t acc3 = buf_ptr[out_channel + 3];
 
-  // MATCHING YOUR HARDWARE: 12-bit address = 4096 entries
-  const int MAX_CFU_SIZE = 8192;
-
-  cfu_op0(4, 4, 0);  // M=4
-  cfu_op0(6, 4, 0);  // N=4
-
-  for (int out_channel = 0; out_channel < output_depth; out_channel += 4) {
-    // Optimization: Pre-calculate column index for weights
-    int weight_col_idx = out_channel >> 2;
-
-    for (int slide = 0; slide < output_height * output_width; slide += 4) {
-      // Optimization: Pre-calculate row index for inputs
-      int input_row_idx = slide >> 2;
-
-      int32_t acc[4][4] = {{0}};
-
-      // --- TILE LOOP ---
-      for (int k_start = 0; k_start < K; k_start += MAX_CFU_SIZE) {
-        int k_chunk_size = std::min(MAX_CFU_SIZE, K - k_start);
-        // printf("OC=%d, SLIDE=%d, K_START=%d, K_SIZE=%d\n", out_channel,
-        // slide,
-        //        k_start, k_chunk_size);
-        // Only verify size if needed (some CFUs auto-reset index)
-        cfu_op0(2, k_chunk_size, 0);
-
-        // -------------------------------------------------------------
-        // SUPER FAST LOADING LOOP
-        // -------------------------------------------------------------
-        // No shifting, no masking, just raw moves.
-        cfu_op0(20, 0, 0);
-        for (int k = 0; k < k_chunk_size; ++k) {
-          int real_k = k_start + k;
-
-          // // Load Weights: 1 Read, 1 Write
-          // cfu_op0(10, k, fr2row_packed[real_k][weight_col_idx]);
-
-          // // Load Inputs: 1 Read, 1 Write
-          // cfu_op0(8, k, im2col_packed[input_row_idx][real_k]);
-          cfu_op0(19,
-                  im2col_packed[input_row_idx][real_k],  // Goes to Buffer A
-                  fr2row_packed[real_k][weight_col_idx]  // Goes to Buffer B
-          );
+        if (bias_data) {
+          acc0 += bias_data[out_channel];
+          acc1 += bias_data[out_channel + 1];
+          acc2 += bias_data[out_channel + 2];
+          acc3 += bias_data[out_channel + 3];
         }
 
-        // Compute
-        cfu_op0(12, 0, 0);  // Start
-        while (cfu_op0(13, 0, 0) != 0) {
-        }  // Wait
+        acc0 = MultiplyByQuantizedMultiplier(
+            acc0, output_multiplier[out_channel], output_shift[out_channel]);
+        acc1 = MultiplyByQuantizedMultiplier(acc1,
+                                             output_multiplier[out_channel + 1],
+                                             output_shift[out_channel + 1]);
+        acc2 = MultiplyByQuantizedMultiplier(acc2,
+                                             output_multiplier[out_channel + 2],
+                                             output_shift[out_channel + 2]);
+        acc3 = MultiplyByQuantizedMultiplier(acc3,
+                                             output_multiplier[out_channel + 3],
+                                             output_shift[out_channel + 3]);
 
-        // Accumulate
-        for (int s = 0; s < 4; ++s) {
-          acc[s][0] += cfu_op0(17, s, 0);
-          acc[s][1] += cfu_op0(16, s, 0);
-          acc[s][2] += cfu_op0(15, s, 0);
-          acc[s][3] += cfu_op0(14, s, 0);
-        }
-      }
+        acc0 += output_offset;
+        acc1 += output_offset;
+        acc2 += output_offset;
+        acc3 += output_offset;
 
-      // --- Post Processing ---
-      for (int s = 0; s < 4; ++s) {
-        int current_slide = slide + s;
-        if (current_slide >= output_height * output_width) continue;
+        acc0 = std::max(acc0, output_activation_min);
+        acc1 = std::max(acc1, output_activation_min);
+        acc2 = std::max(acc2, output_activation_min);
+        acc3 = std::max(acc3, output_activation_min);
 
-        for (int c = 0; c < 4; ++c) {
-          if (out_channel + c >= output_depth) continue;
+        acc0 = std::min(acc0, output_activation_max);
+        acc1 = std::min(acc1, output_activation_max);
+        acc2 = std::min(acc2, output_activation_max);
+        acc3 = std::min(acc3, output_activation_max);
 
-          int32_t final_val = acc[s][c];
-          if (bias_data) final_val += bias_data[out_channel + c];
-
-          final_val = MultiplyByQuantizedMultiplier(
-              final_val, output_multiplier[out_channel + c],
-              output_shift[out_channel + c]);
-          final_val += output_offset;
-          final_val = std::max(final_val, output_activation_min);
-          final_val = std::min(final_val, output_activation_max);
-
-          int out_y = current_slide / output_width;
-          int out_x = current_slide % output_width;
-          output_data[Offset(output_shape, 0, out_y, out_x, out_channel + c)] =
-              static_cast<int8_t>(final_val);
-        }
+        output_ptr[out_channel] = static_cast<int8_t>(acc0);
+        output_ptr[out_channel + 1] = static_cast<int8_t>(acc1);
+        output_ptr[out_channel + 2] = static_cast<int8_t>(acc2);
+        output_ptr[out_channel + 3] = static_cast<int8_t>(acc3);
       }
     }
   }
-  perf_disable_counter(6);
+  perf_enable_counter(6);
 }
 
 inline void ConvPerChannelWithPackedInt4Weights(
@@ -304,16 +482,16 @@ inline void ConvPerChannel(
   const int output_width = output_shape.Dims(2);
   for (int batch = 0; batch < batches; ++batch) {
     for (int out_y = 0; out_y < output_height; ++out_y) {
-      const int top_edge = (out_y * stride_height) - pad_height;
+      const int in_y_origin = (out_y * stride_height) - pad_height;
       for (int out_x = 0; out_x < output_width; ++out_x) {
-        const int left_edge = (out_x * stride_width) - pad_width;
+        const int in_x_origin = (out_x * stride_width) - pad_width;
         for (int out_channel = 0; out_channel < output_depth; ++out_channel) {
           auto group = out_channel / filters_per_group;
           AccumScalar acc = 0;
           for (int filter_y = 0; filter_y < filter_height; ++filter_y) {
-            const int in_y = top_edge + dilation_height_factor * filter_y;
+            const int in_y = in_y_origin + dilation_height_factor * filter_y;
             for (int filter_x = 0; filter_x < filter_width; ++filter_x) {
-              const int in_x = left_edge + dilation_width_factor * filter_x;
+              const int in_x = in_x_origin + dilation_width_factor * filter_x;
 
               // Zero padding by omitting the areas outside the image.
               const bool is_point_inside_image =

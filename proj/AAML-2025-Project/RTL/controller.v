@@ -1,6 +1,6 @@
 //FSM to handle the stages where we invoke the
 module controller#(
-    parameter ADDR_BITS=13
+    parameter ADDR_BITS=15
 )(
     clk,
     rst_n,
