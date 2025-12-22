@@ -9,7 +9,7 @@ module global_buffer_bram #(parameter ADDR_BITS=8, parameter DATA_BITS=8)(
   );
 
   parameter DEPTH = 2**ADDR_BITS;
-
+  (* ram_style = "distributed" *)
   reg [DATA_BITS-1:0] gbuff [DEPTH-1:0];
 
   always @ (negedge clk) begin
