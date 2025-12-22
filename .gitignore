@@ -79,6 +79,7 @@ proj/my_first_cfu
 #proj/*/cfu.v
 
 build
+!soc/build
 csr.csv
 
 # VSCode files

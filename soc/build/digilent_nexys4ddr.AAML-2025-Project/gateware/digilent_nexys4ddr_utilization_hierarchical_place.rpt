@@ -1,0 +1,60 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Mon Dec 22 23:22:31 2025
+| Host         : DESKTOP-8IM51LT running 64-bit Ubuntu 24.04.3 LTS
+| Command      : report_utilization -hierarchical -file digilent_nexys4ddr_utilization_hierarchical_place.rpt
+| Design       : digilent_nexys4ddr
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Fully Placed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|             Instance             |               Module               | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++----------------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| digilent_nexys4ddr               |                              (top) |      17098 |      12088 |    5008 |    2 | 6198 |    130 |      8 |         12 |
+|   (digilent_nexys4ddr)           |                              (top) |       5532 |       1546 |    3984 |    2 | 2157 |      0 |      0 |          0 |
+|   Cfu                            |                                Cfu |       4610 |       3586 |    1024 |    0 | 2278 |    128 |      0 |          8 |
+|     (Cfu)                        |                                Cfu |         26 |         26 |       0 |    0 |  414 |      0 |      0 |          0 |
+|     My_TPU                       |                                TPU |       2827 |       2827 |       0 |    0 | 1736 |      0 |      0 |          4 |
+|       (My_TPU)                   |                                TPU |       1004 |       1004 |       0 |    0 |  508 |      0 |      0 |          4 |
+|       sa                         |                     Systolic_array |       1823 |       1823 |       0 |    0 | 1228 |      0 |      0 |          0 |
+|         (sa)                     |                     Systolic_array |        256 |        256 |       0 |    0 |  512 |      0 |      0 |          0 |
+|         genblk1[0].genblk1[0].pe |                                 PE |        212 |        212 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[0].genblk1[1].pe |                               PE_1 |        143 |        143 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[0].genblk1[2].pe |                               PE_2 |        143 |        143 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[0].genblk1[3].pe |                               PE_3 |         86 |         86 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         genblk1[1].genblk1[0].pe |                               PE_4 |        119 |        119 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[1].genblk1[1].pe |                               PE_5 |        107 |        107 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[1].genblk1[2].pe |                               PE_6 |        107 |        107 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[1].genblk1[3].pe |                               PE_7 |         86 |         86 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         genblk1[2].genblk1[0].pe |                               PE_8 |        119 |        119 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[2].genblk1[1].pe |                               PE_9 |        107 |        107 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[2].genblk1[2].pe |                              PE_10 |        107 |        107 |       0 |    0 |   49 |      0 |      0 |          0 |
+|         genblk1[2].genblk1[3].pe |                              PE_11 |         86 |         86 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         genblk1[3].genblk1[0].pe |                              PE_12 |         63 |         63 |       0 |    0 |   41 |      0 |      0 |          0 |
+|         genblk1[3].genblk1[1].pe |                              PE_13 |         62 |         62 |       0 |    0 |   41 |      0 |      0 |          0 |
+|         genblk1[3].genblk1[2].pe |                              PE_14 |         62 |         62 |       0 |    0 |   41 |      0 |      0 |          0 |
+|         genblk1[3].genblk1[3].pe |                              PE_15 |         41 |         41 |       0 |    0 |   32 |      0 |      0 |          0 |
+|     My_relu                      |                         leaky_relu |        617 |        617 |       0 |    0 |    0 |      0 |      0 |          4 |
+|     gbuff_A                      |                 global_buffer_bram |         32 |         32 |       0 |    0 |    0 |     64 |      0 |          0 |
+|     gbuff_B                      |               global_buffer_bram_0 |         29 |         29 |       0 |    0 |    0 |     64 |      0 |          0 |
+|     gbuff_C                      | global_buffer_bram__parameterized0 |       1086 |         62 |    1024 |    0 |  128 |      0 |      0 |          0 |
+|   VexRiscv                       |                           VexRiscv |       6960 |       6960 |       0 |    0 | 1763 |      2 |      8 |          4 |
+|     (VexRiscv)                   |                           VexRiscv |       1656 |       1656 |       0 |    0 | 1599 |      0 |      2 |          4 |
+|     IBusCachedPlugin_cache       |                   InstructionCache |       4482 |       4482 |       0 |    0 |   98 |      2 |      1 |          0 |
+|     dataCache_1                  |                          DataCache |        830 |        830 |       0 |    0 |   66 |      0 |      5 |          0 |
++----------------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

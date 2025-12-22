@@ -1,0 +1,60 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Thu Nov 27 12:11:42 2025
+| Host         : DESKTOP-8IM51LT running 64-bit Ubuntu 24.04.3 LTS
+| Command      : report_utilization -hierarchical -file digilent_nexys4ddr_utilization_hierarchical_synth.rpt
+| Design       : digilent_nexys4ddr
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|          Instance          |               Module               | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++----------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| digilent_nexys4ddr         |                              (top) |       7752 |       7606 |     144 |    2 | 4993 |     34 |     26 |          5 |
+|   (digilent_nexys4ddr)     |                              (top) |       1776 |       1630 |     144 |    2 | 1954 |     10 |     17 |          0 |
+|   Cfu                      |                                Cfu |       2839 |       2839 |       0 |    0 | 1287 |     22 |      1 |          1 |
+|     (Cfu)                  |                                Cfu |         65 |         65 |       0 |    0 |  245 |      0 |      0 |          0 |
+|     gbuff_A                |                 global_buffer_bram |          0 |          0 |       0 |    0 |    0 |      4 |      0 |          0 |
+|     gbuff_B                |               global_buffer_bram_0 |          0 |          0 |       0 |    0 |    0 |      4 |      0 |          0 |
+|     gbuff_C                | global_buffer_bram__parameterized0 |          0 |          0 |       0 |    0 |    0 |     14 |      1 |          0 |
+|     tpu                    |                                TPU |       2774 |       2774 |       0 |    0 | 1042 |      0 |      0 |          1 |
+|       (tpu)                |                                TPU |         70 |         70 |       0 |    0 |   53 |      0 |      0 |          0 |
+|       ctrl                 |                         controller |       1006 |       1006 |       0 |    0 |  125 |      0 |      0 |          1 |
+|       data_loader_a        |                        data_loader |         24 |         24 |       0 |    0 |   80 |      0 |      0 |          0 |
+|       data_loader_b        |                      data_loader_1 |        122 |        122 |       0 |    0 |   80 |      0 |      0 |          0 |
+|       sys_array            |                     systolic_array |       1556 |       1556 |       0 |    0 |  704 |      0 |      0 |          0 |
+|         ROW[0].COL[0].pe   |                                 PE |        115 |        115 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[0].COL[1].pe   |                               PE_2 |        114 |        114 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[0].COL[2].pe   |                               PE_3 |        115 |        115 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[0].COL[3].pe   |                               PE_4 |        106 |        106 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[1].COL[0].pe   |                               PE_5 |        123 |        123 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[1].COL[1].pe   |                               PE_6 |        121 |        121 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[1].COL[2].pe   |                               PE_7 |        123 |        123 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[1].COL[3].pe   |                               PE_8 |        113 |        113 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[2].COL[0].pe   |                               PE_9 |        123 |        123 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[2].COL[1].pe   |                              PE_10 |        121 |        121 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[2].COL[2].pe   |                              PE_11 |        123 |        123 |       0 |    0 |   48 |      0 |      0 |          0 |
+|         ROW[2].COL[3].pe   |                              PE_12 |        113 |        113 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[3].COL[0].pe   |                              PE_13 |         61 |         61 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[3].COL[1].pe   |                              PE_14 |         76 |         76 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[3].COL[2].pe   |                              PE_15 |         61 |         61 |       0 |    0 |   40 |      0 |      0 |          0 |
+|         ROW[3].COL[3].pe   |                              PE_16 |         68 |         68 |       0 |    0 |   32 |      0 |      0 |          0 |
+|   VexRiscv                 |                           VexRiscv |       3137 |       3137 |       0 |    0 | 1752 |      2 |      8 |          4 |
+|     (VexRiscv)             |                           VexRiscv |       1335 |       1335 |       0 |    0 | 1583 |      0 |      2 |          4 |
+|     IBusCachedPlugin_cache |                   InstructionCache |        922 |        922 |       0 |    0 |  103 |      2 |      1 |          0 |
+|     dataCache_1            |                          DataCache |        880 |        880 |       0 |    0 |   66 |      0 |      5 |          0 |
++----------------------------+------------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+

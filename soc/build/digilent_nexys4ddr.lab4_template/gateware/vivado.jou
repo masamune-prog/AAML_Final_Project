@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Nov  6 12:19:23 2025
+# Process ID: 12149
+# Current directory: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.lab4_template/gateware
+# Command line: vivado -mode batch -source digilent_nexys4ddr.tcl
+# Log file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.lab4_template/gateware/vivado.log
+# Journal file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.lab4_template/gateware/vivado.jou
+# Running On: DESKTOP-8IM51LT, OS: Linux, CPU Frequency: 3187.200 MHz, CPU Physical cores: 8, Host memory: 12545 MB
+#-----------------------------------------------------------
+source digilent_nexys4ddr.tcl

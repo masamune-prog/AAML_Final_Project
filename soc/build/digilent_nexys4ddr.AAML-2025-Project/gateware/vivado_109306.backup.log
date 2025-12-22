@@ -1,0 +1,934 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Mon Dec 22 23:14:51 2025
+# Process ID: 109306
+# Current directory: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware
+# Command line: vivado -mode batch -source digilent_nexys4ddr.tcl
+# Log file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.log
+# Journal file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.jou
+# Running On: DESKTOP-8IM51LT, OS: Linux, CPU Frequency: 3187.200 MHz, CPU Physical cores: 8, Host memory: 12545 MB
+#-----------------------------------------------------------
+source digilent_nexys4ddr.tcl
+# create_project -force -name digilent_nexys4ddr -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1286.348 ; gain = 85.840 ; free physical = 7698 ; free virtual = 12415
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v}
+# read_xdc digilent_nexys4ddr.xdc
+# set_property PROCESSING_ORDER EARLY [get_files digilent_nexys4ddr.xdc]
+# synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 109540
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2040.039 ; gain = 402.715 ; free physical = 6588 ; free virtual = 11345
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-11057] overflow of 32-bit signed integer 2147483648; using -2147483648 instead [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:412]
+WARNING: [Synth 8-11057] overflow of 32-bit signed integer 2147483648; using -2147483648 instead [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:412]
+WARNING: [Synth 8-11065] parameter 'DEPTH' becomes localparam in 'global_buffer_bram' with formal parameter declaration list [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1033]
+INFO: [Synth 8-6157] synthesizing module 'digilent_nexys4ddr' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:20]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_rom.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9717]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_sram.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9732]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_mem.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9755]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9098]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9121]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9190]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9202]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9284]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9339]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYCTRL' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75727]
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYCTRL' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75727]
+WARNING: [Synth 8-7071] port 'RDY' of module 'IDELAYCTRL' is unconnected for instance 'IDELAYCTRL' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+WARNING: [Synth 8-7023] instance 'IDELAYCTRL' of module 'IDELAYCTRL' has 3 connections declared, but only 2 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+INFO: [Synth 8-6157] synthesizing module 'OSERDESE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:97310]
+	Parameter DATA_RATE_OQ bound to: DDR - type: string 
+	Parameter DATA_RATE_TQ bound to: BUF - type: string 
+	Parameter DATA_WIDTH bound to: 4 - type: integer 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'OSERDESE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:97310]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7023] instance 'OSERDESE2' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+INFO: [Synth 8-6157] synthesizing module 'OBUFDS' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:93073]
+INFO: [Synth 8-6155] done synthesizing module 'OBUFDS' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:93073]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_1' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_2' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_3' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_4' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_5' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_6' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_7' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9972]
+INFO: [Common 17-14] Message 'Synth 8-7071' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-7023] instance 'OSERDESE2_7' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9972]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_8' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9994]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_9' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10016]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_10' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10038]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_11' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10060]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_12' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10082]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_13' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10104]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_14' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10126]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_15' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10148]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_16' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10170]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_17' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10192]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_18' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10214]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_19' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10236]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_20' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10258]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_21' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10280]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_22' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10302]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_23' of module 'OSERDESE2' has 27 connections declared, but only 17 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10324]
+INFO: [Synth 8-6157] synthesizing module 'IOBUFDS' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78214]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUFDS' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78214]
+WARNING: [Synth 8-7023] instance 'IOBUFDS' of module 'IOBUFDS' has 5 connections declared, but only 4 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10344]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_24' of module 'OSERDESE2' has 27 connections declared, but only 17 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10357]
+WARNING: [Synth 8-7023] instance 'IOBUFDS_1' of module 'IOBUFDS' has 5 connections declared, but only 4 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10377]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_25' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10390]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_26' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10412]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_27' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10434]
+INFO: [Synth 8-6157] synthesizing module 'ISERDESE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:80759]
+	Parameter DATA_RATE bound to: DDR - type: string 
+	Parameter DATA_WIDTH bound to: 4 - type: integer 
+	Parameter INTERFACE_TYPE bound to: NETWORKING - type: string 
+	Parameter IOBDELAY bound to: IFD - type: string 
+	Parameter NUM_CE bound to: 1 - type: integer 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'ISERDESE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:80759]
+WARNING: [Synth 8-7023] instance 'ISERDESE2' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10460]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75740]
+	Parameter CINVCTRL_SEL bound to: FALSE - type: string 
+	Parameter DELAY_SRC bound to: IDATAIN - type: string 
+	Parameter HIGH_PERFORMANCE_MODE bound to: TRUE - type: string 
+	Parameter IDELAY_TYPE bound to: VARIABLE - type: string 
+	Parameter IDELAY_VALUE bound to: 0 - type: integer 
+	Parameter PIPE_SEL bound to: FALSE - type: string 
+	Parameter REFCLK_FREQUENCY bound to: 200.000000 - type: double 
+	Parameter SIGNAL_PATTERN bound to: DATA - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75740]
+WARNING: [Synth 8-7023] instance 'IDELAYE2' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10487]
+INFO: [Synth 8-6157] synthesizing module 'IOBUF' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78197]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78197]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_28' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10510]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_1' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10536]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_1' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10563]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_29' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10586]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_2' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10612]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_2' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10639]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_30' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10662]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_3' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10688]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_3' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10715]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_31' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10738]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_4' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10764]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_4' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10791]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_32' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10814]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_5' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10840]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_5' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10867]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_33' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10890]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_6' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10916]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_6' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10943]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_34' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10966]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_7' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10992]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_7' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11019]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_35' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11042]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_8' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11068]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_8' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11095]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_36' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11118]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_9' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11144]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_9' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11171]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_37' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11194]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_10' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11220]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_10' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11247]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_38' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11270]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_11' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11296]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_11' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11323]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_39' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11346]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_12' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11372]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_12' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11399]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_40' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11422]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_13' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11448]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_13' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11475]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_41' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11498]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_14' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11524]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_14' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11551]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_42' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11574]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_15' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11600]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_15' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11627]
+INFO: [Synth 8-6157] synthesizing module 'FDCE' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40789]
+INFO: [Synth 8-6155] done synthesizing module 'FDCE' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40789]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_ADV' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:82174]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT_F bound to: 12.000000 - type: double 
+	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
+	Parameter CLKOUT0_DIVIDE_F bound to: 16.000000 - type: double 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT1_DIVIDE bound to: 8 - type: integer 
+	Parameter CLKOUT1_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT2_DIVIDE bound to: 8 - type: integer 
+	Parameter CLKOUT2_PHASE bound to: 90.000000 - type: double 
+	Parameter CLKOUT3_DIVIDE bound to: 6 - type: integer 
+	Parameter CLKOUT3_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT4_DIVIDE bound to: 24 - type: integer 
+	Parameter CLKOUT4_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT5_DIVIDE bound to: 30 - type: integer 
+	Parameter CLKOUT5_PHASE bound to: 0.000000 - type: double 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter REF_JITTER1 bound to: 0.010000 - type: double 
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_ADV' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:82174]
+WARNING: [Synth 8-7023] instance 'MMCME2_ADV' of module 'MMCME2_ADV' has 33 connections declared, but only 12 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11884]
+INFO: [Synth 8-6157] synthesizing module 'VexRiscv' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7]
+INFO: [Synth 8-6157] synthesizing module 'InstructionCache' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7008]
+INFO: [Synth 8-6155] done synthesizing module 'InstructionCache' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7008]
+INFO: [Synth 8-6157] synthesizing module 'DataCache' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6167]
+INFO: [Synth 8-6155] done synthesizing module 'DataCache' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6167]
+INFO: [Synth 8-6155] done synthesizing module 'VexRiscv' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7]
+INFO: [Synth 8-6157] synthesizing module 'Cfu' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:17]
+INFO: [Synth 8-6157] synthesizing module 'global_buffer_bram' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1023]
+	Parameter ADDR_BITS bound to: 16 - type: integer 
+	Parameter DATA_BITS bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'global_buffer_bram' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1023]
+INFO: [Synth 8-6157] synthesizing module 'global_buffer_bram__parameterized0' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1023]
+	Parameter ADDR_BITS bound to: 9 - type: integer 
+	Parameter DATA_BITS bound to: 128 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'global_buffer_bram__parameterized0' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1023]
+INFO: [Synth 8-6157] synthesizing module 'TPU' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:452]
+INFO: [Synth 8-6157] synthesizing module 'Systolic_array' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:934]
+INFO: [Synth 8-6157] synthesizing module 'PE' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:983]
+INFO: [Synth 8-6155] done synthesizing module 'PE' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:983]
+INFO: [Synth 8-6155] done synthesizing module 'Systolic_array' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:934]
+INFO: [Synth 8-6155] done synthesizing module 'TPU' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:452]
+INFO: [Synth 8-6157] synthesizing module 'leaky_relu' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:344]
+INFO: [Synth 8-6155] done synthesizing module 'leaky_relu' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:344]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:222]
+INFO: [Synth 8-6155] done synthesizing module 'Cfu' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:17]
+INFO: [Synth 8-6157] synthesizing module 'FDPE' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40945]
+	Parameter INIT bound to: 1'b1 
+INFO: [Synth 8-6155] done synthesizing module 'FDPE' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40945]
+INFO: [Synth 8-6155] done synthesizing module 'digilent_nexys4ddr' (0#1) [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:20]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_isIoAccess_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7286]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_allowRead_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7288]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_allowWrite_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7289]
+WARNING: [Synth 8-6014] Unused sequential element decodeStage_mmuRsp_bypassTranslation_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7293]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_valid_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6876]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_payload_way_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6877]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_payload_address_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6878]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_payload_data_valid_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6879]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_payload_data_error_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6880]
+WARNING: [Synth 8-6014] Unused sequential element tagsWriteLastCmd_payload_data_address_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6881]
+WARNING: [Synth 8-6014] Unused sequential element stageA_request_totalyConsistent_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6885]
+WARNING: [Synth 8-6014] Unused sequential element stageB_request_totalyConsistent_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6899]
+WARNING: [Synth 8-6014] Unused sequential element stageB_mmuRsp_allowExecute_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6907]
+WARNING: [Synth 8-6014] Unused sequential element stageB_mmuRsp_bypassTranslation_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6910]
+WARNING: [Synth 8-6014] Unused sequential element stageB_tagsReadRsp_0_valid_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6913]
+WARNING: [Synth 8-6014] Unused sequential element stageB_tagsReadRsp_0_address_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6915]
+WARNING: [Synth 8-3848] Net io_cpu_writeBack_exclusiveOk in module/entity DataCache does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6210]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_fetchPc_correctionReg_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3239]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_2_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3347]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_3_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3348]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_injector_nextPcCalc_valids_4_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3349]
+WARNING: [Synth 8-6014] Unused sequential element IBusCachedPlugin_rspCounter_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:5290]
+WARNING: [Synth 8-6014] Unused sequential element DBusCachedPlugin_rspCounter_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:5293]
+WARNING: [Synth 8-6014] Unused sequential element CsrPlugin_lastStageWasWfi_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:5311]
+WARNING: [Synth 8-6014] Unused sequential element dataCache_1_io_mem_cmd_rData_uncached_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3549]
+WARNING: [Synth 8-6014] Unused sequential element dataCache_1_io_mem_cmd_rData_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3554]
+WARNING: [Synth 8-6014] Unused sequential element dataCache_1_io_mem_cmd_s2mPipe_rData_uncached_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3565]
+WARNING: [Synth 8-6014] Unused sequential element dataCache_1_io_mem_cmd_s2mPipe_rData_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:3570]
+WARNING: [Synth 8-6014] Unused sequential element decode_to_execute_FORMAL_PC_NEXT_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2741]
+WARNING: [Synth 8-6014] Unused sequential element execute_to_memory_FORMAL_PC_NEXT_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2740]
+WARNING: [Synth 8-6014] Unused sequential element memory_to_writeBack_FORMAL_PC_NEXT_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2739]
+WARNING: [Synth 8-6014] Unused sequential element memory_to_writeBack_CfuPlugin_CFU_IN_FLIGHT_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2688]
+WARNING: [Synth 8-3848] Net IBusCachedPlugin_cache_io_cpu_fetch_isRemoved in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:78]
+WARNING: [Synth 8-3848] Net IBusCachedPlugin_mmuBus_rsp_bypassTranslation in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:664]
+WARNING: [Synth 8-3848] Net DBusCachedPlugin_mmuBus_rsp_bypassTranslation in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:692]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_SW in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:92]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_SR in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:93]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_SO in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:94]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_SI in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:95]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_PW in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:96]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_PR in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:97]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_PO in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:98]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_PI in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:99]
+WARNING: [Synth 8-3848] Net dataCache_1_io_cpu_writeBack_fence_FM in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:100]
+WARNING: [Synth 8-3848] Net dBus_rsp_payload_last in module/entity VexRiscv does not have driver. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:677]
+WARNING: [Synth 8-6014] Unused sequential element N_num_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:526]
+WARNING: [Synth 8-6014] Unused sequential element wait_cycles_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:594]
+WARNING: [Synth 8-6014] Unused sequential element C_reg_reg[3] was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:615]
+WARNING: [Synth 8-6014] Unused sequential element C_reg_reg[2] was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:615]
+WARNING: [Synth 8-6014] Unused sequential element C_reg_reg[1] was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:615]
+WARNING: [Synth 8-6014] Unused sequential element C_reg_reg[0] was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:615]
+WARNING: [Synth 8-6014] Unused sequential element C_reg_state_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:628]
+WARNING: [Synth 8-6014] Unused sequential element offset_inTPU_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:680]
+WARNING: [Synth 8-6014] Unused sequential element state_forOutput_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:208]
+WARNING: [Synth 8-3848] Net A_index_forPrint in module/entity Cfu does not have driver. [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:58]
+WARNING: [Synth 8-3848] Net B_index_forPrint in module/entity Cfu does not have driver. [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:63]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine0_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8108]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine0_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8109]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine1_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8154]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine1_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8155]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine2_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8200]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine2_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8201]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine3_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8246]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine3_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8247]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine4_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8292]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine4_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8293]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine5_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8338]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine5_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8339]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine6_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8384]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine6_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8385]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine7_cmd_buffer_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8430]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_bankmachine7_cmd_buffer_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:8431]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_wishbone_bridge_rdata_converter_converter_source_first_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:5854]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_wishbone_bridge_rdata_converter_converter_source_last_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:5855]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_wishbone_bridge_rdata_converter_converter_source_payload_valid_token_count_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9043]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_scratch_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9117]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_bus_errors_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9118]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_rst_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9166]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_dly_sel_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9170]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_half_sys8x_taps_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9174]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_wlevel_en_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9178]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_rdphase_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9182]
+WARNING: [Synth 8-6014] Unused sequential element soc_a7ddrphy_wrphase_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9186]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9247]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector0_command_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9251]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector0_address_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9255]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector0_baddress_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9259]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector0_wrdata_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9263]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector0_rddata_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9264]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector1_command_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9268]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector1_address_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9272]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector1_baddress_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9276]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector1_wrdata_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9280]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_sdram_phaseinjector1_rddata_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9281]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_load_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9314]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_reload_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9318]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_en_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9322]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_value_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9327]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_status_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9328]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_timer_enable_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9336]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_txfull_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9366]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_rxempty_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9367]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_status_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9368]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_enable_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9376]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_txempty_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9377]
+WARNING: [Synth 8-6014] Unused sequential element soc_basesoc_uart_rxfull_re_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9378]
+WARNING: [Synth 8-6014] Unused sequential element storage_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9775]
+WARNING: [Synth 8-6014] Unused sequential element storage_1_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9796]
+WARNING: [Synth 8-6014] Unused sequential element storage_2_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11654]
+WARNING: [Synth 8-6014] Unused sequential element storage_3_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11672]
+WARNING: [Synth 8-6014] Unused sequential element storage_4_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11690]
+WARNING: [Synth 8-6014] Unused sequential element storage_5_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11708]
+WARNING: [Synth 8-6014] Unused sequential element storage_6_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11726]
+WARNING: [Synth 8-6014] Unused sequential element storage_7_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11744]
+WARNING: [Synth 8-6014] Unused sequential element storage_8_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11762]
+WARNING: [Synth 8-6014] Unused sequential element storage_9_dat0_reg was removed.  [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11780]
+INFO: [Common 17-14] Message 'Synth 8-6014' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip142_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3581]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip132_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3523]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip122_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3465]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip112_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3407]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip102_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3349]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip92_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3291]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip82_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3233]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip72_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3175]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip62_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3117]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip52_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3059]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip42_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3001]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip32_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:2943]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip22_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:2885]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip14_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:2827]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip04_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:2769]
+WARNING: [Synth 8-3936] Found unconnected internal register 'soc_a7ddrphy_bitslip152_reg' and it is trimmed from '8' to '4' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:3639]
+WARNING: [Synth 8-7129] Port shift_id[31] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[30] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[29] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[28] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[27] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[26] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[25] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[24] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[23] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[22] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[21] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[20] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[19] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[18] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[17] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[16] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[15] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[14] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[13] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[12] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[11] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[10] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[9] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[8] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[7] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_id[6] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[31] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[30] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[29] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[28] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[27] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[26] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[25] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[24] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[23] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[22] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[21] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[20] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[19] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[18] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[17] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[16] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[15] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[14] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[13] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[12] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[11] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[10] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[9] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[8] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[7] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port shift_alpla[6] in module leaky_relu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[127] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[126] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[125] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[124] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[123] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[122] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[121] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[120] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[119] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[118] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[117] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[116] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[115] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[114] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[113] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[112] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[111] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[110] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[109] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[108] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[107] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[106] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[105] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[104] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[103] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[102] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[101] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[100] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[99] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[98] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[97] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[96] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[95] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[94] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[93] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[92] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[91] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[90] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[89] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[88] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[87] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[86] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[85] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[84] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[83] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[82] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[81] in module TPU is either unconnected or has no load
+WARNING: [Synth 8-7129] Port C_data_out[80] in module TPU is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2231.977 ; gain = 594.652 ; free physical = 6388 ; free virtual = 11150
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2249.789 ; gain = 612.465 ; free physical = 6376 ; free virtual = 11138
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 2249.789 ; gain = 612.465 ; free physical = 6376 ; free virtual = 11138
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.14 ; elapsed = 00:00:00.15 . Memory (MB): peak = 2255.727 ; gain = 0.000 ; free physical = 6367 ; free virtual = 11129
+INFO: [Netlist 29-17] Analyzing 52 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.xdc]
+INFO: [Timing 38-2] Deriving generated clocks [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.xdc:343]
+WARNING: [Vivado 12-3521] Clock specified in more than one group: soc_crg_clkout0 [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.xdc:343]
+Finished Parsing XDC File [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/digilent_nexys4ddr_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/digilent_nexys4ddr_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2388.539 ; gain = 0.000 ; free physical = 6271 ; free virtual = 11049
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 19 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 16 instances
+  IOBUFDS => IOBUFDS (IBUFDS, INV, OBUFTDS(x2)): 2 instances
+  OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS(x2)): 1 instance 
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2388.574 ; gain = 0.000 ; free physical = 6272 ; free virtual = 11049
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2388.574 ; gain = 751.250 ; free physical = 6271 ; free virtual = 11049
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2388.574 ; gain = 751.250 ; free physical = 6271 ; free virtual = 11049
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2388.574 ; gain = 751.250 ; free physical = 6272 ; free virtual = 11050
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'memory_to_writeBack_INSTRUCTION_reg' and it is trimmed from '32' to '30' bits. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2996]
+WARNING: [Synth 8-3936] Found unconnected internal register 'execute_to_memory_INSTRUCTION_reg' and it is trimmed from '32' to '30' bits. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2797]
+INFO: [Synth 8-802] inferred FSM for state register 'cur_state_reg' in module 'TPU'
+INFO: [Synth 8-802] inferred FSM for state register 'cfu_state_reg' in module 'Cfu'
+WARNING: [Synth 8-3936] Found unconnected internal register 'storage_1_dat1_reg' and it is trimmed from '10' to '8' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9800]
+WARNING: [Synth 8-3936] Found unconnected internal register 'storage_dat1_reg' and it is trimmed from '10' to '8' bits. [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9779]
+INFO: [Synth 8-802] inferred FSM for state register 'soc_builder_basesoc_refresher_state_reg' in module 'digilent_nexys4ddr'
+INFO: [Synth 8-802] inferred FSM for state register 'soc_builder_basesoc_fsm_state_reg' in module 'digilent_nexys4ddr'
+INFO: [Synth 8-802] inferred FSM for state register 'soc_builder_basesoc_wishbone2csr_state_reg' in module 'digilent_nexys4ddr'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 |                              000
+                    WORK |                              001 |                              001
+                   WRITE |                              010 |                              010
+                    DONE |                              011 |                              011
+                   ERROR |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cur_state_reg' using encoding 'sequential' in module 'TPU'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                READ_CFU |                                0 |                               00
+                WAIT_RSP |                                1 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cfu_state_reg' using encoding 'sequential' in module 'Cfu'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              001 |                               00
+*
+                 iSTATE0 |                              010 |                               01
+                 iSTATE1 |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'soc_builder_basesoc_refresher_state_reg' using encoding 'one-hot' in module 'digilent_nexys4ddr'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                               00 |                               00
+*
+                 iSTATE1 |                               01 |                               10
+                 iSTATE0 |                               10 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'soc_builder_basesoc_fsm_state_reg' using encoding 'sequential' in module 'digilent_nexys4ddr'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              001 |                               00
+*
+                 iSTATE0 |                              010 |                               01
+                 iSTATE1 |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'soc_builder_basesoc_wishbone2csr_state_reg' using encoding 'one-hot' in module 'digilent_nexys4ddr'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2388.574 ; gain = 751.250 ; free physical = 6268 ; free virtual = 11049
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   64 Bit       Adders := 5     
+	   3 Input   52 Bit       Adders := 1     
+	   2 Input   33 Bit       Adders := 3     
+	   3 Input   33 Bit       Adders := 2     
+	   3 Input   32 Bit       Adders := 3     
+	   2 Input   32 Bit       Adders := 18    
+	   3 Input   18 Bit       Adders := 4     
+	   2 Input   16 Bit       Adders := 2     
+	   2 Input   15 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 9     
+	   2 Input    8 Bit       Adders := 5     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 3     
+	   2 Input    4 Bit       Adders := 20    
+	   2 Input    3 Bit       Adders := 57    
+	   2 Input    2 Bit       Adders := 10    
+	   2 Input    1 Bit       Adders := 7     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
+	              128 Bit    Registers := 7     
+	               65 Bit    Registers := 1     
+	               64 Bit    Registers := 2     
+	               52 Bit    Registers := 1     
+	               34 Bit    Registers := 1     
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 111   
+	               30 Bit    Registers := 3     
+	               26 Bit    Registers := 1     
+	               21 Bit    Registers := 10    
+	               16 Bit    Registers := 49    
+	               14 Bit    Registers := 1     
+	               13 Bit    Registers := 13    
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 40    
+	                8 Bit    Registers := 40    
+	                6 Bit    Registers := 4     
+	                5 Bit    Registers := 5     
+	                4 Bit    Registers := 27    
+	                3 Bit    Registers := 59    
+	                2 Bit    Registers := 40    
+	                1 Bit    Registers := 279   
++---RAMs : 
+	            2048K Bit	(65536 X 32 bit)          RAMs := 2     
+	              64K Bit	(2048 X 32 bit)          RAMs := 2     
+	              64K Bit	(512 X 128 bit)          RAMs := 1     
+	              16K Bit	(2048 X 8 bit)          RAMs := 4     
+	              12K Bit	(512 X 24 bit)          RAMs := 1     
+	               5K Bit	(256 X 21 bit)          RAMs := 2     
+	               4K Bit	(512 X 8 bit)          RAMs := 16    
+	             1024 Bit	(32 X 32 bit)          RAMs := 1     
+	              176 Bit	(8 X 22 bit)          RAMs := 8     
+	              160 Bit	(16 X 10 bit)          RAMs := 2     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   4 Input  128 Bit        Muxes := 1     
+	   2 Input  128 Bit        Muxes := 4     
+	   3 Input  128 Bit        Muxes := 1     
+	   2 Input   72 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 1     
+	   2 Input   33 Bit        Muxes := 3     
+	   2 Input   32 Bit        Muxes := 263   
+	   3 Input   32 Bit        Muxes := 5     
+	   4 Input   32 Bit        Muxes := 6     
+	   5 Input   32 Bit        Muxes := 8     
+	   2 Input   30 Bit        Muxes := 1     
+	   2 Input   25 Bit        Muxes := 1     
+	   4 Input   24 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 1     
+	   4 Input   16 Bit        Muxes := 4     
+	   2 Input   16 Bit        Muxes := 13    
+	   5 Input   16 Bit        Muxes := 2     
+	  14 Input   16 Bit        Muxes := 2     
+	   2 Input   14 Bit        Muxes := 1     
+	   3 Input   14 Bit        Muxes := 1     
+	   2 Input   13 Bit        Muxes := 11    
+	   4 Input   13 Bit        Muxes := 1     
+	   3 Input   13 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 4     
+	   2 Input    9 Bit        Muxes := 8     
+	   5 Input    9 Bit        Muxes := 4     
+	  14 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 22    
+	   4 Input    8 Bit        Muxes := 3     
+	   5 Input    8 Bit        Muxes := 6     
+	   3 Input    8 Bit        Muxes := 3     
+	   2 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 4     
+	  14 Input    5 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 3     
+	   2 Input    4 Bit        Muxes := 14    
+	   5 Input    4 Bit        Muxes := 1     
+	   3 Input    4 Bit        Muxes := 1     
+	   7 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 41    
+	   3 Input    3 Bit        Muxes := 4     
+	   5 Input    3 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 20    
+	   6 Input    3 Bit        Muxes := 2     
+	   4 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 20    
+	   5 Input    2 Bit        Muxes := 8     
+	  14 Input    2 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 14    
+	  11 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 410   
+	   3 Input    1 Bit        Muxes := 19    
+	   4 Input    1 Bit        Muxes := 15    
+	   5 Input    1 Bit        Muxes := 13    
+	  14 Input    1 Bit        Muxes := 20    
+	  11 Input    1 Bit        Muxes := 5     
+	   7 Input    1 Bit        Muxes := 104   
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3936] Found unconnected internal register 'memory_to_writeBack_MUL_HH_reg' and it is trimmed from '34' to '32' bits. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2768]
+WARNING: [Synth 8-3936] Found unconnected internal register 'execute_to_memory_MUL_HH_reg' and it is trimmed from '34' to '32' bits. [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:2690]
+DSP Report: Generating DSP memory_to_writeBack_MUL_HH_reg, operation Mode is: (A*B)'.
+DSP Report: register memory_to_writeBack_MUL_HH_reg is absorbed into DSP memory_to_writeBack_MUL_HH_reg.
+DSP Report: register execute_to_memory_MUL_HH_reg is absorbed into DSP memory_to_writeBack_MUL_HH_reg.
+DSP Report: operator execute_MUL_HH is absorbed into DSP memory_to_writeBack_MUL_HH_reg.
+DSP Report: Generating DSP execute_to_memory_MUL_LH_reg, operation Mode is: (A*B)'.
+DSP Report: register execute_to_memory_MUL_LH_reg is absorbed into DSP execute_to_memory_MUL_LH_reg.
+DSP Report: operator execute_MUL_LH is absorbed into DSP execute_to_memory_MUL_LH_reg.
+DSP Report: Generating DSP execute_to_memory_MUL_HL_reg, operation Mode is: (A*B)'.
+DSP Report: register execute_to_memory_MUL_HL_reg is absorbed into DSP execute_to_memory_MUL_HL_reg.
+DSP Report: operator execute_MUL_HL is absorbed into DSP execute_to_memory_MUL_HL_reg.
+DSP Report: Generating DSP execute_to_memory_MUL_LL_reg, operation Mode is: (A*B)'.
+DSP Report: register execute_to_memory_MUL_LL_reg is absorbed into DSP execute_to_memory_MUL_LL_reg.
+DSP Report: operator execute_MUL_LL is absorbed into DSP execute_to_memory_MUL_LL_reg.
+DSP Report: Generating DSP A_index0, operation Mode is: A2*B.
+DSP Report: register K_num_reg is absorbed into DSP A_index0.
+DSP Report: operator A_index0 is absorbed into DSP A_index0.
+DSP Report: Generating DSP A_index0, operation Mode is: C'+A2*B2+1.
+DSP Report: register m_reg is absorbed into DSP A_index0.
+DSP Report: register k_reg is absorbed into DSP A_index0.
+DSP Report: register K_num_reg is absorbed into DSP A_index0.
+DSP Report: operator A_index0 is absorbed into DSP A_index0.
+DSP Report: operator A_index2 is absorbed into DSP A_index0.
+DSP Report: Generating DSP B_index, operation Mode is: ((D or 0)+(0 or A2))*B2.
+DSP Report: register K_num_reg is absorbed into DSP B_index.
+DSP Report: register n_reg is absorbed into DSP B_index.
+DSP Report: operator B_index0 is absorbed into DSP B_index.
+DSP Report: operator B_index2 is absorbed into DSP B_index.
+DSP Report: Generating DSP B_index0, operation Mode is: C'+A2*B2+1.
+DSP Report: register n_reg is absorbed into DSP B_index0.
+DSP Report: register K_num_reg is absorbed into DSP B_index0.
+DSP Report: register k_reg is absorbed into DSP B_index0.
+DSP Report: operator B_index0 is absorbed into DSP B_index0.
+DSP Report: operator B_index2 is absorbed into DSP B_index0.
+DSP Report: Generating DSP high_mul_result5, operation Mode is: A*B.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: Generating DSP high_mul_result5, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: Generating DSP high_mul_result5, operation Mode is: A*B.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: Generating DSP high_mul_result5, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+DSP Report: operator high_mul_result5 is absorbed into DSP high_mul_result5.
+INFO: [Synth 8-3971] The signal "VexRiscv/RegFilePlugin_regFile_reg" was recognized as a true dual port RAM template.
+RAM Pipeline Warning: Read Address Register Found For RAM tag_mem_reg. We will not be able to pipeline it. This may degrade performance. 
+INFO: [Synth 8-5784] Optimized 4 bits of RAM "tag_mem_reg" due to constant propagation. Old ram width 24 bits, new ram width 20 bits.
+RAM Pipeline Warning: Read Address Register Found For RAM tag_mem_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM sram_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM sram_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain0_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain0_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain1_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain1_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain2_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain2_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain3_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain3_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain4_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain4_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain5_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain5_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain6_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain6_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain7_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain7_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain8_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain8_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain9_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain9_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain10_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain10_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain11_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain11_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain12_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain12_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain13_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain13_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain14_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain14_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain15_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain15_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM tag_mem_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM sram_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain0_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain1_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain2_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain3_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain4_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain5_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain6_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain7_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain8_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain9_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain10_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain11_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain12_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain13_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain14_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM data_mem_grain15_reg. We will not be able to pipeline it. This may degrade performance. 
+WARNING: [Synth 8-3332] Sequential element (FDPE_2) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_3) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_4) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_5) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_8) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_9) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_10) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FDPE_11) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FSM_onehot_soc_builder_basesoc_refresher_state_reg[0]) is unused and will be removed from module digilent_nexys4ddr.
+WARNING: [Synth 8-3332] Sequential element (FSM_onehot_soc_builder_basesoc_wishbone2csr_state_reg[0]) is unused and will be removed from module digilent_nexys4ddr.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 2388.574 ; gain = 751.250 ; free physical = 6253 ; free virtual = 11055
+---------------------------------------------------------------------------------
+ Sort Area is  high_mul_result5_e : 0 0 : 2701 4861 : Used 1 time 0
+ Sort Area is  high_mul_result5_e : 0 1 : 2160 4861 : Used 1 time 0
+ Sort Area is  high_mul_result5_11 : 0 0 : 2158 3958 : Used 1 time 0
+ Sort Area is  high_mul_result5_11 : 0 1 : 1800 3958 : Used 1 time 0
+ Sort Area is  memory_to_writeBack_MUL_HH_reg_5 : 0 0 : 2328 2328 : Used 1 time 0
+ Sort Area is  execute_to_memory_MUL_HL_reg_2 : 0 0 : 2298 2298 : Used 1 time 0
+ Sort Area is  execute_to_memory_MUL_LH_reg_4 : 0 0 : 2298 2298 : Used 1 time 0
+ Sort Area is  execute_to_memory_MUL_LL_reg_0 : 0 0 : 1978 1978 : Used 1 time 0
+ Sort Area is  B_index_c : 0 0 : 1819 1819 : Used 1 time 0
+ Sort Area is  A_index0_7 : 0 0 : 957 957 : Used 1 time 0
+ Sort Area is  B_index0_b : 0 0 : 957 957 : Used 1 time 0
+ Sort Area is  A_index0_9 : 0 0 : 917 917 : Used 1 time 0
+WARNING: [Synth 8-5835] Resources of type BRAM have been overutilized. Used = 309, Available = 270. Will try to implement using LUT-RAM. 
+ DSP resource Status: memory_to_writeBack_MUL_HH_reg_5 0 2328 2328: Used 1 time : Accepted (5 < 240) uniquify 0 
+ DSP resource Status: execute_to_memory_MUL_LH_reg_4 0 2298 2298: Used 1 time : Accepted (7 < 240) uniquify 0 
+ DSP resource Status: execute_to_memory_MUL_HL_reg_2 0 2298 2298: Used 1 time : Accepted (6 < 240) uniquify 0 
+ DSP resource Status: execute_to_memory_MUL_LL_reg_0 0 1978 1978: Used 1 time : Accepted (8 < 240) uniquify 0 
+ DSP resource Status: A_index0_9 0 917 917: Used 1 time : Accepted (12 < 240) uniquify 0 
+ DSP resource Status: A_index0_7 0 957 957: Used 1 time : Accepted (10 < 240) uniquify 0 
+ DSP resource Status: B_index_c 0 1819 1819: Used 1 time : Accepted (9 < 240) uniquify 0 
+ DSP resource Status: B_index0_b 0 957 957: Used 1 time : Accepted (11 < 240) uniquify 0 
+ DSP resource Status: high_mul_result5_11 0 3958 2158: Used 1 time : Accepted (3 < 240) uniquify 0 
+ DSP resource Status: high_mul_result5_11 1 3958 1800: Used 1 time : Accepted (4 < 240) uniquify 0 
+ DSP resource Status: high_mul_result5_e 0 4861 2701: Used 1 time : Accepted (1 < 240) uniquify 0 
+ DSP resource Status: high_mul_result5_e 1 4861 2160: Used 1 time : Accepted (2 < 240) uniquify 0 

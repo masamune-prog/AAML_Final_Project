@@ -1,0 +1,36 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Thu Nov  6 12:21:49 2025
+| Host         : DESKTOP-8IM51LT running 64-bit Ubuntu 24.04.3 LTS
+| Command      : report_utilization -hierarchical -file digilent_nexys4ddr_utilization_hierarchical_synth.rpt
+| Design       : digilent_nexys4ddr
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------------+------------------+------------+------------+---------+------+------+--------+--------+------------+
+|          Instance          |      Module      | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++----------------------------+------------------+------------+------------+---------+------+------+--------+--------+------------+
+| digilent_nexys4ddr         |            (top) |       5530 |       5384 |     144 |    2 | 3737 |     12 |     25 |         44 |
+|   (digilent_nexys4ddr)     |            (top) |       1775 |       1629 |     144 |    2 | 1954 |     10 |     17 |          0 |
+|   Cfu                      |              Cfu |        228 |        228 |       0 |    0 |   32 |      0 |      0 |         40 |
+|     (Cfu)                  |              Cfu |          0 |          0 |       0 |    0 |   32 |      0 |      0 |          0 |
+|     exponential_softmax    |        exp_inter |        228 |        228 |       0 |    0 |    0 |      0 |      0 |         40 |
+|   VexRiscv                 |         VexRiscv |       3527 |       3527 |       0 |    0 | 1751 |      2 |      8 |          4 |
+|     (VexRiscv)             |         VexRiscv |       1707 |       1707 |       0 |    0 | 1582 |      0 |      2 |          4 |
+|     IBusCachedPlugin_cache | InstructionCache |        909 |        909 |       0 |    0 |  103 |      2 |      1 |          0 |
+|     dataCache_1            |        DataCache |        911 |        911 |       0 |    0 |   66 |      0 |      5 |          0 |
++----------------------------+------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+
