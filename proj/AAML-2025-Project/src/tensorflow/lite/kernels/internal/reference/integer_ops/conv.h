@@ -163,7 +163,7 @@ inline void ConvPerChannel(
   
   // 1. SAFETY CHECK: CALCULATE MAX TILE SIZE
   // Hardware buffer depth (entries per buffer A/B)
-  const int BUFFER_DEPTH = 4096; 
+  const int BUFFER_DEPTH = 32768; 
   
   // How many "strips" (groups of 4) can we fit?
   // 1 strip = 1*K entries. 

@@ -68,6 +68,8 @@ module Cfu
   );
   // @ ======== test C address bit sub, and A B addr bits increase ======//
   // @ ======== currently it's 6 bits
+  // @ 15 15 8 
+  // @ 14 14 6
   global_buffer_bram #(.ADDR_BITS(8), .DATA_BITS(C_BITS)) gbuff_C (
     .clk(clk), .rst_n(1'b1), .ram_en(1'b1),
     .wr_en(C_wr_en_mux), .index(C_index_mux),
