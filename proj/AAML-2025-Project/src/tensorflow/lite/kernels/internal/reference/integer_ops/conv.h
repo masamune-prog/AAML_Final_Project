@@ -170,7 +170,8 @@ inline void ConvPerChannel(
   int max_strips = BUFFER_DEPTH / K;
   
   // Clamp strips to valid tile configs: 4 (16x16), 2 (8x8), or 1 (4x4)
-  if (max_strips >= 8) max_strips = 8;
+  if (max_strips >= 16) max_strips = 16;
+  else if (max_strips >= 8) max_strips = 8;
   else if (max_strips >= 4) max_strips = 4;
   else if (max_strips >= 2) max_strips = 2;
   else max_strips = 1;
@@ -238,12 +239,12 @@ inline void ConvPerChannel(
       while (cfu_op0(13, 0, 0) != 0) { } 
 
       // -------------------------------------------------------------
-      // READ BACK max tile = 32
+      // READ BACK max tile = 64
       // -------------------------------------------------------------
       // int32_t acc[16][16];
       // ! fix here
-      int32_t acc[32][32];
-      
+      int32_t acc[64][64];
+
       int c_sram_addr = 0;
       
       // Calculate how many blocks the hardware actually processed

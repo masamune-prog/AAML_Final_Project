@@ -70,7 +70,7 @@ module Cfu
   // @ ======== currently it's 6 bits
   // @ 15 15 8 
   // @ 14 14 6
-  global_buffer_bram #(.ADDR_BITS(10), .DATA_BITS(C_BITS)) gbuff_C (
+  global_buffer_bram #(.ADDR_BITS(12), .DATA_BITS(C_BITS)) gbuff_C (
     .clk(clk), .rst_n(1'b1), .ram_en(1'b1),
     .wr_en(C_wr_en_mux), .index(C_index_mux),
     .data_in(C_data_in_mux), .data_out(C_data_out)
