@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Mon Dec 22 23:20:14 2025
+| Date         : Tue Dec 23 01:12:12 2025
 | Host         : DESKTOP-8IM51LT running 64-bit Ubuntu 24.04.3 LTS
 | Command      : report_timing_summary -file digilent_nexys4ddr_timing_synth.rpt
 | Design       : digilent_nexys4ddr
@@ -138,7 +138,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-    -17.244     -560.634                     56                59942        0.022        0.000                      0                59942        0.264        0.000                       0                 11660  
+     -1.516      -48.151                     59                60667        0.022        0.000                      0                60667        0.264        0.000                       0                 11993  
 
 
 Timing constraints are not met.
@@ -170,7 +170,7 @@ Clock                              WNS(ns)      TNS(ns)  TNS Failing Endpoints  
 -----                              -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 clk100                               8.781        0.000                      0                    7        0.148        0.000                      0                    7        3.000        0.000                       0                    10  
   soc_builder_basesoc_mmcm_fb                                                                                                                                                    8.751        0.000                       0                     2  
-  soc_crg_clkout0                  -17.244     -560.634                     56                59921        0.022        0.000                      0                59921        5.417        0.000                       0                 11555  
+  soc_crg_clkout0                   -1.516      -48.151                     59                60646        0.022        0.000                      0                60646        5.417        0.000                       0                 11888  
   soc_crg_clkout1                                                                                                                                                                4.511        0.000                       0                    75  
   soc_crg_clkout2                                                                                                                                                                4.511        0.000                       0                     4  
   soc_crg_clkout3                    1.060        0.000                      0                   14        0.045        0.000                      0                   14        0.264        0.000                       0                    10  
@@ -374,7 +374,7 @@ Max Period  n/a     MMCME2_ADV/CLKFBIN   n/a            100.000       10.000    
 From Clock:  soc_crg_clkout0
   To Clock:  soc_crg_clkout0
 
-Setup :           56  Failing Endpoints,  Worst Slack      -17.244ns,  Total Violation     -560.634ns
+Setup :           59  Failing Endpoints,  Worst Slack       -1.516ns,  Total Violation      -48.151ns
 Hold  :            0  Failing Endpoints,  Worst Slack        0.022ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        5.417ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
@@ -382,16 +382,16 @@ PW    :            0  Failing Endpoints,  Worst Slack        5.417ns,  Total Vio
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (VIOLATED) :        -17.244ns  (required time - arrival time)
-  Source:                 Cfu/relu_input_reg[1]/C
-                            (rising edge-triggered cell FDRE clocked by soc_crg_clkout0  {rise@0.000ns fall@6.667ns period=13.333ns})
-  Destination:            Cfu/rsp_payload_outputs_0_reg[0]/D
+Slack (VIOLATED) :        -1.516ns  (required time - arrival time)
+  Source:                 Cfu/My_relu/s2_product_comb__1/CLK
+                            (rising edge-triggered cell DSP48E1 clocked by soc_crg_clkout0  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            Cfu/My_relu/s2_high_mul_result_reg[30]/D
                             (rising edge-triggered cell FDRE clocked by soc_crg_clkout0  {rise@0.000ns fall@6.667ns period=13.333ns})
   Path Group:             soc_crg_clkout0
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            13.333ns  (soc_crg_clkout0 rise@13.333ns - soc_crg_clkout0 rise@0.000ns)
-  Data Path Delay:        30.407ns  (logic 20.519ns (67.482%)  route 9.888ns (32.518%))
-  Logic Levels:           71  (CARRY4=55 DSP48E1=2 LUT2=4 LUT3=2 LUT4=1 LUT5=4 LUT6=3)
+  Data Path Delay:        14.679ns  (logic 11.280ns (76.845%)  route 3.399ns (23.155%))
+  Logic Levels:           43  (CARRY4=36 DSP48E1=1 LUT2=3 LUT4=1 LUT6=2)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
     Destination Clock Delay (DCD):    4.838ns = ( 18.171 - 13.333 ) 
     Source Clock Delay      (SCD):    5.462ns
@@ -417,211 +417,136 @@ Slack (VIOLATED) :        -17.244ns  (required time - arrival time)
                                                       0.088     3.761 r  MMCME2_ADV/CLKOUT0
                          net (fo=1, unplaced)         0.803     4.564    soc_crg_clkout0
                          BUFG (Prop_bufg_I_O)         0.096     4.660 r  BUFG/O
-                         net (fo=11558, unplaced)     0.803     5.462    Cfu/out
-                         FDRE                                         r  Cfu/relu_input_reg[1]/C
+                         net (fo=11891, unplaced)     0.803     5.462    Cfu/My_relu/out
+                         DSP48E1                                      r  Cfu/My_relu/s2_product_comb__1/CLK
   -------------------------------------------------------------------    -------------------
-                         FDRE (Prop_fdre_C_Q)         0.478     5.940 r  Cfu/relu_input_reg[1]/Q
-                         net (fo=2, unplaced)         0.481     6.421    Cfu/My_relu/Q[1]
-                         LUT2 (Prop_lut2_I0_O)        0.295     6.716 r  Cfu/My_relu/val_carry_i_3/O
-                         net (fo=1, unplaced)         0.000     6.716    Cfu/My_relu/val_carry_i_3_n_0
-                         CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.533     7.249 r  Cfu/My_relu/val_carry/CO[3]
-                         net (fo=1, unplaced)         0.000     7.249    Cfu/My_relu/val_carry_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.366 r  Cfu/My_relu/val_carry__0/CO[3]
-                         net (fo=1, unplaced)         0.000     7.366    Cfu/My_relu/val_carry__0_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.483 r  Cfu/My_relu/val_carry__1/CO[3]
-                         net (fo=1, unplaced)         0.000     7.483    Cfu/My_relu/val_carry__1_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.600 r  Cfu/My_relu/val_carry__2/CO[3]
-                         net (fo=1, unplaced)         0.000     7.600    Cfu/My_relu/val_carry__2_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.717 r  Cfu/My_relu/val_carry__3/CO[3]
-                         net (fo=1, unplaced)         0.000     7.717    Cfu/My_relu/val_carry__3_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.834 r  Cfu/My_relu/val_carry__4/CO[3]
-                         net (fo=1, unplaced)         0.000     7.834    Cfu/My_relu/val_carry__4_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117     7.951 r  Cfu/My_relu/val_carry__5/CO[3]
-                         net (fo=1, unplaced)         0.000     7.951    Cfu/My_relu/val_carry__5_n_0
-                         CARRY4 (Prop_carry4_CI_O[3])
-                                                      0.331     8.282 r  Cfu/My_relu/val_carry__6/O[3]
-                         net (fo=112, unplaced)       0.550     8.832    Cfu/My_relu/p_0_in
-                         LUT3 (Prop_lut3_I1_O)        0.307     9.139 r  Cfu/My_relu/clamped_output8_carry_i_8/O
-                         net (fo=73, unplaced)        0.824     9.963    Cfu/My_relu/clamped_output8_carry_i_8_n_0
-                         LUT6 (Prop_lut6_I1_O)        0.124    10.087 f  Cfu/My_relu/high_mul_result5__1_i_41/O
-                         net (fo=4, unplaced)         0.756    10.843    Cfu/My_relu/high_mul_result5__1_i_41_n_0
-                         LUT5 (Prop_lut5_I0_O)        0.124    10.967 f  Cfu/My_relu/high_mul_result5__1_i_21/O
-                         net (fo=2, unplaced)         0.460    11.427    Cfu/My_relu/high_mul_result5__1_i_21_n_0
-                         LUT5 (Prop_lut5_I4_O)        0.124    11.551 r  Cfu/My_relu/high_mul_result5__1_i_5/O
-                         net (fo=3, unplaced)         0.803    12.354    Cfu/My_relu/val_shift[12]
-                         DSP48E1 (Prop_dsp48e1_A[12]_PCOUT[47])
-                                                      4.036    16.390 r  Cfu/My_relu/high_mul_result5__1/PCOUT[47]
-                         net (fo=1, unplaced)         0.000    16.390    Cfu/My_relu/high_mul_result5__1_n_106
+                         DSP48E1 (Prop_dsp48e1_CLK_PCOUT[47])
+                                                      2.488     7.950 r  Cfu/My_relu/s2_product_comb__1/PCOUT[47]
+                         net (fo=1, unplaced)         0.000     7.950    Cfu/My_relu/s2_product_comb__1_n_106
                          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
-                                                      1.518    17.908 r  Cfu/My_relu/high_mul_result5__2/P[0]
-                         net (fo=2, unplaced)         0.803    18.711    Cfu/My_relu/p_1_in[17]
-                         LUT2 (Prop_lut2_I0_O)        0.124    18.835 r  Cfu/My_relu/high_mul_result5_carry_i_3/O
-                         net (fo=1, unplaced)         0.000    18.835    Cfu/My_relu/high_mul_result5_carry_i_3_n_0
+                                                      1.518     9.468 r  Cfu/My_relu/s2_product_comb__2/P[0]
+                         net (fo=2, unplaced)         0.803    10.271    Cfu/My_relu/s2_product_comb__2_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    10.395 r  Cfu/My_relu/s2_product_comb_carry_i_3/O
+                         net (fo=1, unplaced)         0.000    10.395    Cfu/My_relu/s2_product_comb_carry_i_3_n_0
                          CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.533    19.368 r  Cfu/My_relu/high_mul_result5_carry/CO[3]
-                         net (fo=1, unplaced)         0.000    19.368    Cfu/My_relu/high_mul_result5_carry_n_0
+                                                      0.533    10.928 r  Cfu/My_relu/s2_product_comb_carry/CO[3]
+                         net (fo=1, unplaced)         0.000    10.928    Cfu/My_relu/s2_product_comb_carry_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    19.485 r  Cfu/My_relu/high_mul_result5_carry__0/CO[3]
-                         net (fo=1, unplaced)         0.000    19.485    Cfu/My_relu/high_mul_result5_carry__0_n_0
+                                                      0.117    11.045 r  Cfu/My_relu/s2_product_comb_carry__0/CO[3]
+                         net (fo=1, unplaced)         0.000    11.045    Cfu/My_relu/s2_product_comb_carry__0_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    19.602 r  Cfu/My_relu/high_mul_result5_carry__1/CO[3]
-                         net (fo=1, unplaced)         0.000    19.602    Cfu/My_relu/high_mul_result5_carry__1_n_0
+                                                      0.117    11.162 r  Cfu/My_relu/s2_product_comb_carry__1/CO[3]
+                         net (fo=1, unplaced)         0.000    11.162    Cfu/My_relu/s2_product_comb_carry__1_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    19.719 r  Cfu/My_relu/high_mul_result5_carry__2/CO[3]
-                         net (fo=1, unplaced)         0.000    19.719    Cfu/My_relu/high_mul_result5_carry__2_n_0
+                                                      0.117    11.279 r  Cfu/My_relu/s2_product_comb_carry__2/CO[3]
+                         net (fo=1, unplaced)         0.000    11.279    Cfu/My_relu/s2_product_comb_carry__2_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    19.836 r  Cfu/My_relu/high_mul_result5_carry__3/CO[3]
-                         net (fo=1, unplaced)         0.000    19.836    Cfu/My_relu/high_mul_result5_carry__3_n_0
+                                                      0.117    11.396 r  Cfu/My_relu/s2_product_comb_carry__3/CO[3]
+                         net (fo=1, unplaced)         0.000    11.396    Cfu/My_relu/s2_product_comb_carry__3_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    19.953 r  Cfu/My_relu/high_mul_result5_carry__4/CO[3]
-                         net (fo=1, unplaced)         0.000    19.953    Cfu/My_relu/high_mul_result5_carry__4_n_0
+                                                      0.117    11.513 r  Cfu/My_relu/s2_product_comb_carry__4/CO[3]
+                         net (fo=1, unplaced)         0.000    11.513    Cfu/My_relu/s2_product_comb_carry__4_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    20.070 r  Cfu/My_relu/high_mul_result5_carry__5/CO[3]
-                         net (fo=1, unplaced)         0.000    20.070    Cfu/My_relu/high_mul_result5_carry__5_n_0
+                                                      0.117    11.630 r  Cfu/My_relu/s2_product_comb_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    11.630    Cfu/My_relu/s2_product_comb_carry__5_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    20.187 r  Cfu/My_relu/high_mul_result5_carry__6/CO[3]
-                         net (fo=1, unplaced)         0.000    20.187    Cfu/My_relu/high_mul_result5_carry__6_n_0
+                                                      0.117    11.747 r  Cfu/My_relu/s2_product_comb_carry__6/CO[3]
+                         net (fo=1, unplaced)         0.000    11.747    Cfu/My_relu/s2_product_comb_carry__6_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    20.304 r  Cfu/My_relu/high_mul_result5_carry__7/CO[3]
-                         net (fo=1, unplaced)         0.000    20.304    Cfu/My_relu/high_mul_result5_carry__7_n_0
+                                                      0.117    11.864 r  Cfu/My_relu/s2_product_comb_carry__7/CO[3]
+                         net (fo=1, unplaced)         0.000    11.864    Cfu/My_relu/s2_product_comb_carry__7_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    20.421 r  Cfu/My_relu/high_mul_result5_carry__8/CO[3]
-                         net (fo=1, unplaced)         0.000    20.421    Cfu/My_relu/high_mul_result5_carry__8_n_0
+                                                      0.117    11.981 r  Cfu/My_relu/s2_product_comb_carry__8/CO[3]
+                         net (fo=1, unplaced)         0.000    11.981    Cfu/My_relu/s2_product_comb_carry__8_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    20.538 r  Cfu/My_relu/high_mul_result5_carry__9/CO[3]
-                         net (fo=1, unplaced)         0.000    20.538    Cfu/My_relu/high_mul_result5_carry__9_n_0
+                                                      0.117    12.098 r  Cfu/My_relu/s2_product_comb_carry__9/CO[3]
+                         net (fo=1, unplaced)         0.000    12.098    Cfu/My_relu/s2_product_comb_carry__9_n_0
                          CARRY4 (Prop_carry4_CI_O[3])
-                                                      0.331    20.869 r  Cfu/My_relu/high_mul_result5_carry__10/O[3]
-                         net (fo=6, unplaced)         0.480    21.349    Cfu/My_relu/high_mul_result5__3[63]
-                         LUT2 (Prop_lut2_I1_O)        0.307    21.656 r  Cfu/My_relu/high_mul_result4_carry_i_1/O
-                         net (fo=1, unplaced)         0.000    21.656    Cfu/My_relu/high_mul_result4_carry_i_1_n_0
+                                                      0.331    12.429 r  Cfu/My_relu/s2_product_comb_carry__10/O[3]
+                         net (fo=6, unplaced)         0.480    12.909    Cfu/My_relu/s2_product_comb__3[63]
+                         LUT2 (Prop_lut2_I1_O)        0.307    13.216 r  Cfu/My_relu/s2_acc_comb_carry_i_1/O
+                         net (fo=1, unplaced)         0.000    13.216    Cfu/My_relu/s2_acc_comb_carry_i_1_n_0
                          CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.513    22.169 r  Cfu/My_relu/high_mul_result4_carry/CO[3]
-                         net (fo=1, unplaced)         0.000    22.169    Cfu/My_relu/high_mul_result4_carry_n_0
+                                                      0.513    13.729 r  Cfu/My_relu/s2_acc_comb_carry/CO[3]
+                         net (fo=1, unplaced)         0.000    13.729    Cfu/My_relu/s2_acc_comb_carry_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.286 r  Cfu/My_relu/high_mul_result4_carry__0/CO[3]
-                         net (fo=1, unplaced)         0.000    22.286    Cfu/My_relu/high_mul_result4_carry__0_n_0
+                                                      0.117    13.846 r  Cfu/My_relu/s2_acc_comb_carry__0/CO[3]
+                         net (fo=1, unplaced)         0.000    13.846    Cfu/My_relu/s2_acc_comb_carry__0_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.403 r  Cfu/My_relu/high_mul_result4_carry__1/CO[3]
-                         net (fo=1, unplaced)         0.000    22.403    Cfu/My_relu/high_mul_result4_carry__1_n_0
+                                                      0.117    13.963 r  Cfu/My_relu/s2_acc_comb_carry__1/CO[3]
+                         net (fo=1, unplaced)         0.000    13.963    Cfu/My_relu/s2_acc_comb_carry__1_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.520 r  Cfu/My_relu/high_mul_result4_carry__2/CO[3]
-                         net (fo=1, unplaced)         0.000    22.520    Cfu/My_relu/high_mul_result4_carry__2_n_0
+                                                      0.117    14.080 r  Cfu/My_relu/s2_acc_comb_carry__2/CO[3]
+                         net (fo=1, unplaced)         0.000    14.080    Cfu/My_relu/s2_acc_comb_carry__2_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.637 r  Cfu/My_relu/high_mul_result4_carry__3/CO[3]
-                         net (fo=1, unplaced)         0.000    22.637    Cfu/My_relu/high_mul_result4_carry__3_n_0
+                                                      0.117    14.197 r  Cfu/My_relu/s2_acc_comb_carry__3/CO[3]
+                         net (fo=1, unplaced)         0.000    14.197    Cfu/My_relu/s2_acc_comb_carry__3_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.754 r  Cfu/My_relu/high_mul_result4_carry__4/CO[3]
-                         net (fo=1, unplaced)         0.000    22.754    Cfu/My_relu/high_mul_result4_carry__4_n_0
+                                                      0.117    14.314 r  Cfu/My_relu/s2_acc_comb_carry__4/CO[3]
+                         net (fo=1, unplaced)         0.000    14.314    Cfu/My_relu/s2_acc_comb_carry__4_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.871 r  Cfu/My_relu/high_mul_result4_carry__5/CO[3]
-                         net (fo=1, unplaced)         0.000    22.871    Cfu/My_relu/high_mul_result4_carry__5_n_0
+                                                      0.117    14.431 r  Cfu/My_relu/s2_acc_comb_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    14.431    Cfu/My_relu/s2_acc_comb_carry__5_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    22.988 r  Cfu/My_relu/high_mul_result4_carry__6/CO[3]
-                         net (fo=1, unplaced)         0.000    22.988    Cfu/My_relu/high_mul_result4_carry__6_n_0
+                                                      0.117    14.548 r  Cfu/My_relu/s2_acc_comb_carry__6/CO[3]
+                         net (fo=1, unplaced)         0.000    14.548    Cfu/My_relu/s2_acc_comb_carry__6_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.105 r  Cfu/My_relu/high_mul_result4_carry__7/CO[3]
-                         net (fo=1, unplaced)         0.000    23.105    Cfu/My_relu/high_mul_result4_carry__7_n_0
+                                                      0.117    14.665 r  Cfu/My_relu/s2_acc_comb_carry__7/CO[3]
+                         net (fo=1, unplaced)         0.000    14.665    Cfu/My_relu/s2_acc_comb_carry__7_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.222 r  Cfu/My_relu/high_mul_result4_carry__8/CO[3]
-                         net (fo=1, unplaced)         0.000    23.222    Cfu/My_relu/high_mul_result4_carry__8_n_0
+                                                      0.117    14.782 r  Cfu/My_relu/s2_acc_comb_carry__8/CO[3]
+                         net (fo=1, unplaced)         0.000    14.782    Cfu/My_relu/s2_acc_comb_carry__8_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.339 r  Cfu/My_relu/high_mul_result4_carry__9/CO[3]
-                         net (fo=1, unplaced)         0.000    23.339    Cfu/My_relu/high_mul_result4_carry__9_n_0
+                                                      0.117    14.899 r  Cfu/My_relu/s2_acc_comb_carry__9/CO[3]
+                         net (fo=1, unplaced)         0.000    14.899    Cfu/My_relu/s2_acc_comb_carry__9_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.456 r  Cfu/My_relu/high_mul_result4_carry__10/CO[3]
-                         net (fo=1, unplaced)         0.000    23.456    Cfu/My_relu/high_mul_result4_carry__10_n_0
+                                                      0.117    15.016 r  Cfu/My_relu/s2_acc_comb_carry__10/CO[3]
+                         net (fo=1, unplaced)         0.000    15.016    Cfu/My_relu/s2_acc_comb_carry__10_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.573 r  Cfu/My_relu/high_mul_result4_carry__11/CO[3]
-                         net (fo=1, unplaced)         0.000    23.573    Cfu/My_relu/high_mul_result4_carry__11_n_0
+                                                      0.117    15.133 r  Cfu/My_relu/s2_acc_comb_carry__11/CO[3]
+                         net (fo=1, unplaced)         0.000    15.133    Cfu/My_relu/s2_acc_comb_carry__11_n_0
                          CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    23.690 r  Cfu/My_relu/high_mul_result4_carry__12/CO[3]
-                         net (fo=1, unplaced)         0.000    23.690    Cfu/My_relu/high_mul_result4_carry__12_n_0
-                         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.337    24.027 r  Cfu/My_relu/high_mul_result4_carry__13/O[1]
-                         net (fo=3, unplaced)         0.733    24.760    Cfu/My_relu/high_mul_result4_carry__13_n_6
-                         CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.839    25.599 r  Cfu/My_relu/p_1_out__62_carry__5_i_9/CO[3]
-                         net (fo=1, unplaced)         0.000    25.599    Cfu/My_relu/p_1_out__62_carry__5_i_9_n_0
+                                                      0.117    15.250 r  Cfu/My_relu/s2_acc_comb_carry__12/CO[3]
+                         net (fo=1, unplaced)         0.000    15.250    Cfu/My_relu/s2_acc_comb_carry__12_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    15.367 r  Cfu/My_relu/s2_acc_comb_carry__13/CO[3]
+                         net (fo=1, unplaced)         0.000    15.367    Cfu/My_relu/s2_acc_comb_carry__13_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    15.698 r  Cfu/My_relu/s2_acc_comb_carry__14/O[3]
+                         net (fo=7, unplaced)         0.483    16.181    Cfu/My_relu/s2_acc_comb_carry__14_n_4
+                         LUT6 (Prop_lut6_I4_O)        0.307    16.488 r  Cfu/My_relu/s2_high_mul_result[3]_i_8/O
+                         net (fo=1, unplaced)         0.732    17.220    Cfu/My_relu/s2_high_mul_result[3]_i_8_n_0
+                         LUT6 (Prop_lut6_I3_O)        0.124    17.344 r  Cfu/My_relu/s2_high_mul_result[3]_i_4/O
+                         net (fo=1, unplaced)         0.449    17.793    Cfu/My_relu/s2_high_mul_result[3]_i_4_n_0
+                         LUT4 (Prop_lut4_I1_O)        0.124    17.917 r  Cfu/My_relu/s2_high_mul_result[3]_i_3/O
+                         net (fo=1, unplaced)         0.000    17.917    Cfu/My_relu/s2_high_mul_result[3]_i_3_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.513    18.430 r  Cfu/My_relu/s2_high_mul_result_reg[3]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    18.430    Cfu/My_relu/s2_high_mul_result_reg[3]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    18.547 r  Cfu/My_relu/s2_high_mul_result_reg[7]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    18.547    Cfu/My_relu/s2_high_mul_result_reg[7]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    18.664 r  Cfu/My_relu/s2_high_mul_result_reg[11]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    18.664    Cfu/My_relu/s2_high_mul_result_reg[11]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    18.781 r  Cfu/My_relu/s2_high_mul_result_reg[15]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    18.781    Cfu/My_relu/s2_high_mul_result_reg[15]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    18.898 r  Cfu/My_relu/s2_high_mul_result_reg[19]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    18.898    Cfu/My_relu/s2_high_mul_result_reg[19]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    19.015 r  Cfu/My_relu/s2_high_mul_result_reg[23]_i_2/CO[3]
+                         net (fo=1, unplaced)         0.000    19.015    Cfu/My_relu/s2_high_mul_result_reg[23]_i_2_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    19.132 r  Cfu/My_relu/s2_high_mul_result_reg[31]_i_4/CO[3]
+                         net (fo=1, unplaced)         0.000    19.132    Cfu/My_relu/s2_high_mul_result_reg[31]_i_4_n_0
                          CARRY4 (Prop_carry4_CI_O[2])
-                                                      0.256    25.855 f  Cfu/My_relu/p_1_out__62_carry__6_i_8/O[2]
-                         net (fo=2, unplaced)         0.463    26.318    Cfu/My_relu/p_1_out__62_carry__6_i_8_n_5
-                         LUT6 (Prop_lut6_I4_O)        0.301    26.619 f  Cfu/My_relu/p_1_out_carry_i_3/O
-                         net (fo=1, unplaced)         0.449    27.068    Cfu/My_relu/p_1_out_carry_i_3_n_0
-                         LUT6 (Prop_lut6_I0_O)        0.124    27.192 r  Cfu/My_relu/p_1_out_carry_i_2/O
-                         net (fo=34, unplaced)        0.522    27.714    Cfu/My_relu/p_1_out_carry_i_2_n_0
-                         LUT2 (Prop_lut2_I1_O)        0.124    27.838 r  Cfu/My_relu/p_1_out_carry_i_1/O
-                         net (fo=1, unplaced)         0.000    27.838    Cfu/My_relu/p_1_out_carry_i_1_n_0
-                         CARRY4 (Prop_carry4_S[0]_CO[3])
-                                                      0.513    28.351 r  Cfu/My_relu/p_1_out_carry/CO[3]
-                         net (fo=1, unplaced)         0.000    28.351    Cfu/My_relu/p_1_out_carry_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    28.468 r  Cfu/My_relu/p_1_out_carry__0/CO[3]
-                         net (fo=1, unplaced)         0.000    28.468    Cfu/My_relu/p_1_out_carry__0_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    28.585 r  Cfu/My_relu/p_1_out_carry__1/CO[3]
-                         net (fo=1, unplaced)         0.000    28.585    Cfu/My_relu/p_1_out_carry__1_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    28.702 r  Cfu/My_relu/p_1_out_carry__2/CO[3]
-                         net (fo=1, unplaced)         0.000    28.702    Cfu/My_relu/p_1_out_carry__2_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    28.819 r  Cfu/My_relu/p_1_out_carry__3/CO[3]
-                         net (fo=1, unplaced)         0.000    28.819    Cfu/My_relu/p_1_out_carry__3_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    28.936 r  Cfu/My_relu/p_1_out_carry__4/CO[3]
-                         net (fo=1, unplaced)         0.000    28.936    Cfu/My_relu/p_1_out_carry__4_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    29.053 r  Cfu/My_relu/p_1_out_carry__5/CO[3]
-                         net (fo=1, unplaced)         0.000    29.053    Cfu/My_relu/p_1_out_carry__5_n_0
-                         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.337    29.390 r  Cfu/My_relu/p_1_out_carry__6/O[1]
-                         net (fo=2, unplaced)         0.323    29.713    Cfu/My_relu/threshold[29]
-                         LUT3 (Prop_lut3_I0_O)        0.306    30.019 r  Cfu/My_relu/p_1_out__62_carry__6_i_3/O
-                         net (fo=1, unplaced)         0.000    30.019    Cfu/My_relu/p_1_out__62_carry__6_i_3_n_0
-                         CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.533    30.552 r  Cfu/My_relu/p_1_out__62_carry__6/CO[3]
-                         net (fo=1, unplaced)         0.000    30.552    Cfu/My_relu/p_1_out__62_carry__6_n_0
-                         CARRY4 (Prop_carry4_CI_O[0])
-                                                      0.232    30.784 r  Cfu/My_relu/p_1_out__62_carry__7/O[0]
-                         net (fo=1, unplaced)         0.334    31.118    Cfu/My_relu/p_1_out[32]
-                         CARRY4 (Prop_carry4_CYINIT_CO[3])
-                                                      0.766    31.884 r  Cfu/My_relu/clamped_output2_carry/CO[3]
-                         net (fo=1, unplaced)         0.000    31.884    Cfu/My_relu/clamped_output2_carry_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    32.001 r  Cfu/My_relu/clamped_output2_carry__0/CO[3]
-                         net (fo=1, unplaced)         0.000    32.001    Cfu/My_relu/clamped_output2_carry__0_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    32.118 r  Cfu/My_relu/clamped_output2_carry__1/CO[3]
-                         net (fo=1, unplaced)         0.000    32.118    Cfu/My_relu/clamped_output2_carry__1_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    32.235 r  Cfu/My_relu/clamped_output2_carry__2/CO[3]
-                         net (fo=1, unplaced)         0.000    32.235    Cfu/My_relu/clamped_output2_carry__2_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    32.352 r  Cfu/My_relu/clamped_output2_carry__3/CO[3]
-                         net (fo=1, unplaced)         0.000    32.352    Cfu/My_relu/clamped_output2_carry__3_n_0
-                         CARRY4 (Prop_carry4_CI_CO[3])
-                                                      0.117    32.469 r  Cfu/My_relu/clamped_output2_carry__4/CO[3]
-                         net (fo=1, unplaced)         0.000    32.469    Cfu/My_relu/clamped_output2_carry__4_n_0
-                         CARRY4 (Prop_carry4_CI_O[1])
-                                                      0.337    32.806 f  Cfu/My_relu/clamped_output2_carry__5/O[1]
-                         net (fo=5, unplaced)         0.639    33.445    Cfu/My_relu/unclamped[25]
-                         LUT4 (Prop_lut4_I1_O)        0.332    33.777 r  Cfu/My_relu/clamped_output1_carry__2_i_4/O
-                         net (fo=1, unplaced)         0.000    33.777    Cfu/My_relu/clamped_output1_carry__2_i_4_n_0
-                         CARRY4 (Prop_carry4_DI[0]_CO[3])
-                                                      0.576    34.353 r  Cfu/My_relu/clamped_output1_carry__2/CO[3]
-                         net (fo=32, unplaced)        0.819    35.172    Cfu/My_relu/clamped_output1
-                         LUT5 (Prop_lut5_I3_O)        0.124    35.296 r  Cfu/My_relu/rsp_payload_outputs_0[0]_i_3/O
-                         net (fo=1, unplaced)         0.449    35.745    Cfu/gbuff_C/rsp_payload_outputs_0_reg[0]
-                         LUT5 (Prop_lut5_I4_O)        0.124    35.869 r  Cfu/gbuff_C/rsp_payload_outputs_0[0]_i_1/O
-                         net (fo=1, unplaced)         0.000    35.869    Cfu/gbuff_C_n_285
-                         FDRE                                         r  Cfu/rsp_payload_outputs_0_reg[0]/D
+                                                      0.256    19.388 r  Cfu/My_relu/s2_high_mul_result_reg[31]_i_2/O[2]
+                         net (fo=1, unplaced)         0.452    19.840    Cfu/My_relu/s2_high_mul_calc[30]
+                         LUT2 (Prop_lut2_I0_O)        0.301    20.141 r  Cfu/My_relu/s2_high_mul_result[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    20.141    Cfu/My_relu/s2_high_mul_result[30]_i_1_n_0
+                         FDRE                                         r  Cfu/My_relu/s2_high_mul_result_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock soc_crg_clkout0 rise edge)
@@ -638,16 +563,16 @@ Slack (VIOLATED) :        -17.244ns  (required time - arrival time)
                                                       0.083    16.659 r  MMCME2_ADV/CLKOUT0
                          net (fo=1, unplaced)         0.763    17.422    soc_crg_clkout0
                          BUFG (Prop_bufg_I_O)         0.091    17.513 r  BUFG/O
-                         net (fo=11558, unplaced)     0.658    18.171    Cfu/out
-                         FDRE                                         r  Cfu/rsp_payload_outputs_0_reg[0]/C
+                         net (fo=11891, unplaced)     0.658    18.171    Cfu/My_relu/out
+                         FDRE                                         r  Cfu/My_relu/s2_high_mul_result_reg[30]/C
                          clock pessimism              0.480    18.651    
                          clock uncertainty           -0.070    18.581    
-                         FDRE (Setup_fdre_C_D)        0.044    18.625    Cfu/rsp_payload_outputs_0_reg[0]
+                         FDRE (Setup_fdre_C_D)        0.044    18.625    Cfu/My_relu/s2_high_mul_result_reg[30]
   -------------------------------------------------------------------
                          required time                         18.625    
-                         arrival time                         -35.869    
+                         arrival time                         -20.141    
   -------------------------------------------------------------------
-                         slack                                -17.244    
+                         slack                                 -1.516    
 
 
 
@@ -686,7 +611,7 @@ Slack (MET) :             0.022ns  (arrival time - required time)
                                                       0.050     0.937 r  MMCME2_ADV/CLKOUT0
                          net (fo=1, unplaced)         0.338     1.275    soc_crg_clkout0
                          BUFG (Prop_bufg_I_O)         0.026     1.301 r  BUFG/O
-                         net (fo=11558, unplaced)     0.211     1.513    sys_clk
+                         net (fo=11891, unplaced)     0.211     1.513    sys_clk
                          FDRE                                         r  soc_a7ddrphy_rst_storage_reg/C
   -------------------------------------------------------------------    -------------------
                          FDRE (Prop_fdre_C_Q)         0.147     1.660 r  soc_a7ddrphy_rst_storage_reg/Q
@@ -710,7 +635,7 @@ Slack (MET) :             0.022ns  (arrival time - required time)
                                                       0.053     1.450 r  MMCME2_ADV/CLKOUT0
                          net (fo=1, unplaced)         0.356     1.806    soc_crg_clkout0
                          BUFG (Prop_bufg_I_O)         0.029     1.835 r  BUFG/O
-                         net (fo=11558, unplaced)     0.356     2.191    sys_clk
+                         net (fo=11891, unplaced)     0.356     2.191    sys_clk
     OLOGIC_X1Y88         OSERDESE2                                    r  OSERDESE2/CLKDIV
                          clock pessimism             -0.533     1.658    
     OLOGIC_X1Y88         OSERDESE2 (Hold_oserdese2_CLKDIV_RST)

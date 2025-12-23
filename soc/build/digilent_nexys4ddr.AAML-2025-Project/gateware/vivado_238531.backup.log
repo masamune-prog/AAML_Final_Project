@@ -1,0 +1,49 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Dec 23 01:00:50 2025
+# Process ID: 238531
+# Current directory: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware
+# Command line: vivado -mode batch -source digilent_nexys4ddr.tcl
+# Log file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.log
+# Journal file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.jou
+# Running On: DESKTOP-8IM51LT, OS: Linux, CPU Frequency: 3187.200 MHz, CPU Physical cores: 8, Host memory: 12545 MB
+#-----------------------------------------------------------
+source digilent_nexys4ddr.tcl
+# create_project -force -name digilent_nexys4ddr -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1320.598 ; gain = 0.027 ; free physical = 8017 ; free virtual = 12224
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v}
+# read_xdc digilent_nexys4ddr.xdc
+# set_property PROCESSING_ORDER EARLY [get_files digilent_nexys4ddr.xdc]
+# synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 238869
+ERROR: [Synth 8-9263] cannot open include file 'global_buffer_bram' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2016.414 ; gain = 402.746 ; free physical = 6996 ; free virtual = 11203
+---------------------------------------------------------------------------------
+ERROR: [Synth 8-9263] cannot open include file 'global_buffer_bram' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:1]
+INFO: [Synth 8-10285] module 'Cfu' is ignored due to previous errors [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:292]
+INFO: [Synth 8-10285] module 'leaky_relu' is ignored due to previous errors [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:409]
+INFO: [Synth 8-9084] Verilog file '/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v' ignored due to errors
+ERROR: [Synth 8-439] module 'digilent_nexys4ddr' not found
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2091.383 ; gain = 477.715 ; free physical = 6907 ; free virtual = 11114
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+9 Infos, 0 Warnings, 0 Critical Warnings and 4 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 23 01:01:15 2025...

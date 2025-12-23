@@ -1,0 +1,68 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Dec 23 01:04:51 2025
+# Process ID: 242154
+# Current directory: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware
+# Command line: vivado -mode batch -source digilent_nexys4ddr.tcl
+# Log file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.log
+# Journal file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.jou
+# Running On: DESKTOP-8IM51LT, OS: Linux, CPU Frequency: 3187.200 MHz, CPU Physical cores: 8, Host memory: 12545 MB
+#-----------------------------------------------------------
+source digilent_nexys4ddr.tcl
+# create_project -force -name digilent_nexys4ddr -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1320.039 ; gain = 0.027 ; free physical = 7966 ; free virtual = 12176
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v}
+# read_xdc digilent_nexys4ddr.xdc
+# set_property PROCESSING_ORDER EARLY [get_files digilent_nexys4ddr.xdc]
+# synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 242549
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2018.887 ; gain = 402.746 ; free physical = 6923 ; free virtual = 11133
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-11065] parameter 'DEPTH' becomes localparam in 'global_buffer_bram' with formal parameter declaration list [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:11]
+INFO: [Synth 8-11241] undeclared symbol 'clk', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:412]
+INFO: [Synth 8-11241] undeclared symbol 'reset', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:413]
+INFO: [Synth 8-11241] undeclared symbol 'in_valid', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:414]
+INFO: [Synth 8-11241] undeclared symbol 'K', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:415]
+INFO: [Synth 8-11241] undeclared symbol 'M', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:416]
+INFO: [Synth 8-11241] undeclared symbol 'N', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:417]
+INFO: [Synth 8-11241] undeclared symbol 'busy', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:418]
+INFO: [Synth 8-11241] undeclared symbol 'A_index_forRead', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:420]
+INFO: [Synth 8-11241] undeclared symbol 'A_data_out', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:422]
+INFO: [Synth 8-11241] undeclared symbol 'B_index_forRead', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:424]
+INFO: [Synth 8-11241] undeclared symbol 'B_data_out', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:426]
+INFO: [Synth 8-11241] undeclared symbol 'C_wr_en_fromTPU', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:427]
+INFO: [Synth 8-11241] undeclared symbol 'C_index_forWrite', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:428]
+INFO: [Synth 8-11241] undeclared symbol 'C_data_in', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:429]
+INFO: [Synth 8-11241] undeclared symbol 'C_data_out', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:430]
+INFO: [Synth 8-11241] undeclared symbol 'offset', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:431]
+INFO: [Synth 8-11241] undeclared symbol 'cur_state_fromTPU', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:432]
+INFO: [Synth 8-11241] undeclared symbol 'C_write_counter', assumed default net type 'wire' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:441]
+ERROR: [Synth 8-983] module instantiations in compilation scope are not allowed [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:451]
+WARNING: [Synth 8-11145] root scope declaration is not allowed in Verilog 95/2K mode [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:451]
+ERROR: [Synth 8-2716] syntax error near 'always' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:454]
+ERROR: [Synth 8-10307] Verilog 2000 keyword 'always' used in incorrect context [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:454]
+INFO: [Synth 8-9084] Verilog file '/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v' ignored due to errors
+ERROR: [Synth 8-439] module 'digilent_nexys4ddr' not found
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2093.824 ; gain = 477.684 ; free physical = 6842 ; free virtual = 11052
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+25 Infos, 2 Warnings, 0 Critical Warnings and 5 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 23 01:05:15 2025...

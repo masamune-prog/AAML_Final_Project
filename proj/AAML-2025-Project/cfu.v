@@ -1,19 +1,3 @@
-// Copyright 2021 The CFU-Playground Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-
-
 module Cfu (
   input               cmd_valid,
   output reg          cmd_ready,
@@ -27,21 +11,10 @@ module Cfu (
   input               clk
 );
 
-  // Trivial handshaking for a combinational CFU
-  // assign rsp_valid = cmd_valid;
-  // assign cmd_ready = rsp_ready;
-
-  //
-  // select output -- note that we're not fully decoding the 3 function_id bits
-  //
-  // assign rsp_payload_outputs_0 = cmd_payload_function_id[0] ? 
-  //                                          cmd_payload_inputs_1 :
-  //                                          cmd_payload_inputs_0 ;
-
   reg             in_valid;
-  reg [15:0]       K;
-  reg [15:0]       M;
-  reg [15:0]       N;
+  reg [15:0]      K;
+  reg [15:0]      M;
+  reg [15:0]      N;
   wire            busy;
   wire A_wr_en;
   reg  A_wr_en_fromCFU;
@@ -58,14 +31,12 @@ module Cfu (
   reg [15:0] A_index_forPrint;
   reg [15:0] A_index_forWrite;
   wire [15:0] B_index;
-
   wire [15:0] B_index_forRead;
   wire [15:0] B_index_forPrint;
   reg [15:0] B_index_forWrite;
   wire [8:0] C_index;
   reg [8:0] C_index_forRead;
   wire [8:0] C_index_forWrite;
-
   reg [31:0] A_data_in;
   wire [31:0] A_data_out;
   reg [31:0] B_data_in;
@@ -74,9 +45,10 @@ module Cfu (
   wire [127:0] C_data_out;
   reg [31:0] offset;
   reg [2:0] state_forOutput;
-  wire [2:0] cur_state_fromTPU; // for testing tpu state
+  wire [2:0] cur_state_fromTPU; 
   reg [1:0] readC_counter;
 
+  // -- ReLU Registers --
   reg signed [31:0] relu_input_offset;
   reg signed [31:0] relu_output_offset;
   reg signed [31:0] relu_multiplier_id;
@@ -88,33 +60,26 @@ module Cfu (
   reg signed [31:0] relu_max;
   wire signed [31:0] relu_clamped_output;
 
-  localparam READ_CFU = 2'd0;
-  localparam WAIT_RSP = 2'd1;
-  reg [1:0] cfu_state;
+  // -- State Machine --
+  localparam READ_CFU  = 3'd0;
+  localparam WAIT_RSP  = 3'd1;
+  localparam WAIT_RELU = 3'd2; // New state for pipeline wait
+  reg [2:0] cfu_state;
+  reg [1:0] relu_latency_cnt;  // Counter for pipeline delay
+
   wire check_CFU_or_TPU;
   assign check_CFU_or_TPU = busy;
   
-  // wire [7:0] K_num, M_num, N_num;
-  // wire [7:0] MdivFour, NdivFour;
-  // wire [7:0] k, m, n;
-  wire [2:0] C_write_counter;
-  // wire [2:0] C_reg_state;
-
-  // reg [31:0] cfu_counter;
-  // reg print;
-  // wire [127:0] see_sa_out0, see_sa_out1, see_sa_out2, see_sa_out3;
-  // wire [31:0] see_a_out0, see_a_out1, see_b_out0, see_b_out1;
-
-  // assign cmd_ready = ~rsp_valid;
   assign A_index = check_CFU_or_TPU ? A_index_forRead : (print ? A_index_forPrint: A_index_forWrite);
   assign A_wr_en = check_CFU_or_TPU ? 0 : A_wr_en_fromCFU;
   assign B_index = check_CFU_or_TPU ? B_index_forRead : (print ? B_index_forPrint: B_index_forWrite);
   assign B_wr_en = check_CFU_or_TPU ? 0 : B_wr_en_fromCFU;
   assign C_index = check_CFU_or_TPU ? C_index_forWrite : C_index_forRead;
   assign C_wr_en = check_CFU_or_TPU ? C_wr_en_fromTPU : C_wr_en_fromCFU;
+
   global_buffer_bram #(
-    .ADDR_BITS(16), // ADDR_BITS 12 -> generates 2^12 entries
-    .DATA_BITS(32)  // DATA_BITS 32 -> 32 bits for each entries
+    .ADDR_BITS(16), 
+    .DATA_BITS(32) 
   )
   gbuff_A(
     .clk(clk),
@@ -123,12 +88,12 @@ module Cfu (
     .wr_en(A_wr_en),
     .index(A_index),
     .data_in(A_data_in),
-    .data_out(A_data_out) // out
+    .data_out(A_data_out) 
   );
 
   global_buffer_bram #(
-    .ADDR_BITS(16), // ADDR_BITS 12 -> generates 2^12 entries
-    .DATA_BITS(32)  // DATA_BITS 32 -> 32 bits for each entries
+    .ADDR_BITS(16), 
+    .DATA_BITS(32) 
   )
   gbuff_B(
     .clk(clk),
@@ -137,11 +102,12 @@ module Cfu (
     .wr_en(B_wr_en),
     .index(B_index),
     .data_in(B_data_in),
-    .data_out(B_data_out) // out
+    .data_out(B_data_out) 
   );
+  
   global_buffer_bram #(
-    .ADDR_BITS(9), // ADDR_BITS 12 -> generates 2^12 entries
-    .DATA_BITS(128)  // DATA_BITS 32 -> 32 bits for each entries
+    .ADDR_BITS(9), 
+    .DATA_BITS(128) 
   )
   gbuff_C(
     .clk(clk),
@@ -150,7 +116,7 @@ module Cfu (
     .wr_en(C_wr_en),
     .index(C_index),
     .data_in(C_data_in),
-    .data_out(C_data_out) // out
+    .data_out(C_data_out) 
   );
   
   TPU My_TPU(
@@ -160,39 +126,39 @@ module Cfu (
     .K              (K), 
     .M              (M), 
     .N              (N), 
-    .busy           (busy),         // out
-    .A_wr_en        (),      // out   
-    .A_index        (A_index_forRead),      // out   
-    .A_data_in      (),    // out      
+    .busy           (busy),        
+    .A_wr_en        (),       
+    .A_index        (A_index_forRead),      
+    .A_data_in      (),       
     .A_data_out     (A_data_out),         
-    .B_wr_en        (),      // out   
-    .B_index        (B_index_forRead),      // out    
-    .B_data_in      (),    // out     
+    .B_wr_en        (),       
+    .B_index        (B_index_forRead),         
+    .B_data_in      (),      
     .B_data_out     (B_data_out),         
-    .C_wr_en        (C_wr_en_fromTPU),      // out   
-    .C_index        (C_index_forWrite),      // out   
-    .C_data_in      (C_data_in),    // out     
+    .C_wr_en        (C_wr_en_fromTPU),      
+    .C_index        (C_index_forWrite),      
+    .C_data_in      (C_data_in),      
     .C_data_out     (C_data_out),
     .offset         (offset)
   );
 
+  // -- PATCHED: Pipelined ReLU --
   leaky_relu My_relu(
-    .input_data (relu_input),
-    .input_offset(relu_input_offset),
-    .output_offset(relu_output_offset),
-    .multiplier_id(relu_multiplier_id),
-    .multiplier_alpla(relu_multiplier_alpla),
-    .shift_id(relu_shift_id),
-    .shift_alpla(relu_shift_alpla),
-    .min(relu_min),
-    .max(relu_max),
-    .clamped_output(relu_clamped_output)
+    .clk              (clk),           // Connected
+    .reset            (reset),         // Connected
+    .input_data       (relu_input),
+    .input_offset     (relu_input_offset),
+    .output_offset    (relu_output_offset),
+    .multiplier_id    (relu_multiplier_id),
+    .multiplier_alpla (relu_multiplier_alpla),
+    .shift_id         (relu_shift_id),
+    .shift_alpla      (relu_shift_alpla),
+    .min              (relu_min),
+    .max              (relu_max),
+    .clamped_output   (relu_clamped_output)
   );
 
-
-  
   always @(posedge clk) begin
-    // cfu_counter <= cfu_counter + 1;
     if (in_valid) begin
       in_valid <= 0;
     end
@@ -208,32 +174,29 @@ module Cfu (
       state_forOutput <= 0;
       offset <= 0;
       cfu_state <= READ_CFU;
-
-      // cfu_counter <= 0;
       print <= 0;
-    
+      relu_latency_cnt <= 0;
     end else begin
       case (cfu_state)
         READ_CFU: begin
           if (cmd_valid && cmd_ready) begin
             cmd_ready <= 1'b0;
-            rsp_valid <= 1'b1;
+            // Default response Valid, unless overridden below
+            rsp_valid <= 1'b1; 
             cfu_state <= WAIT_RSP;
+
             case(cmd_payload_function_id[9:3])
               7'd0:begin
                 A_wr_en_fromCFU <= 1'b0;
                 B_wr_en_fromCFU <= 1'b0;
-                A_index_forWrite <= 12'd0 - 12'd1; // -1
-                B_index_forWrite <= 12'd0 - 12'd1; // -1
+                A_index_forWrite <= 12'd0 - 12'd1; 
+                B_index_forWrite <= 12'd0 - 12'd1; 
                 print = 0;
               end
               7'd1:begin
                 A_wr_en_fromCFU = 1'b1;
-                // B_wr_en_fromCFU = 1'b1;
                 A_index_forWrite <= A_index_forWrite + 1; 
-                // B_index_forWrite <= B_index_forWrite + 1;
                 A_data_in <= cmd_payload_inputs_0[31:0];
-                // B_data_in <= cmd_payload_inputs_1[31:0];
               end
               7'd2:begin
                 B_wr_en_fromCFU = 1'b1;
@@ -249,7 +212,7 @@ module Cfu (
               7'd4:begin
                 if (busy) begin
                   rsp_payload_outputs_0 <= 1;
-                end else begin // busy == 0
+                end else begin 
                   rsp_payload_outputs_0 <= 0;
                   C_index_forRead <= 0;
                   readC_counter <= 2'd0;
@@ -288,46 +251,32 @@ module Cfu (
                 relu_input <=  cmd_payload_inputs_0[31:0];
               end
               7'd14:begin
-                rsp_payload_outputs_0 <=  relu_clamped_output;
+                // PATCH: Do not valid immediately. Wait for pipeline.
+                rsp_valid <= 1'b0;
+                relu_latency_cnt <= 0;
+                cfu_state <= WAIT_RELU;
               end
               7'd15:begin
                 relu_min <=  cmd_payload_inputs_0[31:0];
                 relu_max <=  cmd_payload_inputs_1[31:0];
               end
-              
             endcase
-            /*
-            else if (cmd_payload_function_id[9:3] == 7'd6) begin
-              offset <= cmd_payload_inputs_0[31:0];
-            end else if (cmd_payload_function_id[9:3] == 7'd7) begin 
-              rsp_payload_outputs_0 <= {8'b0, K, M, N};
-            end else if (cmd_payload_function_id[9:3] == 7'd8) begin
-              rsp_payload_outputs_0 <= cur_state_fromTPU;
-
-            end else if (cmd_payload_function_id[9:3] == 7'd9) begin
-              rsp_payload_outputs_0 <= C_write_counter;
-            end //else if (cmd_payload_function_id[9:3] == 7'd10) begin
-            //   // rsp_payload_outputs_0 <= see_sa_out2;
-            //   rsp_payload_outputs_0 <= see_b_out0;
-            // end else if (cmd_payload_function_id[9:3] == 7'd11) begin
-            //   // rsp_payload_outputs_0 <= see_sa_out3;
-            //   rsp_payload_outputs_0 <= see_b_out1;
-            // end
-            else if (cmd_payload_function_id[9:3] == 7'd10) begin
-              case(cmd_payload_inputs_1[1:0])
-                2'b00:rsp_payload_outputs_0 <= {cmd_payload_inputs_0[7:0],24'b0};
-                2'b01:rsp_payload_outputs_0[23:16] <= cmd_payload_inputs_0[7:0];
-                2'b10:rsp_payload_outputs_0[15:8] <= cmd_payload_inputs_0[7:0];
-                2'b11:rsp_payload_outputs_0[7:0] <= cmd_payload_inputs_0[7:0];
-              endcase
-              
-            end 
-            */
           end
         end
 
+        // PATCH: New state to wait for 3-cycle ReLU pipeline
+        WAIT_RELU: begin
+            if (relu_latency_cnt == 2'd3) begin
+                rsp_payload_outputs_0 <= relu_clamped_output;
+                rsp_valid <= 1'b1;
+                cfu_state <= WAIT_RSP;
+            end else begin
+                relu_latency_cnt <= relu_latency_cnt + 1;
+            end
+        end
+
         WAIT_RSP:begin
-          if (rsp_valid && rsp_ready) begin // when rsp_valid is 1, it will wait rsp_ready is 0 to handshake the 
+          if (rsp_valid && rsp_ready) begin 
             cmd_ready <= 1'b1;
             rsp_valid <= 1'b0;
             cfu_state <= READ_CFU;            
@@ -341,111 +290,121 @@ module Cfu (
 
 endmodule
 
+
+
 module leaky_relu(
-  input_data ,
-  input_offset,
-  output_offset,
-  multiplier_id,
-  multiplier_alpla,
-  shift_id,
-  shift_alpla,
-  min,
-  max,
-  clamped_output
+  input               clk,
+  input               reset,
+  input signed [31:0] input_data,
+  input signed [31:0] input_offset,
+  input signed [31:0] output_offset,
+  input signed [31:0] multiplier_id,
+  input signed [31:0] multiplier_alpla,
+  input signed [31:0] shift_id,
+  input signed [31:0] shift_alpla,
+  input signed [31:0] min,
+  input signed [31:0] max,
+  output reg signed [31:0] clamped_output
 );
 
-  input signed [31:0] input_data;
-  input signed  [31:0] input_offset;
-  input signed  [31:0] output_offset;
-  input signed  [31:0] multiplier_id;
-  input signed  [31:0] multiplier_alpla;
-  input signed  [31:0] shift_id;
-  input signed  [31:0] shift_alpla;
-  input signed  [31:0] min;
-  input signed  [31:0] max;
-  output reg signed  [31:0] clamped_output;
+  // --- Pipeline Stage 1: Preparation ---
+  reg signed [31:0] s1_val_shift;
+  reg signed [31:0] s1_multiplier;
+  reg signed [31:0] s1_output_offset, s1_min, s1_max;
+  reg signed [5:0]  s1_right_shift;
 
-  wire signed [31:0] val;
-  assign val = input_data - input_offset;
+  // Moved from block-local temps to module-scope wires (Verilog-safe)
+  wire signed [31:0] s1_val_comb = input_data - input_offset;
+  wire signed [5:0]  s1_raw_shift_comb = s1_val_comb[31] ? $signed(shift_alpla[5:0]) : $signed(shift_id[5:0]);
+  wire signed [31:0] s1_multiplier_comb = s1_val_comb[31] ? multiplier_alpla : multiplier_id;
 
-  reg signed [31:0] multiplier;
-  reg signed [ 5:0] shift;
-  
-  always@(*)begin
-    if(val[31])begin
-      multiplier = multiplier_alpla;
-      shift = shift_alpla[5:0];
-    end
-    else begin
-      multiplier = multiplier_id;
-      shift = shift_id[5:0];
-    end
-  end
-    
-  
-  reg signed [31:0] val_shift;
-  reg signed [ 5:0] right_shift;
+  always @(posedge clk) begin
+    if (reset) begin
+      s1_val_shift      <= 0;
+      s1_multiplier     <= 0;
+      s1_right_shift    <= 0;
+      s1_output_offset  <= 0;
+      s1_min            <= 0;
+      s1_max            <= 0;
+    end else begin
+      s1_multiplier <= s1_multiplier_comb;
 
-  always@(*)begin
-    if($signed(shift) > 0)begin
-      val_shift = val <<< shift;
-      right_shift = 0;
-    end
-    else begin
-      val_shift = val;
-      right_shift = -$signed(shift);
-    end
-
-  end
-    
-
-  reg signed [63:0] nudge;
-  reg signed [63:0] product;
-  reg signed [63:0] acc;
-  reg signed [31:0] high_mul_result; 
-    
-
-  always@(*)begin
-    product = val_shift * multiplier;
-    nudge = (product >=0)? (1 << 30) : (1 - (1 << 30));
-    acc = product + nudge;
-    if( val_shift ==  -2147483648 && multiplier ==  -2147483648)begin
-      high_mul_result = 2147483647;
-    end
-    else begin
-      high_mul_result = (acc <0 && acc[30:0] != 0) ? acc[62:31] +1 : acc[62:31];
-    end
-  end
-  
-  reg signed [31:0] final_scaled_val;
-  reg [31:0] mask;
-  reg [31:0] remainder;
-  reg [31:0] threshold;
-
-  always@(*)begin
-    mask = (1 << right_shift) - 1;
-    remainder = high_mul_result & mask;
-    threshold = (mask >> 1) + (high_mul_result < 0 ? 1 : 0);
-
-    final_scaled_val = (high_mul_result >>> right_shift) + (remainder > threshold ? 1 : 0);
-  end
-
-  reg signed [31:0] unclamped;
-  
-  always@(*)begin
-    unclamped = output_offset + final_scaled_val;
-
-  end
-
-  always @(*) begin
-      if (unclamped > max) begin
-          clamped_output = max;
-      end else if (unclamped < min) begin
-          clamped_output = min;
+      if (s1_raw_shift_comb > 0) begin
+        s1_val_shift   <= (s1_val_comb <<< s1_raw_shift_comb);
+        s1_right_shift <= 0;
       end else begin
-          clamped_output = unclamped;
+        s1_val_shift   <= s1_val_comb;
+        s1_right_shift <= -s1_raw_shift_comb;
       end
+
+      s1_output_offset <= output_offset;
+      s1_min           <= min;
+      s1_max           <= max;
+    end
   end
+
+  // --- Pipeline Stage 2: Multiplication & Accumulation ---
+  reg signed [31:0] s2_high_mul_result;
+  reg signed [5:0]  s2_right_shift;
+  reg signed [31:0] s2_output_offset, s2_min, s2_max;
+
+  // Moved from block-local temps to module-scope wires (Verilog-safe)
+  wire signed [63:0] s2_product_comb = $signed(s1_val_shift) * $signed(s1_multiplier);
+  wire signed [63:0] s2_nudge_comb   = (s2_product_comb >= 0) ? 64'sd1073741824 : -64'sd1073741823; // +2^30 or (1-2^30)
+  wire signed [63:0] s2_acc_comb     = s2_product_comb + s2_nudge_comb;
+  wire signed [31:0] s2_high_mul_calc =
+    (s2_acc_comb < 0 && s2_acc_comb[30:0] != 0) ? ($signed(s2_acc_comb[62:31]) + 1) : $signed(s2_acc_comb[62:31]);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      s2_high_mul_result <= 0;
+      s2_right_shift     <= 0;
+      s2_output_offset   <= 0;
+      s2_min             <= 0;
+      s2_max             <= 0;
+    end else begin
+      if (s1_val_shift == 32'sh8000_0000 && s1_multiplier == 32'sh8000_0000) begin
+        s2_high_mul_result <= 32'sd2147483647;
+      end else begin
+        s2_high_mul_result <= s2_high_mul_calc;
+      end
+
+      s2_right_shift   <= s1_right_shift;
+      s2_output_offset <= s1_output_offset;
+      s2_min           <= s1_min;
+      s2_max           <= s1_max;
+    end
+  end
+
+  // --- Pipeline Stage 3: Scaling & Clamping ---
+  // Moved from block-local temps to module-scope wires (Verilog-safe)
+  wire [31:0] s3_mask =
+    (s2_right_shift == 0) ? 32'd0 : ((32'h1 << s2_right_shift) - 1);
+
+  wire [31:0] s3_remainder = (s2_high_mul_result[31:0] & s3_mask);
+
+  wire [31:0] s3_threshold =
+    (s3_mask >> 1) + ((s2_high_mul_result < 0) ? 32'd1 : 32'd0);
+
+  wire signed [31:0] s3_final_scaled_val =
+    ($signed(s2_high_mul_result >>> s2_right_shift)) + ((s3_remainder > s3_threshold) ? 32'sd1 : 32'sd0);
+
+  wire signed [31:0] s3_unclamped = s2_output_offset + s3_final_scaled_val;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      clamped_output <= 0;
+    end else begin
+      if (s3_unclamped > s2_max) begin
+        clamped_output <= s2_max;
+      end else if (s3_unclamped < s2_min) begin
+        clamped_output <= s2_min;
+      end else begin
+        clamped_output <= s3_unclamped;
+      end
+    end
+  end
+
 endmodule
 
 
@@ -473,30 +432,49 @@ module TPU(
     C_index,
     C_data_in,
     C_data_out,
-    offset
+    offset,
+    cur_state,
+    // K_num,
+    // M_num,
+    // N_num,
+    // MdivFour,
+    // NdivFour,
+    // k,
+    // m,
+    // n, 
+    C_write_counter 
+    // C_reg_state,
+    // see_sa_out0, 
+    // see_sa_out1, 
+    // see_sa_out2, 
+    // see_sa_out3, 
+    // see_a_out0,
+    // see_a_out1, 
+    // see_b_out0,
+    // see_b_out1
 );
 
 
 input clk;
 input reset;
 input            in_valid;
-input [15:0]      K;
-input [15:0]      M;
-input [15:0]      N;
+input [7:0]      K;
+input [7:0]      M;
+input [7:0]      N;
 output  reg      busy;
 
 output           A_wr_en;
-output reg [15:0]    A_index;
+output reg [11:0]    A_index;
 output [31:0]    A_data_in;
 input  [31:0]    A_data_out;
 
 output           B_wr_en;
-output reg [15:0]    B_index;
+output reg [11:0]    B_index;
 output [31:0]    B_data_in;
 input  [31:0]    B_data_out;
 
 output reg       C_wr_en;
-output reg [8:0]    C_index;
+output reg [11:0]    C_index;
 output reg [127:0]   C_data_in;
 input  [127:0]   C_data_out;
 input [31:0]     offset;
@@ -507,7 +485,7 @@ localparam WORK = 3'd1;
 localparam WRITE = 3'd2;
 localparam DONE = 3'd3;
 localparam ERROR = 3'd4;
-reg [2:0] cur_state; // set to output for cfu
+output reg [2:0] cur_state; // set to output for cfu
 reg pe_rst;
 
 assign A_wr_en = 0;
@@ -515,8 +493,8 @@ assign B_wr_en = 0;
 assign A_data_in = 32'd0;
 assign B_data_in = 32'd0;
 
-reg [15:0] MdivFour, NdivFour;
-reg [15:0] K_num, M_num, N_num;
+reg [7:0] MdivFour, NdivFour;
+reg [7:0] K_num, M_num, N_num;
 always @(posedge clk) begin
     if (reset) begin
         MdivFour <= 0;
@@ -569,7 +547,7 @@ reg [7:0] m, k, n;
 // reg [15:0] C_addr_cur;
 // reg [1:0] C_sa_index;
 reg [2:0] wait_cycles;
-reg [2:0] C_write_counter;
+output reg [2:0] C_write_counter;
 reg [8:0] offset_inTPU;
 // reg [127:0] see_sa_out0, see_sa_out1, see_sa_out2, see_sa_out3;
 // reg [31:0] see_a_out0, see_a_out1, see_b_out0, see_b_out1;

@@ -1,0 +1,309 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Dec 23 01:02:22 2025
+# Process ID: 240321
+# Current directory: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware
+# Command line: vivado -mode batch -source digilent_nexys4ddr.tcl
+# Log file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.log
+# Journal file: /home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/vivado.jou
+# Running On: DESKTOP-8IM51LT, OS: Linux, CPU Frequency: 3187.200 MHz, CPU Physical cores: 8, Host memory: 12545 MB
+#-----------------------------------------------------------
+source digilent_nexys4ddr.tcl
+# create_project -force -name digilent_nexys4ddr -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1319.012 ; gain = 0.027 ; free physical = 7981 ; free virtual = 12190
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v}
+# read_verilog {/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v}
+# read_xdc digilent_nexys4ddr.xdc
+# set_property PROCESSING_ORDER EARLY [get_files digilent_nexys4ddr.xdc]
+# synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top digilent_nexys4ddr -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 240730
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2016.828 ; gain = 403.715 ; free physical = 6972 ; free virtual = 11182
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-11065] parameter 'DEPTH' becomes localparam in 'global_buffer_bram' with formal parameter declaration list [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:11]
+INFO: [Synth 8-6157] synthesizing module 'digilent_nexys4ddr' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:20]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_rom.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9717]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_sram.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9732]
+INFO: [Synth 8-3876] $readmem data file 'digilent_nexys4ddr_mem.init' is read successfully [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9755]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9098]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9121]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9190]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9202]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9284]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9339]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:1951]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYCTRL' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75727]
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYCTRL' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75727]
+WARNING: [Synth 8-7071] port 'RDY' of module 'IDELAYCTRL' is unconnected for instance 'IDELAYCTRL' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+WARNING: [Synth 8-7023] instance 'IDELAYCTRL' of module 'IDELAYCTRL' has 3 connections declared, but only 2 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9706]
+INFO: [Synth 8-6157] synthesizing module 'OSERDESE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:97310]
+	Parameter DATA_RATE_OQ bound to: DDR - type: string 
+	Parameter DATA_RATE_TQ bound to: BUF - type: string 
+	Parameter DATA_WIDTH bound to: 4 - type: integer 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'OSERDESE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:97310]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+WARNING: [Synth 8-7023] instance 'OSERDESE2' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9812]
+INFO: [Synth 8-6157] synthesizing module 'OBUFDS' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:93073]
+INFO: [Synth 8-6155] done synthesizing module 'OBUFDS' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:93073]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_1' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_1' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9840]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_2' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_2' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9862]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_3' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_3' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9884]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_4' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_4' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9906]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_5' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_5' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9928]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTOUT1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTOUT2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TBYTEOUT' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TQ' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTIN1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'SHIFTIN2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T1' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T2' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T3' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'T4' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TBYTEIN' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'TCE' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_6' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_6' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9950]
+WARNING: [Synth 8-7071] port 'OFB' of module 'OSERDESE2' is unconnected for instance 'OSERDESE2_7' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9972]
+INFO: [Common 17-14] Message 'Synth 8-7071' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-7023] instance 'OSERDESE2_7' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9972]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_8' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:9994]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_9' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10016]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_10' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10038]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_11' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10060]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_12' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10082]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_13' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10104]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_14' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10126]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_15' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10148]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_16' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10170]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_17' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10192]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_18' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10214]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_19' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10236]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_20' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10258]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_21' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10280]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_22' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10302]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_23' of module 'OSERDESE2' has 27 connections declared, but only 17 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10324]
+INFO: [Synth 8-6157] synthesizing module 'IOBUFDS' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78214]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUFDS' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78214]
+WARNING: [Synth 8-7023] instance 'IOBUFDS' of module 'IOBUFDS' has 5 connections declared, but only 4 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10344]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_24' of module 'OSERDESE2' has 27 connections declared, but only 17 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10357]
+WARNING: [Synth 8-7023] instance 'IOBUFDS_1' of module 'IOBUFDS' has 5 connections declared, but only 4 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10377]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_25' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10390]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_26' of module 'OSERDESE2' has 27 connections declared, but only 13 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10412]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_27' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10434]
+INFO: [Synth 8-6157] synthesizing module 'ISERDESE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:80759]
+	Parameter DATA_RATE bound to: DDR - type: string 
+	Parameter DATA_WIDTH bound to: 4 - type: integer 
+	Parameter INTERFACE_TYPE bound to: NETWORKING - type: string 
+	Parameter IOBDELAY bound to: IFD - type: string 
+	Parameter NUM_CE bound to: 1 - type: integer 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'ISERDESE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:80759]
+WARNING: [Synth 8-7023] instance 'ISERDESE2' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10460]
+INFO: [Synth 8-6157] synthesizing module 'IDELAYE2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75740]
+	Parameter CINVCTRL_SEL bound to: FALSE - type: string 
+	Parameter DELAY_SRC bound to: IDATAIN - type: string 
+	Parameter HIGH_PERFORMANCE_MODE bound to: TRUE - type: string 
+	Parameter IDELAY_TYPE bound to: VARIABLE - type: string 
+	Parameter IDELAY_VALUE bound to: 0 - type: integer 
+	Parameter PIPE_SEL bound to: FALSE - type: string 
+	Parameter REFCLK_FREQUENCY bound to: 200.000000 - type: double 
+	Parameter SIGNAL_PATTERN bound to: DATA - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'IDELAYE2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:75740]
+WARNING: [Synth 8-7023] instance 'IDELAYE2' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10487]
+INFO: [Synth 8-6157] synthesizing module 'IOBUF' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78197]
+INFO: [Synth 8-6155] done synthesizing module 'IOBUF' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:78197]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_28' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10510]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_1' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10536]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_1' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10563]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_29' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10586]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_2' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10612]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_2' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10639]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_30' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10662]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_3' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10688]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_3' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10715]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_31' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10738]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_4' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10764]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_4' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10791]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_32' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10814]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_5' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10840]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_5' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10867]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_33' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10890]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_6' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10916]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_6' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10943]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_34' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10966]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_7' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:10992]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_7' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11019]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_35' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11042]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_8' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11068]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_8' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11095]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_36' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11118]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_9' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11144]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_9' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11171]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_37' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11194]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_10' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11220]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_10' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11247]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_38' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11270]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_11' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11296]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_11' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11323]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_39' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11346]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_12' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11372]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_12' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11399]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_40' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11422]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_13' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11448]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_13' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11475]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_41' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11498]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_14' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11524]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_14' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11551]
+WARNING: [Synth 8-7023] instance 'OSERDESE2_42' of module 'OSERDESE2' has 27 connections declared, but only 16 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11574]
+WARNING: [Synth 8-7023] instance 'ISERDESE2_15' of module 'ISERDESE2' has 28 connections declared, but only 15 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11600]
+WARNING: [Synth 8-7023] instance 'IDELAYE2_15' of module 'IDELAYE2' has 12 connections declared, but only 7 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11627]
+INFO: [Synth 8-6157] synthesizing module 'FDCE' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40789]
+INFO: [Synth 8-6155] done synthesizing module 'FDCE' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:40789]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_ADV' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:82174]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT_F bound to: 12.000000 - type: double 
+	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
+	Parameter CLKOUT0_DIVIDE_F bound to: 16.000000 - type: double 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT1_DIVIDE bound to: 8 - type: integer 
+	Parameter CLKOUT1_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT2_DIVIDE bound to: 8 - type: integer 
+	Parameter CLKOUT2_PHASE bound to: 90.000000 - type: double 
+	Parameter CLKOUT3_DIVIDE bound to: 6 - type: integer 
+	Parameter CLKOUT3_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT4_DIVIDE bound to: 24 - type: integer 
+	Parameter CLKOUT4_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT5_DIVIDE bound to: 30 - type: integer 
+	Parameter CLKOUT5_PHASE bound to: 0.000000 - type: double 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter REF_JITTER1 bound to: 0.010000 - type: double 
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_ADV' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:82174]
+WARNING: [Synth 8-7023] instance 'MMCME2_ADV' of module 'MMCME2_ADV' has 33 connections declared, but only 12 given [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:11884]
+INFO: [Synth 8-6157] synthesizing module 'VexRiscv' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7]
+INFO: [Synth 8-6157] synthesizing module 'InstructionCache' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7008]
+INFO: [Synth 8-6155] done synthesizing module 'InstructionCache' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7008]
+INFO: [Synth 8-6157] synthesizing module 'DataCache' [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6167]
+INFO: [Synth 8-6155] done synthesizing module 'DataCache' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:6167]
+INFO: [Synth 8-6155] done synthesizing module 'VexRiscv' (0#1) [/home/masamuneprog/AAML/CFU-Playground/third_party/python/pythondata_cpu_vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv_PerfCfu.v:7]
+INFO: [Synth 8-6157] synthesizing module 'Cfu' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:2]
+INFO: [Synth 8-6157] synthesizing module 'global_buffer_bram' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:1]
+	Parameter ADDR_BITS bound to: 16 - type: integer 
+	Parameter DATA_BITS bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'global_buffer_bram' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:1]
+INFO: [Synth 8-6157] synthesizing module 'global_buffer_bram__parameterized0' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:1]
+	Parameter ADDR_BITS bound to: 9 - type: integer 
+	Parameter DATA_BITS bound to: 128 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'global_buffer_bram__parameterized0' (0#1) [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/global_buffer_bram.v:1]
+ERROR: [Synth 8-439] module 'TPU' not found [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:123]
+ERROR: [Synth 8-6156] failed synthesizing module 'Cfu' [/home/masamuneprog/AAML/CFU-Playground/proj/AAML-2025-Project/cfu.v:2]
+ERROR: [Synth 8-6156] failed synthesizing module 'digilent_nexys4ddr' [/home/masamuneprog/AAML/CFU-Playground/soc/build/digilent_nexys4ddr.AAML-2025-Project/gateware/digilent_nexys4ddr.v:20]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 2111.766 ; gain = 498.652 ; free physical = 6867 ; free virtual = 11076
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 181 Warnings, 0 Critical Warnings and 4 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 23 01:02:47 2025...
