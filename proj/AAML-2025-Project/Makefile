@@ -23,7 +23,7 @@ export DEFINES :=
 DEFINES += NDEBUG
 
 # Uncomment this line to skip individual profiling output (has minor effect on performance).
-DEFINES += NPROFILE
+#DEFINES += NPROFILE
 
 # Uncomment to include specified model in built binary
 # DEFINES += INCLUDE_MODEL_PDTI8
@@ -41,7 +41,7 @@ DEFINES += NPROFILE
 DEFINES += INCLUDE_MODEL_WAV2LETTER_PRUNED
 DEFINES += MLPERF_TINY_NO_ECHO
 # Uncomment this line to disable all debug printf-ing
-DEFINES += SILENT_FIRMWARE
+#DEFINES += SILENT_FIRMWARE
 # DEFINES += HIDE_PROGRESS_DOTS
 
 # Uncomment to include all TFLM examples (pdti8, micro_speech, magic_wand)

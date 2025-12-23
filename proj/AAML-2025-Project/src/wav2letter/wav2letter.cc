@@ -38,7 +38,7 @@ static void do_golden_tests() {
       printf("  Expected: %d\n", expected_val);
       
       passed = false;
-      break; 
+      // break; 
     }
   }
   

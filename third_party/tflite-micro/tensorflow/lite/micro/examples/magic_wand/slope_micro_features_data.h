@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0df8131f1509ab0e07177156aa2826822ebea63f7b2c70f12ef5267771246d1b
-size 1082
+/* Copyright 2019 The TensorFlow Authors. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+#ifndef TENSORFLOW_LITE_MICRO_EXAMPLES_MAGIC_WAND_SLOPE_MICRO_FEATURES_DATA_H_
+#define TENSORFLOW_LITE_MICRO_EXAMPLES_MAGIC_WAND_SLOPE_MICRO_FEATURES_DATA_H_
+
+extern const int g_slope_micro_f2e59fea_nohash_1_length;
+extern const int g_slope_micro_f2e59fea_nohash_1_dim;
+extern const float g_slope_micro_f2e59fea_nohash_1_data[];
+
+#endif  // TENSORFLOW_LITE_MICRO_EXAMPLES_MAGIC_WAND_SLOPE_MICRO_FEATURES_DATA_H_

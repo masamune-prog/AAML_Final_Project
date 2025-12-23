@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8af2419644e0b545089bec8d49131c2feb5272b1be1b75c6ff44a77c1d4017fc
-size 191
+#ifndef _WAV2LETTER_PRUNED_H
+#define _WAV2LETTER_PRUNED_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void wav2letter_pruned_menu();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // _WAV2LETTER_PRUNED_H

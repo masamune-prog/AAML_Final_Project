@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:02acd50c512f1547d68727a9c5f6887e28573d8280cf2d0cdfba762c2979d0a1
-size 957
+/*
+ * Copyright 2021 The CFU-Playground Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef BASE_H
+#define BASE_H
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/** Initializes the runtime. */
+void init_runtime();
+
+// Read value from console
+// Uses strtol. Can accept values in hex or decimal. Also allows negative
+// values.
+uint32_t read_val(const char* prompt);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // !BASE_H

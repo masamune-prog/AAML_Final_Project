@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:09a0b9249df9f4edffd0fb7fd9264ac13f59edfb0e62c50d8047e5d54dea71ad
-size 861
+/*
+ * Copyright 2021 The CFU-Playground Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef FUNCTIONAL_CFU_TESTS_H
+#define FUNCTIONAL_CFU_TESTS_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+// Menu driven tests suitable for functional CFUs
+void do_functional_cfu_tests();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // !FUNCTIONAL_CFU_TESTS_H

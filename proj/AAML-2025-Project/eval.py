@@ -166,15 +166,14 @@ if __name__ == '__main__':
                 
             print(f"\n... Inference for '{testcase.filename}' running:")
             msg_buffer_bytes = b''
+            encoded_ready = READY_MSG.encode()
             while True:
-                byte_char = com.read(1)
-                if not byte_char:
-                    print("\nError: Read timed out during inference!")
-                    msg = msg_buffer_bytes.decode('utf-8', 'ignore')
-                    break
-                print(byte_char.decode('utf-8', 'ignore'), end='', flush=True)
-                msg_buffer_bytes += byte_char
-                if msg_buffer_bytes.endswith(READY_MSG.encode()):
+                waiting = com.in_waiting
+                read_size = waiting if waiting > 0 else 1
+                chunk = com.read(read_size)
+                msg_buffer_bytes += chunk
+                print(chunk.decode('utf-8', 'ignore'), end='', flush=True)
+                if encoded_ready in msg_buffer_bytes:
                     msg = msg_buffer_bytes.decode('utf-8', 'ignore')
                     break
             
